@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-*.class
-=======
-
 node_modules/
 .vscode/
 .gradle/
@@ -27,4 +23,3 @@ package-lock.json
 
 
 hs_err_pid*
->>>>>>> 0e3a74bbd01da78aa0605a041816ffd9fa7f0fec
