@@ -7,6 +7,9 @@ public class Test13 {
     // java.lang 패키지의 멤버를 사용할 때는 그냥 이름을 지정하면 된다.
     // 그 외 다른 패키지의 멤버를 사용할 때는 반드시 패키지 이름을 함께 지정해야 한다.
     java.util.Date today = new java.util.Date();
+    java.util.Date today1 = new java.util.Date();
+    String b = "today2";
+    String c = "today3";
     
     // %t[날짜 및 시각 옵션]
     // 날짜 및 시간 옵션
@@ -15,12 +18,16 @@ public class Test13 {
     System.out.printf("%1$tY, %1$ty\n", today);
                         //1$ : 첫번째변수
     
+    System.out.printf("%1$ty, %1$tY, %2$s, %3$s\n", today1, b, c);
+    
     // B : 날짜 및 시각 데이터에서 월을 추출하여 전체 이름으로 표현한다. ex) January
     // B : 날짜 및 시각 데이터에서 월을 추출하여 단축 이름으로 표현한다. ex) Jan
     System.out.printf("%1$tB, %1$tb\n", today);
+    System.out.printf("%1$tb, %1$tB, %2$tY, %2$ty\n", today, today1);
     
     // m : 날짜 및 시각 데이터에서 월을 추출하여 2자리 숫자로 표현한다. ex) 12, 01
     System.out.printf("%1$tm\n", today);
+    System.out.printf("%1$tm%td, %2$td\n", today, today1);
     
     // d : 날짜 및 시각 데이터에서 일을 추출하여 2자리 숫자로 표현한다. ex) 01, 22
     // e : 날짜 및 시각 데이터에서 일을 추출하여 1자리 숫자로 표현한다. ex) 1, 22
