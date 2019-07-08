@@ -8,6 +8,7 @@ public class Test04 {
     /*
      5(int) / 2(int) + 3.2f(float)
           2(int) + 3.2f(float)
+          => 플롯으로 암시적 형변환
           2.0f(float) + 3.2f(float)
                   5.2f(float)
      */

@@ -10,6 +10,9 @@ public class Test04 {
     long l = 1L; // switch 조건으로 사용할 수 없다.
     float f = 1.0f;// switch 조건으로 사용할 수 없다.
     double d = 1.0;// switch 조건으로 사용할 수 없다.
+    //==>>> 4바이트이하값만 가능
+    
+    
     
     switch (b) {
       case 1:

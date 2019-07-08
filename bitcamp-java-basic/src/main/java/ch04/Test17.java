@@ -18,7 +18,29 @@ public class Test17 {
     System.out.println(result);
     System.out.println((age >= 19) ? "성인" : "미성년");
     System.out.println((age >= 65) ? "성인" : false);
+    
+    // 조건 ? 표현식 : 표현식
+    // => 표현식이 아닌 것은 올 수 없음.
+    
+    //(age >=19) ? System.out.println("성인") ㅣ System.out.println("미성년"); // 컴파일 오류
+    
+    //표현식(expression)?
+    //=>값을 리턴하는 문장(statement)
+    //int a = (age >= 19) ? m1() : m1(); // 컴파일 오류 // m1이 값을 리턴하지 않아서.
+    int b = (age >= 19) ? m2() : m2(); // 가능// 리턴값이 있음.
+    int c = (age >= 19) ? 100 + 2 - 4 * 3 + Math.abs(-100) : m2(); // 가능// 값이 이 자리에 오기만 하면 됨.
+    System.out.println(b); // 0
+    System.out.println(c); // 190
   }
+  
+  static void m1() {
+    
+  }
+  
+  static int m2() {
+    return 0;
+  }
+  
 }
 
 

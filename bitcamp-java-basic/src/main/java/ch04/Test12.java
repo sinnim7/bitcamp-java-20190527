@@ -15,14 +15,19 @@ public class Test12 {
     
     // && 와 &의 차이점
     boolean b1 = true;
-    boolean b2 = false && (b1 = false);
-    System.out.printf("b1=%b, b2=%b\n", b1, b2);
+    boolean b2 = false && (b1 = false);  // (b1 = false) : dead code(실행 안되는 코드)
+    System.out.printf("b1=%b, b2=%b\n", b1, b2); // b1=true, b2=false
     // && 연산자는 l-value의 값으로 결과를 유추할 수 있다면, r-value를 실행하지 않는다.
+    //&&가 뒤부분을 아예 실행안함.
     
     b1 = true;
     b2 = false & (b1 = false);
     System.out.printf("b1=%b, b2=%b\n", b1, b2);
     // & 연산자는 l-value의 값으로 결과가 결정되었다 하더라도 r-value를 끝까지 실행한다.
+    
+    b1 = true;
+    b2 = true || (b1 = false);
+    System.out.printf("b1=%b, b2=%b\n", b1, b2);
     
     b1 = true;
     b2 = true || (b1 = false);
