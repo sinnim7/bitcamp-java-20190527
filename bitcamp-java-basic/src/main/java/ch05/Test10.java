@@ -15,7 +15,8 @@ public class Test10 {
       a++;
     }
     System.out.println("-------------------------");
-    
+   
+    /*
     // 중첩 반복문에서 가장 바깥의 반복문을 나가기
     a = 1;
     while (a <= 10) { 
@@ -46,6 +47,8 @@ public class Test10 {
     }
     
     System.out.println("프로그램 종료!");
+    
+    */
   }
 }
 

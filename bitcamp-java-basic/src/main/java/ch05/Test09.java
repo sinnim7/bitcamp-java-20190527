@@ -20,7 +20,7 @@ public class Test09 {
         a++;
         continue; // 짝수이면 다음 코드를 실행하지 않고 조건 검사로 바로 올라 간다.
       }
-      
+      //1, 3,5
       System.out.print(a + " ");
       a++;
     }
