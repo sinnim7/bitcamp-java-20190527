@@ -5,7 +5,6 @@ package com.eomcs.lms;
 
 
 import java.util.Scanner;
-import com.eomcs.lms.util.Input;
 
 // 임포트 라인수가 늘어나도 컴파일러에게 알려주는 것이기에 문제 없음.
 
