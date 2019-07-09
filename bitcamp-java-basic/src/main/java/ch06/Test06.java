@@ -51,6 +51,10 @@ public class Test06 {
     // 배열 레퍼런스가 있을 때는 new int[]를 생략할 수 있지만,
     // 없는 경우는 생략할 수 없다.
     
+    String[] b = plusa("g");
+    
+    System.out.println(b);
+    
     
   }
   
@@ -66,11 +70,13 @@ public class Test06 {
     }
     return sum;
   }
+
+
+  static String[] plusa(String... value) {
+    
+    return value;
+  }
 }
-
-
-
-
 
 
 

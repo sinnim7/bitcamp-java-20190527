@@ -19,9 +19,11 @@ public class Test10 {
   }
   
   static void m3(int value) {
-    System.out.println(++value);
+    System.out.println("m3 : " + ++value);
   }
 }
+//실행순서 : m3 -> m2 -> m1 ... 메서드별 밸류값은 메서드 종료 즉시 삭제. -> 메인메서드 종료.
+
 
 /*
 # 스택 메모리
@@ -34,7 +36,14 @@ public class Test10 {
 - 이렇게 메서드가 호출될 때 로컬 변수가 준비되고 맨마지막에 호출한 메서드가 먼저 삭제된다고 해서
   "스택(stack)" 메모리라 부른다.
   스택? 접시 쌓는 것을 생각하라!
-- 스택 방식을 "Last In First Out(LIFO;후입선출)"라 부른다. 
+- 스택 방식을 "Last In First Out(LIFO;후입선출)"라 부른다.
+-인터넷 사이트 뒤로가기에 사용.
+#큐
+-FIFO 방식.
+-예약 사이트에 사용.
+
+
+
  */
 
 

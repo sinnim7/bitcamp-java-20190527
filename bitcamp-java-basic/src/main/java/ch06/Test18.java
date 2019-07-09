@@ -11,14 +11,15 @@ public class Test18 {
     // JVM의 전체 프로퍼티 목록 가져오기
     java.util.Properties props = System.getProperties();
     
-    java.util.Set keySet = props.keySet();
+    java.util.Set keySet = props.keySet();//이름이 들어있는 집합(Properties)의 인스턴스 주소를 리턴.
+                                          //"Properties 객체를 리턴한다." 이렇게도 말함.
     
-    for (Object key : keySet) {
-      String value = System.getProperty((String)key);
+    for (Object key : keySet) { //셋에서 값을 꺼낼 때 스트링으로 받지 못함. 그래서 오브젝트로 .
+      String value = System.getProperty((String)key); // 스트링으로 값을 꺼내려면 앞에 형변환을 해줘야함.
       System.out.printf("%s = %s\n", key, value);
     }
   }
-  
+  //C:\Users\bit\git\bitcamp-java-20190527\bitcamp-java-basic>java -classpath ./bin/main ch06.Test18
 }
 
 

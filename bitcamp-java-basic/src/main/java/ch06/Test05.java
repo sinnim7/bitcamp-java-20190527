@@ -6,7 +6,7 @@ public class Test05 {
     // 2 + 3 + 4 + 5
     int result = plus(2, 3);
     result = plus(result, 4); // result 변수가 넘어가는 것이 아니라 result 변수의 값이 넘어 간다.
-    result = plus(result, 5);
+    result = plus(result, 5); // 9+5
     System.out.println(result);
     
     result = plus(plus(plus(2, 3), 4), 5);
