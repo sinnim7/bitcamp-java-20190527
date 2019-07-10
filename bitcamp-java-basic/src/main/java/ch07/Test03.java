@@ -10,7 +10,7 @@ public class Test03 {
   //      }
   // - 새데이터타입의이름 : 대문자로 시작하고, 단어의 시작도 대문자로 작성한다. 보통 명사형으로 짓는다.
   //
-  static class Score {
+  static class Score {   //score 정보를 담을 메모리를 설계.
     String name;  // 설계 도면이기 때문에 변수가 존재하는 상태가 아니다.
     int kor;
     int eng;
@@ -33,12 +33,19 @@ public class Test03 {
     
     Score s1;  // Score 설계도에 따라 준비한 메모리(변수들)의 주소를 저장하는 변수 
                // 이렇게 주소를 저장하는 변수를 "레퍼런스(reference)"라 부른다.
-    s1 = new Score(); // Score 설계도에 따라 메모리(변수들)를 준비시킨다.
-                      // 그리고 메모리의 주소를 레퍼런스에 저장한다.
+    s1 = new Score(); // Score 설계도에 따라 힙에 메모리(변수들)를 준비시킨다.
+                      // 그리고 메모리의 시작주소를 리턴하는데 그걸 레퍼런스라고 부르는 것에 저장한다.
+                      //이때 힙에 만들어진 걸 인스턴스, 스코어의 인스턴스.
     
-    Class c = Class.forName("ch07.Test03$Score");
-    Score s3 = (Score)c.newInstance();
-    
+    //안스턴스 새로 만드는법@@
+    Class c = Class.forName("ch07.Test03$Score");//() 안 클래스를 찾아가 클래스를 로딩하고 jvm은 클래스 정보를 메모리에 보관. 메모리 주소가 c에 리턴. 
+    //@@@@대문자임! socre 모든 정보를 따로 만든다.
+    //$는 socre클래스가 test03 클래스 안에 있다는 얘기. 이걸 중첩 클래스라고 함.
+    //이걸 문자열로 가르키려면 ch07.Test03$Score 해야 함. 확장자명을 적지 않음.
+    //Class는 class를 다루는 클래스임.
+    Score s3 = (Score)c.newInstance();//newInstance()는 클래스 정보를 가지고 인스턴스를 만듦. 
+                                    //힙에 스코어 인스턴스를 만들어 주소를 리턴함.
+                                     //
     
     // 물론 다음과 같이 한 줄에 표현할 수도 있다.
     Score s2 = new Score();

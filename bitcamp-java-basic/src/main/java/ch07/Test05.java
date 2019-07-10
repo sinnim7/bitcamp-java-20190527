@@ -4,7 +4,7 @@ package ch07;
 public class Test05 {
 
   static class Score {
-    String name; 
+    String name; //변수를 만들라는 명령어
     int kor;
     int eng;
     int math;
@@ -13,6 +13,8 @@ public class Test05 {
   }
   
   public static void main(String[] args) throws Exception {
+    
+    
     
     Score s1 = new Score(); 
 
