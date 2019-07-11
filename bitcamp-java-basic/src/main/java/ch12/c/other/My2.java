@@ -13,7 +13,7 @@ public class My2 extends My {
     //obj1.v2 = 100; // 컴파일 오류!
     
     // protected
-    //obj1.v3 = 100; // 컴파일 오류! obj1이 가리키는 v3이다. 자기가 상속 받은 것이 아니다.
+    //obj1.v3 = 100; // 컴파일 오류! My2 게 아님. obj1이 가리키는 v3이다. 자기가 상속 받은 것이 아니다.
     
     // public 
     obj1.v4 = 100;

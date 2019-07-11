@@ -31,7 +31,9 @@ public class Score2 {
     return this.name;
   }
   public void setName(String name) {
+    
     // 이렇게 유효성을 검사하지 않더라도 setter를 그냥 만들라!
+    //(if사용)나중에 이름 글자 수 제한을 걸 수도 있음.
     this.name = name;
   }
   
