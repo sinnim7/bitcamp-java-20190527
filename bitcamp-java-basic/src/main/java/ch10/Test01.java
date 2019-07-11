@@ -11,6 +11,8 @@ class My1 {
 
 public class Test01 {
   public static void main(String[] args) {
+    //My1 이 로딩됨. 15라인 실행 전임. static int(스태틱필드)도 만드어짐.
+    //레퍼런스가 아닌 new my1()이 실행되기 전임! My obj; 이렇게 레퍼런스만 하면 My1 로딩 안 함.
     My1 obj1 = new My1();
     My1 obj2 = new My1();
     My1 obj3 = new My1();
@@ -24,7 +26,7 @@ public class Test01 {
     obj3.a = 400; // = My1.a
     
     System.out.println(My1.a);
-    
+    System.out.println(obj2.a);
     // 인스턴스 필드는 인스턴스 마다 존재하는 변수이다.
     // 즉 인스턴스 마다 개별적으로 다뤄야 할 값을 저장한다.
     obj1.b = 100;

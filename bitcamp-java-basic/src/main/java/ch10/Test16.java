@@ -12,9 +12,17 @@ public class Test16 {
     //c1 = new Calendar(); // 컴파일 오류!
     
     // Calendar는 인스턴스 생성을 도와주는 별도의 클래스 메서드(스태틱 메서드)를 제공한다.
-    c1 = Calendar.getInstance();
+    c1 = Calendar.getInstance();  //캘린더 객체를 만들어주는 일종의 공장 역할을 함.
     
-    System.out.println(c1.get(Calendar.YEAR));
+    
+    
+    System.out.println(c1.get(Calendar.YEAR)); //연도 추출하기 : 2019년
+    System.out.println(c1.get(Calendar.MONTH)); // 월 출력하기 : 6..인데 1더하면 7월
+    System.out.println(c1.get(Calendar.DATE)); // 날짜 추출하기 : 11일
+    
+    
+    
+    
     
     /* 
      # 팩토리 메서드(factory method)

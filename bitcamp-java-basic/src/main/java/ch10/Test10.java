@@ -7,7 +7,7 @@ class Monitor8 {
   int widthRes; // 해상도 너비
   int heightRes = 1080; // 해상도 높이
   
-  // 만약 생성자가 한 개라도 있으면 컴파일러는 기본 생성자를 추가하지 않는다.
+  // 만약 생성자가 단 한 개라도 있으면 컴파일러는 기본 생성자를 추가하지 않는다.
   // 
   Monitor8(int bright, int contrast) {
     this.bright = bright;
@@ -31,6 +31,9 @@ public class Test10 {
     // 존재하는 생성자를 지정해야 하고, 그 생성자의 파라미터에 맞춰 값을 넘겨야 한다.
     // => Monitor8 설계도에 따라 인스턴스를 생성한 후, int 값 두 개를 받는 생성자를 호출하라는 의미다.
     new Monitor8(50, 50); // OK!
+    
+    // 생성자가 원하는 타입의 원하는 개수의 값을 줘야 함.
+
   }
 }
 
