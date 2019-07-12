@@ -5,19 +5,17 @@ import com.eomcs.lms.domain.Lesson;
 import com.eomcs.lms.util.Input;
 
 public class LessonHandler {
-  private Lesson[] lessons = new Lesson[100]; //확장 대비해서 
-  private int lessonsSize = 0;
+ 
+  private LessonList lessonList = new LessonList();
   
-  public Input input;
+  private Input input;   // 퍼블에서 프라이빗으로 바꿈
   
   public LessonHandler(Input input) {
     this.input = input;
   }
   
-  public void addLesson() { // 메서드 이름은 동사 + 명사 형태로 만든다.
-    // 수업 데이터를 저장할 메모리를 Lesson 설계도에 따라 만든다.
+  public void addLesson() {
     Lesson lesson = new Lesson();
-    // 사용자가 입력한 값을 Lesson 인스턴스의 각 변수에 저장.
     lesson.setNo(input.getIntValue("번호? "));
     lesson.setTitle(input.getStringValue("수업명? "));
     lesson.setContents(input.getStringValue("설명? "));
@@ -25,20 +23,22 @@ public class LessonHandler {
     lesson.setEndDate(input.getDateValue("종료일? "));
     lesson.setTotalHours(input.getIntValue("총수업시간? "));
     lesson.setDayHours(input.getIntValue("일수업시간? "));
-    // 수업 데이터를 저장하고 있는 인스턴스의 주소를 레퍼런스 배열에 저장.
-    lessons[lessonsSize++] = lesson; // 0번방부터 시작하는 셈.
+    
+
+    //LessonsHandler에서 직접 데이터를 보관하지 않고
+    //LessonsList에게 전달.
+    lessonList.add(lesson); 
     System.out.println("저장했습니다.");
   }
 
   public void listLesson() {
-    for (int i = 0; i < lessonsSize; i++) {
-      // 레퍼런스 배열에서 한 개의 인스턴스 주소를 꺼낸다.
-      Lesson lesson = lessons[i];
-      // 그 인스턴스 주소로 찾아가서 인스턴스의 각 변수 값을 꺼내 출력한다.
+    Lesson[] lessons = lessonList.toArray();
+    for (Lesson lesson : lessons) {
       System.out.printf("%s, %s, %s ~ %s, %s\n", lesson.getNo(), lesson.getTitle(), lesson.getStartDate(),
           lesson.getEndDate(), lesson.getTotalHours(), lesson.getDayHours());
     }
+    
+   
+  
   }
-  
-  
 }

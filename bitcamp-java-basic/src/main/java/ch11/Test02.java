@@ -5,7 +5,7 @@ public class Test02 {
   public static void main(String[] args) {
     
     String s1;
-    s1 = "Hello"; // => new String("Hello") => 스트링 상수풀에 생성
+    s1 = "Hello"; // => new String("Hello") => 스트링 상수풀에 생성, 스택에도 생성됨.
     // String 레퍼런스에 문자열 리터럴을 할당하면 내부적으로 다음 코드로 바뀐다.
     //    s1 = new String("Hello");
     // 단 리터럴(값을 직접 작성한 것)로 String 인스턴스를 만들 때는 

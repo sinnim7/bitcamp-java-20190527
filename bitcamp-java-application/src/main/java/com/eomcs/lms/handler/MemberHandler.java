@@ -1,15 +1,14 @@
 package com.eomcs.lms.handler;
 
 import java.sql.Date;
+import com.eomcs.lms.domain.Lesson;
 import com.eomcs.lms.domain.Member;
 import com.eomcs.lms.util.Input;
 
 public class MemberHandler {
-
-  private Member[] members = new Member[100];
-  private int memberSize = 0;
-
-  public Input input;
+  
+  private MemberList memberList = new MemberList();
+  private Input input;
   
   public MemberHandler(Input input) {
     this.input = input;
@@ -25,16 +24,17 @@ public class MemberHandler {
     member.setTel(input.getStringValue("전화? "));
     member.setRegisteredDate(new Date(System.currentTimeMillis()));
 
-    members[memberSize++] = member;
+    memberList.add(member); 
     System.out.println("저장했습니다.");
   }
 
   public void listMember() {
-    for (int i = 0; i < memberSize; i++) {
-      Member member = members[i];
+    Member[] members = memberList.toArray();
+    for (Member member : members) {
       System.out.printf("%s, %s, %s, %s, %s\n", member.getNo(), member.getName(),
           member.getEmail(), member.getTel(), member.getRegisteredDate());
     }
+   
   }
 
 

@@ -5,8 +5,13 @@ public class Test07 {
   public static void main(String[] args) {
     StringBuffer b1 = new StringBuffer("Hello");
     
-    // StringBuffer는 mutable 객체이다. 내부의 문자열을 변경할 수 있다.
+    // StringBuffer는 mutable 객체이다. 내부의 문자열을 변경할 수 있다.  //원본이 바뀜.
     StringBuffer b2 = b1.replace(2, 4, "xxxxx");
+    
+    String a = new String("Hexxxxxo");
+    
+    System.out.println(a== b1.toString());
+    System.out.println(b1.toString());
     
     System.out.println(b1 == b2);
     System.out.println(b1.toString());
