@@ -25,6 +25,7 @@ public class Test09 {
     // 
     //Integer i1 = new Integer(100); // 가능한 사용하지 말자!
     Integer i1 = Integer.valueOf(100); // OK!
+    
 
     //Character c1 = new Character('가');
     Character c1 = Character.valueOf('가');
