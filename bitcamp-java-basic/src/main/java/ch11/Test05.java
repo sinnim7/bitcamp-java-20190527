@@ -10,6 +10,14 @@ public class Test05 {
     // => 이런 것을 "immutable 객체"라 부른다.
     String s2 = s1.replace('l', 'x');
     
+    String s4 = s1.replace('l', 'x');
+    System.out.println(s1);
+    System.out.println(s2);
+    System.out.println(s4);
+    System.out.println(s4 == s1);
+    System.out.println(s4 == s2);
+    System.out.println("----------");
+    
     String s3 = s1.replace("ll", "dd");
 
     System.out.println(s1);

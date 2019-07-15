@@ -24,7 +24,7 @@ public class A {
   // => 파라미터 개수가 달라야 한다.
   public void m1(float a, float b) {} // OK
   public void m1(short a, String b) {} // OK
-  
+  public void m1(String b, short a) {} // OK
   // => 접근 범위는 상관없다.
   void m1(float a, int b) {} // OK
   private void m1(float a, int b, int c) {} // OK

@@ -23,7 +23,7 @@ public class Calculator2 extends Calculator {
   public void multiple(int value) {
     // super 클래스의 result 필드를 사용해야 하는데
     // 만약 그 필드가 private으로 선언되어 있으면 접근할 수 없다.
-    // 그래서 현업에서는 나중에 서브 클래스가 직접 접근할 수 있도록 
+    // 그래서 현업에서는 나중에 서브 클래스가 직접 접근할 수 있도록
     // 주로 protected로 선언한다.
     //
     this.result *= value;

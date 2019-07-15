@@ -21,7 +21,7 @@ public class Test01 {
     String c = "a";
     String d = "a";
     
-    if (s1 == s2)
+    if (s1 == s2)  //  == 주소가 같냐??
       System.out.println("같다");
     else
       System.out.println("다르다"); //주소가 다름.
@@ -35,6 +35,11 @@ public class Test01 {
       System.out.println("같다"); //같다
     else
       System.out.println("다르다");
+    
+    if (a == c)
+      System.out.println("같다"); 
+    else
+      System.out.println("다르다"); //다르다
     
   }
 }

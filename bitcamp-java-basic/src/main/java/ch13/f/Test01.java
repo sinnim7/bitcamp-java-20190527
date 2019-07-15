@@ -4,8 +4,9 @@ package ch13.f;
 public class Test01 {
 
   public static void main(String[] args) {
-    B obj = new B();
-    // 생성자 호출 과정
+    B obj = new B();  // B 클래스와 그 상위 클래스들의 설계도에 따라 인스턴스를 생성한 후 
+                      // B 클래스의 default 생성자를 호출.
+    // 생성자 호출 과정  :  생성자 호출은sub부터 호출함.
     // 1) B() 생성자 호출
     // 2) B의 수퍼 클래스인 A() 생성자 호출
     // 3) A의 수퍼 클래스인 Object() 생성자 호출

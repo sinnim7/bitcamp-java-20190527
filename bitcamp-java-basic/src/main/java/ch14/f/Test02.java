@@ -18,7 +18,7 @@ public class Test02 {
     // 형변환하여 사용하라!
     B obj2 = (B) obj; // 컴파일러야 obj에 들어 있는 주소가 원래 B의 인스턴스이다. 
                       // 그러니 obj2에 저장해주렴!
-    obj2.m2();
+    obj2.m2();  // obj 레퍼런스가 b클 멤버라고 파악 컴파일 허용.
     
     if (obj == obj2) {
       System.out.println("obj == obj2");
