@@ -40,6 +40,13 @@ public class MemberHandler {
    
   }
 
+  public void detailMember() {
+    int no = input.getIntValue("번호? ");
+    
+    
+    
+  }
+
 
 }
 

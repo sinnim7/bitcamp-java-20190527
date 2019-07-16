@@ -57,11 +57,23 @@ public class App {
       } else if (command.equals("/lesson/list")) {
         lessonHandler.listLesson();
         
+      } else if (command.equals("/lesson/detail")) {
+        lessonHandler.detailLesson();
+        
+      } else if (command.equals("/lesson/update")) {
+        lessonHandler.updateLesson();
+        
+      } else if (command.equals("/lesson/delete")) {
+        lessonHandler.deleteLesson();
+        
       } else if (command.contentEquals("/member/add")) {
         memberHandler.addMember();
 
       } else if (command.equals("/member/list")) {
         memberHandler.listMember();
+
+      } else if (command.equals("/member/detail")) {
+        memberHandler.detailMember();
 
       } else if (command.equals("/board/add")) {
         boardHandler.addBoard(); //보드핸들러가 가리키는 인스턴스를 가지고 애드보드를 실행.
