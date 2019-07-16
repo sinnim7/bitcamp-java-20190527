@@ -42,10 +42,89 @@ public class MemberHandler {
 
   public void detailMember() {
     int no = input.getIntValue("번호? ");
+
+    //사용자가 입력한 번호를 가지고 목록에서 그 번호에 해당하는 레슨 객체가 찾음.
+    Member member = null;
     
+    for (int i = 0; i < memberList.size(); i++) {
+      Member temp = memberList.get(i);
+      if (temp.getNo() == no) {
+        member = temp;
+        break;
+      }
+    }
     
+    if (member == null) {
+      System.out.println("해당 번호의 데이터가 없습니다.");
+      return; //보이드 경우 그냥 리턴하면 함수를 끝내라는 얘기.
+    }
+    System.out.printf("이름 : %s\n", member.getName());
+    System.out.printf("이메일 : %s\n", member.getEmail());
+    System.out.printf("암호: %s\n", member.getPassword());
+    System.out.printf("사진 : %s\n", member.getPhoto());
+    System.out.printf("전화 : %s\n", member.getTel());
+        
     
   }
+
+  public void updateMember() {
+    int no = input.getIntValue("번호? ");
+    
+    Member member = null;
+    
+    for (int i = 0; i <memberList.size(); i++) {
+      Member temp = memberList.get(i);
+      if (temp.getNo() == no) {
+        member = temp;
+        break;
+      }
+    }
+    
+    if (member == null) {
+      System.out.println("해당 번호의 데이터가 없습니다");
+      return;
+    }
+    
+    //사용자로부터 변경할 값을 입력받는다.
+    String str = input.getStringValue("이름(" + member.getName() + ")? ");
+    if (str.length() > 0) {
+      member.setName(str);
+    } 
+    String str1 = input.getStringValue("이메일(" + member.getEmail() + ")? ");
+    if (str1.length() > 0) {
+      member.setEmail(str1);
+    } 
+    String str2 = input.getStringValue("암호(" + member.getPassword() + ")? ");
+    if (str2.length() > 0) {
+      member.setPassword(str2);
+    } 
+    String str3 = input.getStringValue("사진(" + member.getPhoto() + ")? ");
+    if (str3.length() > 0) {
+      member.setPhoto(str3);
+    } 
+    String str4 = input.getStringValue("전화(" + member.getTel() + ")? ");
+    if (str4.length() > 0) {
+      member.setTel(str4);
+    }
+    System.out.println("데이터를 변경했습니다.");
+    
+  }
+
+  public void deleteMember() {
+int no = input.getIntValue("번호? ");
+    
+    //사용자가 입력한 번호를 가지고 목록에서 그 번호에 해당하는 Lesson 객체가 찾는다.
+      for (int i = 0; i < memberList.size(); i++) {
+        Member temp = memberList.get(i);
+        if (temp.getNo() == no) {
+          memberList.remove(i);
+          System.out.println("데이터를 삭제했습니다.");
+          return;
+        }
+      }
+        System.out.println("해당 번호의 데이터가 없습니다.");
+      }
+  
 
 
 }

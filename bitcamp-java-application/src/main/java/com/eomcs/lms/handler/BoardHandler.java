@@ -2,6 +2,7 @@ package com.eomcs.lms.handler;
 
 import java.sql.Date;
 import com.eomcs.lms.domain.Board;
+import com.eomcs.lms.domain.Lesson;
 import com.eomcs.util.ArrayList;
 import com.eomcs.util.Input;
 //개별적으로 다뤄야 할 데이터를 다뤄야 한다면 인스턴스 필드로 만들어야.
@@ -48,6 +49,81 @@ public class BoardHandler {
     
     
   }
+
+
+  public void detailBoard() {
+ int no = input.getIntValue("번호? ");
+    
+    //사용자가 입력한 번호를 가지고 목록에서 그 번호에 해당하는 Lesson 객체가 찾는다.
+    Board board = null; //0도 있으니까 아예 널로 초기화.
+    
+    for (int i = 0; i < boardList.size(); i++) {
+      Board temp = boardList.get(i);
+      if (temp.getNo() == no) {
+        board = temp;
+        break;
+      }
+    }
+    
+    
+    if (board == null) {
+      System.out.println("해당 번호의 데이터가 없습니다.");
+      return; //void 경우 그냥 리턴하면 함수를 끝내라는 얘기.
+    }
+    
+    
+    System.out.printf("번호 : %s\n", board.getContents());
+    
+    
+  }
+
+
+  public void updateBoard() {
+    int no = input.getIntValue("번호? ");
+    
+      Board board = null;
+      
+      for (int i = 0; i < boardList.size(); i++) {
+        Board temp = boardList.get(i);
+        if (temp.getNo() == no) {
+          board = temp;
+          break;
+        }
+      }
+      
+      if (board == null) {
+        System.out.println("해당 번호의 데이터가 없습니다.");
+        return; //void 경우 그냥 리턴하면 함수를 끝내라는 얘기.
+      }
+     
+      
+      //사용자로부터 변경할 값을 입력 받는다.
+      String str = input.getStringValue("내용(" + board.getContents() + ")? ");
+      if (str.length() > 0) {
+        board.setContents(str);
+      } 
+      
+     
+      System.out.println("데이터를 변경했습니다.");
+      
+  }
+
+
+  public void deleteBoard() {
+int no = input.getIntValue("번호? ");
+    
+    //사용자가 입력한 번호를 가지고 목록에서 그 번호에 해당하는 Lesson 객체가 찾는다.
+      for (int i = 0; i <boardList.size(); i++) {
+        Board temp = boardList.get(i);
+        if (temp.getNo() == no) {
+          boardList.remove(i);
+          System.out.println("데이터를 삭제했습니다.");
+          return;
+        }
+      }
+        System.out.println("해당 번호의 데이터가 없습니다.");
+      }
+  
 
   
 

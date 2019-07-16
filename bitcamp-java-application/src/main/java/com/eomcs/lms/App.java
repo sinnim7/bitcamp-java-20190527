@@ -75,13 +75,28 @@ public class App {
       } else if (command.equals("/member/detail")) {
         memberHandler.detailMember();
 
+      } else if (command.equals("/member/update")) {
+        memberHandler.updateMember();
+
+      } else if (command.equals("/member/delete")) {
+        memberHandler.deleteMember();
+      
       } else if (command.equals("/board/add")) {
         boardHandler.addBoard(); //보드핸들러가 가리키는 인스턴스를 가지고 애드보드를 실행.
                                  //애드보드 메서드 앞에 있는 보드핸들러 주소를 찾아가 힙에 있는 메모리를 바꿈.
       } else if (command.equals("/board/list")) {
         boardHandler.listBoard();
 
-      } else {
+      }else if (command.equals("/board/detail")) {
+        boardHandler.detailBoard();
+
+      }else if (command.equals("/board/update")) {
+        boardHandler.updateBoard();
+
+      }else if (command.equals("/board/delete")) {
+        boardHandler.deleteBoard();
+
+      }else {
         System.out.println("해당 명령을 지원하지 않습니다");
       }
 
