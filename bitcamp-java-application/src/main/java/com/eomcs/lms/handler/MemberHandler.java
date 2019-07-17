@@ -86,32 +86,27 @@ public class MemberHandler {
     }
     
     //사용자로부터 변경할 값을 입력받는다.
+    
     String str = input.getStringValue("이름(" + member.getName() + ")? ");
+    String str1 = input.getStringValue("이메일(" + member.getEmail() + ")? ");
+    String str2 = input.getStringValue("암호(" + member.getPassword() + ")? ");
+    String str3 = input.getStringValue("사진(" + member.getPhoto() + ")? ");
+    String str4 = input.getStringValue("전화(" + member.getTel() + ")? ");
     if (str.length() > 0) {
       member.setName(str);
-    } 
-    String str1 = input.getStringValue("이메일(" + member.getEmail() + ")? ");
-    if (str1.length() > 0) {
       member.setEmail(str1);
-    } 
-    String str2 = input.getStringValue("암호(" + member.getPassword() + ")? ");
-    if (str2.length() > 0) {
       member.setPassword(str2);
-    } 
-    String str3 = input.getStringValue("사진(" + member.getPhoto() + ")? ");
-    if (str3.length() > 0) {
       member.setPhoto(str3);
-    } 
-    String str4 = input.getStringValue("전화(" + member.getTel() + ")? ");
-    if (str4.length() > 0) {
       member.setTel(str4);
-    }
+    } 
+    
+   
     System.out.println("데이터를 변경했습니다.");
     
   }
-
+  
   public void deleteMember() {
-int no = input.getIntValue("번호? ");
+    int no = input.getIntValue("번호? ");
     
     //사용자가 입력한 번호를 가지고 목록에서 그 번호에 해당하는 Lesson 객체가 찾는다.
       for (int i = 0; i < memberList.size(); i++) {

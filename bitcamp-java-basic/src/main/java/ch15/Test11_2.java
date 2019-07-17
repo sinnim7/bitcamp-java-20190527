@@ -1,11 +1,11 @@
 // Object 클래스 - getClass() 와 배열
 package ch15;
 
-public class Test13 {
+public class Test11_2 {
   public static void main(String[] args) {
     String obj1 = new String();
     
-    Class classInfo = obj1.getClass();
+    Class<?> classInfo = obj1.getClass();
     System.out.println(classInfo.getName()); // java.lang.String
     
     // 배열의 클래스 정보
@@ -24,6 +24,13 @@ public class Test13 {
     double[] obj5 = new double[10];
     classInfo = obj5.getClass();
     System.out.println(classInfo.getName()); //[D
+    
+  //배열을만들고 그 클래스정보를얻고 그의이름을 얻는다.
+    System.out.println(new byte[10].getClass().getName()); //[B
+    System.out.println(new short[10].getClass().getName()); //[S
+    System.out.println(new long[10].getClass().getName()); //[J
+    System.out.println(new char[10].getClass().getName()); //[C
+    System.out.println(new boolean[10].getClass().getName()); //[Z
   }
 }
 
