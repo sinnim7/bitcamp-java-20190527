@@ -36,12 +36,12 @@ public class Test12_2 {
       return "Score [name=" + name + ", kor=" + kor + ", eng=" + eng + ", math=" + math + ", sum="
           + sum + ", aver=" + aver + "]";
     }
-    
-  
     // => Object에서 상속 받은 clone()을 오버라이딩하여 다른 패키지의 멤버도 사용할 수 있게 
     //    public 으로 접근 범위를 넗혀라!
     // => 오버라이딩은 접근 범위를 좁힐 수는 없지만, 넓힐 수는 있다.
     // => 오버라이딩 할 때 리턴 타입을 클래스 타입으로 변경해도 된다.
+    
+
     @Override
     public Score clone() throws CloneNotSupportedException {
       // 복제를 위한 코드를 따로 작성할 필요가 없다. JVM이 알아서 해준다. 
@@ -49,9 +49,11 @@ public class Test12_2 {
       // 리턴 타입은 해당 클래스 이름으로 변경.
       return (Score) super.clone();
     }
+    
+
   }
   
-  public static void main(String[] args) throws Exception {
+  public static void main(String[] args) throws Exception{
     
     Score s1 = new Score("홍길동", 100, 100, 100);
     Score s2 = s1.clone(); // 실행오류(run-time-error)

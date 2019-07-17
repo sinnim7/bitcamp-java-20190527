@@ -56,6 +56,8 @@ public class Test13_2 {
       // 
       Car copy = (Car) super.clone();
       copy.engine = this.engine.clone();
+      
+      
       return copy;
     }
   }
@@ -71,6 +73,8 @@ public class Test13_2 {
     System.out.println(car);
     System.out.println(car2);
     System.out.println(car.engine == car2.engine);
+    System.out.println(car.maker == car2.maker);
+    System.out.println(car.name == car2.name);
     
   }
 }

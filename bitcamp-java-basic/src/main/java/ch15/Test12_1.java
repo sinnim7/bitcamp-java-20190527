@@ -23,12 +23,21 @@ public class Test12_1 {
       this.sum = this.kor + this.eng + this.math;
       this.aver = this.sum / 3f;
     }
- 
+
     @Override
     public String toString() {
       return "Score [name=" + name + ", kor=" + kor + ", eng=" + eng + ", math=" + math + ", sum="
           + sum + ", aver=" + aver + "]";
     }
+    
+    
+    /*
+    @Override
+    public String toString() {
+      return "Score [name=" + name + ", kor=" + kor + ", eng=" + eng + ", math=" + math + ", sum="
+          + sum + ", aver=" + aver + "]";
+    }
+    */
   }
   
   public static void main(String[] args) {
@@ -56,7 +65,7 @@ public class Test12_1 {
     
     // 해결책2:
     // => Object에서 상속 받은 clone()을 오버라이딩 하라!
-    // => Test16.java 를 살펴보라!
+    // => Test12_2.java 를 살펴보라!
   }
 }
 

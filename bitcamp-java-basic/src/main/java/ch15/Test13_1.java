@@ -19,6 +19,7 @@ public class Test13_1 {
       return "Engine [cc=" + cc + ", valve=" + valve + "]";
     }
 
+  
     @Override
     public Engine clone() throws CloneNotSupportedException {
       return (Engine) super.clone();
@@ -36,6 +37,8 @@ public class Test13_1 {
       this.engine = engine;
     }
 
+    
+    
     @Override
     public String toString() {
       return "Car [maker=" + maker + ", name=" + name + ", engine=" + engine + "]";
@@ -58,6 +61,8 @@ public class Test13_1 {
     System.out.println(car);
     System.out.println(car2);
     System.out.println(car.engine == car2.engine);
+    System.out.println(car.maker == car2.maker);
+    System.out.println(car.name == car2.name);
     
     // clone()은 해당 객체의 필드 값만 복제한다.
     // 그 객체가 포함하고 있는 하위 객체는 복제하지 않는다.
