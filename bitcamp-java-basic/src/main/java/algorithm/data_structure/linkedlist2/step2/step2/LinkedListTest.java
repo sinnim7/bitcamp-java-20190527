@@ -1,9 +1,9 @@
-package com.eomcs.util;
+package algorithm.data_structure.linkedlist2.step2.step2;
 
 public class LinkedListTest {
   
   public static void main(String[] args) {
-    LinkedList<String> list = new LinkedList<>();
+    LinkedList list = new LinkedList();
     list.add("aaa");//aaa가 저장된 스트링 주소가 넘어감.
     list.add("bbb");
     list.add("ccc");
@@ -11,6 +11,7 @@ public class LinkedListTest {
     list.add("eee");
     list.add("fff");
     list.add("ggg");
+    
     
     list.set(2, "xxx"); // "ccc" -> "xxx"로 변경
     
@@ -28,8 +29,8 @@ public class LinkedListTest {
     
     //list.clear();
     
-    String[] arr = list.toArray(new String[] {});
-    for (String obj : arr) {
+    Object[] arr = list.toArray();
+    for (Object obj : arr) {
       System.out.println(obj);
       }
     

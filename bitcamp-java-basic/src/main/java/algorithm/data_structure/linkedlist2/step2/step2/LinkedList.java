@@ -1,11 +1,10 @@
-//LinkedList : 목록으로 다루는 값을 특정 타입으로 제한하기 위해 제네릭(generic) 적용하기
-package com.eomcs.util;
+//LinkedList : Node 클래스를 중첩클래스(static nested class)로 만들기.
 
-import java.lang.reflect.Array;
+package algorithm.data_structure.linkedlist2.step2.step2;
 
-public class LinkedList<T> {
-  Node<T> head;
-  Node<T> tail;
+public class LinkedList {
+  Node head;
+  Node tail;
   int size = 0; //인스턴스필드 int는 초기화로 0임. 그래도 소스를 명확하게 하려고이렇게 함. 
   
   
@@ -17,8 +16,8 @@ public class LinkedList<T> {
      * tail = head;
      */
   }
-  public boolean add(T value) {
-    Node<T> temp = new Node<>(value); //새 노드를 템프에 담음.
+  public boolean add(Object value) {
+    Node temp = new Node(value); //새 노드를 템프에 담음.
     
     if (head == null) //해드 값이 없을때만
       head = temp; //해드가 널이면 새로만든 템프에 저장.
@@ -39,11 +38,11 @@ public class LinkedList<T> {
   }
 
   
-  public T get(int index) { // 2번일때
+  public Object get(int index) { // 2번일때
     if (index < 0 || index >= size)
       throw new IndexOutOfBoundsException("인덱스가 유효하지 않습니다!");
     
-    Node<T> node = head; //임시 노드를 만들고 여기에 해드 주소를 저장.
+    Node node = head; //임시 노드를 만들고 여기에 해드 주소를 저장.
     for (int i = 0; i < index; i++) {  //현재 인덱스가 가리키는. 0일때는 이동할필요없음.
       // i가 0이면 인덱스 만큼 반복하는 걸로 생각. // 0부터 어떤것보다 작다는 건 어떤것만큼 반복하라는 얘기.
 
@@ -54,9 +53,9 @@ public class LinkedList<T> {
   
  
   //특정 위치의 값을 바꾼다.
-  public T set(int index, T value) {
+  public Object set(int index, Object value) {
     
-    Node<T> node = head;
+    Node node = head;
     if (index < 0 || index >= size)
       throw new IndexOutOfBoundsException("인덱스가 유효하지 않습니다!");
 
@@ -65,7 +64,7 @@ public class LinkedList<T> {
       node = node.next;  
     }
     
-    T oldVal = node.value;
+    Object oldVal = node.value;
     node.value = value;
     return oldVal;
   }
@@ -73,17 +72,17 @@ public class LinkedList<T> {
   
   
   // 특정 위치의 값을 삭제한다.
-    public T remove(int index) {
+    public Object remove(int index) {
     if (index <0 || index >= size)
       throw new IndexOutOfBoundsException("인덱스가 유효하지 않습니다!");
     
-    Node<T> deletedNode = null;
+    Node deletedNode = null;
     if (index == 0) {
       deletedNode = head;
       head = deletedNode.next;
     } else {
       
-      Node<T> node = head;
+      Node node = head;
       for (int i = 0; i < index - 1; i++) {
         // 삭제하려는 노드의 이전 노드까지 간다.
         node = node.next;
@@ -97,12 +96,14 @@ public class LinkedList<T> {
       }
     }
     
-      T oldVal = deletedNode.value; // 삭제돨 노드의 값을 임시 보관.
+      Object oldVal = deletedNode.value; // 삭제돨 노드의 값을 임시 보관.
       deletedNode.value = null;   // 삭제될 노드가 다른 객체를 참조하지 않도록 값과 주소를 초기화시킴.
       deletedNode.next = null;    // 이런 식으로 개발자가 메모리 관리에 기여할 수 있음.
       size--;
       return oldVal;
     }
+  
+  
   
   public int size() {
     return size;
@@ -116,7 +117,7 @@ public class LinkedList<T> {
   //size가 0보다 클때 노드를 따라 가면서 삭제하기.
     
     while (head != null) {
-      Node<T> deletedNode = head; // //반복문으로 돌아와 해드를 다시 딜릿노드에 넣음.
+      Node deletedNode = head; // //반복문으로 돌아와 해드를 다시 딜릿노드에 넣음.
       head = head.next; //해드를 다음노드로이동
       deletedNode.value = null; // 딜릿노드(원래 해드) 밸류,넥스트 초기화 => 해드연결선 끊어짐.
       deletedNode.next = null;
@@ -144,40 +145,30 @@ public class LinkedList<T> {
    */
     
     // 방법2:
-    Node<T> node = head;
+    Node node = head;
     int i = 0;
     while (node !=null) {
       arr[i++] = node.value;
       node = node.next;
     }
+    
     return arr;
-  }
-  
-  @SuppressWarnings("unchecked")
-  public T[] toArray(T[] a) {
-    if (a.length < size) {
-      a = (T[]) Array.newInstance(a.getClass().getComponentType(), size);
-    }
-    Node<T> node = head;
-    for (int i = 0; i < size; i++) {
-      a[i] = node.value;
-      node = node.next;
-    }
-    if (a.length > size) 
-      a[size] = null;    
-    return a;
+    
   }
   
   
-  // Node 객체에 보관하는 데이터의 클래스 이름을  "타입 파라미터" T에 받음.
-  static public class Node<T> {
-    T value; //값
-    Node<T> next; //주소
+  // LinkedList 에서 사용하는 클래스라면 굳이 패키지 멤버 클래스로 만들 필요가 없음.
+  // LinkedList 안에 선언해 중첩 클래스로 정의하는 게 
+  // 소스 코드의 유지보수에 좋음.
+  // 외부에 직접 노출되지 않아 쓸 데 없는 클래스를 감추는 효과도 있음.
+  static public class Node {
+    Object value; //값
+    Node next; //주소
     
     public Node() { // 이미 생성자가 있어서 기본 생성자를 직접 만듦.
     }
     
-    public Node(T value) {
+    public Node(Object value) {
       this.value = value;
     }
 
