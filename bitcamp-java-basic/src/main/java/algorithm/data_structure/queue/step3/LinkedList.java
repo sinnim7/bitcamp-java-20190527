@@ -1,9 +1,9 @@
 //LinkedList : 목록으로 다루는 값을 특정 타입으로 제한하기 위해 제네릭(generic) 적용하기
-package com.eomcs.util;
+package algorithm.data_structure.queue.step3;
 
 import java.lang.reflect.Array;
 
-public class LinkedList<T> implements List<T> {
+public class LinkedList<T> {
   Node<T> head;
   Node<T> tail;
   int size = 0; //인스턴스필드 int는 초기화로 0임. 그래도 소스를 명확하게 하려고이렇게 함. 
@@ -17,8 +17,6 @@ public class LinkedList<T> implements List<T> {
      * tail = head;
      */
   }
-  
-  @Override
   public boolean add(T value) {
     Node<T> temp = new Node<>(value); //새 노드를 템프에 담음.
     
@@ -40,7 +38,7 @@ public class LinkedList<T> implements List<T> {
     return true;
   }
 
-  @Override
+  
   public T get(int index) { // 2번일때
     if (index < 0 || index >= size)
       throw new IndexOutOfBoundsException("인덱스가 유효하지 않습니다!");
@@ -55,9 +53,7 @@ public class LinkedList<T> implements List<T> {
   }
   
  
-  
   //특정 위치의 값을 바꾼다.
-  @Override
   public T set(int index, T value) {
     
     Node<T> node = head;
@@ -77,7 +73,6 @@ public class LinkedList<T> implements List<T> {
   
   
   // 특정 위치의 값을 삭제한다.
-  @Override
     public T remove(int index) {
     if (index <0 || index >= size)
       throw new IndexOutOfBoundsException("인덱스가 유효하지 않습니다!");
@@ -109,15 +104,17 @@ public class LinkedList<T> implements List<T> {
       return oldVal;
     }
   
-  @Override
   public int size() {
     return size;
   }
-  @Override
+  
   public void clear() {
+    
     if (size == 0)
       return;
+    
   //size가 0보다 클때 노드를 따라 가면서 삭제하기.
+    
     while (head != null) {
       Node<T> deletedNode = head; // //반복문으로 돌아와 해드를 다시 딜릿노드에 넣음.
       head = head.next; //해드를 다음노드로이동
@@ -127,7 +124,7 @@ public class LinkedList<T> implements List<T> {
     tail = null; //테일을 먼저 널로 그리고 해드로.
     size = 0;
   }
-  @Override
+
   public Object[] toArray() {
     // LinkedList에 있는 데이터를 저장할 배열 준비.
     
@@ -156,8 +153,6 @@ public class LinkedList<T> implements List<T> {
     return arr;
   }
   
-  
-  @Override
   @SuppressWarnings("unchecked")
   public T[] toArray(T[] a) {
     if (a.length < size) {
