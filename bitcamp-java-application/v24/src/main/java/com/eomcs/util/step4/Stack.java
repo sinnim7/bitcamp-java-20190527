@@ -1,8 +1,11 @@
 // 상속 문법을 이용해 스택 만들기
 
-package com.eomcs.util;
+package com.eomcs.util.step4;
 
-public class Stack<E> extends LinkedList<E> implements Cloneable, Iterable<E>{
+import com.eomcs.util.Iterator;
+import com.eomcs.util.LinkedList;
+
+public class Stack<E> extends LinkedList<E> implements Cloneable{
   //스택 클래스는 링크드리스트를 확장하고 클로너블을 실행한다
   
   
@@ -38,8 +41,7 @@ public class Stack<E> extends LinkedList<E> implements Cloneable, Iterable<E>{
   
   
   //스택에서 Iterator를 제공함.
-  @Override
-  public Iterator<E> iterator() {
+  public Iterator<E> getIterator() {
     
     //중첩 클래스를 정의한 후 인스턴스를 딱 한 개 생성하는 용도로 사용한다면
     //굳이 클래스 이름을 가질 필요가 없음.

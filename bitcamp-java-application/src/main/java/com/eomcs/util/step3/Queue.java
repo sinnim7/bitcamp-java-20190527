@@ -1,8 +1,11 @@
 // 상속 문법을 이용해 큐 만들기
 
-package com.eomcs.util;
+package com.eomcs.util.step3;
 
-public class Queue<E> extends LinkedList<E> implements Cloneable, Iterable<E>{
+import com.eomcs.util.Iterator;
+import com.eomcs.util.LinkedList;
+
+public class Queue<E> extends LinkedList<E> implements Cloneable{
 
 
   @Override
@@ -34,28 +37,60 @@ public class Queue<E> extends LinkedList<E> implements Cloneable, Iterable<E>{
 
   // 큐의 데이터를 꺼낼 Iterator를 제공.
 
-  @Override
-  public Iterator<E> iterator() {
+  public Iterator<E> createIterator() {
     // => 중첩 클래스의 가장 큰 효용성은 다른 멤버(메서드)들처럼 다른 멤버를 그냥 사용할 수 있다는 것.
-    return new Iterator<E>() {
+    class QueueIterator implements Iterator<E> {
       
       @Override
       public boolean hasNext() {
+        //중첩 클래스 안에서는 자신을 생성한 바깥 클래스의 인스턴스 주소를
+        //"바깥클래스명.this"라는 변수에 저장.
+        // 생성자에서 따로 바깥 클래스의 인스턴스 주소를 받을 필요가 없이
+        // 바로 바깥 클래스의 인스턴스를 사용할 수 있음.
+        //return Queue.this.size() > 0; // ok
+        
+        // 만약 사용하려는 필드나 메서드가 중첩 클래스에 있는 필드나 메서드가 아니라면
+        // 바깥 클래스의 인스턴스 즈소를 생략할 수 있음.
         return size() > 0;
       }
       
+      
       @Override
       public E next() {
-        return poll();
+        // return (E) Queue.this.poll(); ok 
+        return poll(); // 바깥 클래스(Queue)의 주소를 생략할 수 있음.
       }
-    };
+      
+    }
+    /*
+    Queue<E> clonedQueue = this; // 복제된 commandQueue의 주소가 들어 있음.
+    QueueIterator<E> iterator = new QueueIterator<>(clonedQueue);
+    return new QueueIterator<E>(this);
+     */
+    return new QueueIterator();
+    
+   
   }
-}
+
 
   // => 이 클래스에서 사용할 클래스는 이 클래스 안에 선언하는 게 소스 코드 관리에 좋음.
   //    이렇게 클래스 안에 선언된 클래스를 nested class(중첩 클래스)라 부름.
   //    중첩 클래스 중 static이 붙지 않은 중첩 클래스를 "non-static nested class"라 부름.
   //    non-static nested class를 "inner class"라 부름.
 
-  
-  
+  public class StackIterator implements Iterator<E> {
+
+
+    @Override
+    public boolean hasNext() {
+
+      return size() > 0;
+    }
+
+    @Override
+    public E next() {
+      return poll();
+    }
+  }
+
+  }

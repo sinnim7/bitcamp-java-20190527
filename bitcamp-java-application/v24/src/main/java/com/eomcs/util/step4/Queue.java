@@ -1,8 +1,11 @@
 // 상속 문법을 이용해 큐 만들기
 
-package com.eomcs.util;
+package com.eomcs.util.step4;
 
-public class Queue<E> extends LinkedList<E> implements Cloneable, Iterable<E>{
+import com.eomcs.util.Iterator;
+import com.eomcs.util.LinkedList;
+
+public class Queue<E> extends LinkedList<E> implements Cloneable{
 
 
   @Override
@@ -34,8 +37,7 @@ public class Queue<E> extends LinkedList<E> implements Cloneable, Iterable<E>{
 
   // 큐의 데이터를 꺼낼 Iterator를 제공.
 
-  @Override
-  public Iterator<E> iterator() {
+  public Iterator<E> createIterator() {
     // => 중첩 클래스의 가장 큰 효용성은 다른 멤버(메서드)들처럼 다른 멤버를 그냥 사용할 수 있다는 것.
     return new Iterator<E>() {
       
