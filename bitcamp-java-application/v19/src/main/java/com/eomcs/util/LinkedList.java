@@ -4,9 +4,26 @@ package com.eomcs.util;
 import java.lang.reflect.Array;
 
 public class LinkedList<T> {
+  
+  
   Node<T> head;
   Node<T> tail;
   int size = 0; //인스턴스필드 int는 초기화로 0임. 그래도 소스를 명확하게 하려고이렇게 함. 
+  
+  
+//Node 객체에 보관하는 데이터의 클래스 이름을  "타입 파라미터" T에 받음.
+ static public class Node<T> {
+   T value; //값
+   Node<T> next; //주소
+   
+   public Node() { // 이미 생성자가 있어서 기본 생성자를 직접 만듦.
+   }
+   
+   public Node(T value) {
+     this.value = value;
+   }
+
+ }
   
   
   public LinkedList() {
@@ -169,19 +186,7 @@ public class LinkedList<T> {
   }
   
   
-  // Node 객체에 보관하는 데이터의 클래스 이름을  "타입 파라미터" T에 받음.
-  static public class Node<T> {
-    T value; //값
-    Node<T> next; //주소
-    
-    public Node() { // 이미 생성자가 있어서 기본 생성자를 직접 만듦.
-    }
-    
-    public Node(T value) {
-      this.value = value;
-    }
-
-  }
+  
 
     
 }

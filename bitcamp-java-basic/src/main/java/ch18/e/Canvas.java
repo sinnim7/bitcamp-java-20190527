@@ -8,7 +8,7 @@ public class Canvas {
   // => 이 방식의 장점은 규칙에 따라 만든 도구가 어떤 클래스를 상속 받는 상관하지 않는다.
   // => 만약 Pen이 인터페이스가 아니라 클래스라면 반드시 Pen의 서브 클래스만 사용해야 한다.
   //    따라서 클래스를 사용하는 것 보다 인터페이스를 사용하는 것이 훨신 유연한 코딩을 할 수 있다.
-  Pen tool;
+  Pen tool; //  Assoication 관계 (지속적) // pen 규칙에 따라서 만든 객체를 쓰겠다는 것.
   
   // 만약 캔버스의 그리기 도구로서 다음과 같이 클래스를 지정한다면,
   // => 오직 Monami 도구만, Monami의 서브 클래스만 사용할 수 있다.
@@ -22,7 +22,7 @@ public class Canvas {
   //Monami tool;
   
   
-  public Canvas(Pen tool) {
+  public Canvas(Pen tool) { //pen 규칙에 따르는 객체.
     this.tool = tool;
   }
   
@@ -31,6 +31,11 @@ public class Canvas {
   }
   
   public void render(String contents) {
+    
+    // 어떤 Pen인지 상관없이 
+    // Pen 사용 규칙에 따라 메서드를 호출.
+    // => 클래스에 상관없이 일관된 방법으로 펜을 사용할 수 있어 유지보수에 좋음.
+    // => 이것이 인터페이스를 사용하는 이유.
     tool.write(contents);
   }
 }

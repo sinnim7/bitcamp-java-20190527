@@ -14,7 +14,7 @@ public class Test01 {
     // 정렬을 수행하고 출력할 메서드를 따로 따로 만들어야 했다.
     // 클래스의 사용법도 달라서 불편했다.
     // BubbleSort.run(), QuickSort.start()
-    display(s1, values);
+    //display(s1, values);
     display(s2, values2);
     
   }

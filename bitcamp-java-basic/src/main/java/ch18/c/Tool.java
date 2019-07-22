@@ -2,7 +2,7 @@
 package ch18.c;
 
 // 한 클래스가 여러 규칙에 따라 동작하도록 정의할 수 있다.
-public class Tool implements ProtocolA, ProtocolB {
+public class Tool implements ProtocolA, ProtocolB {  // 툴은 a와 b 자격을 가질 수 잇음.
   
   // 여러 규칙을 모두 만족시키려면 
   // 여러 규칙의 모든 메서드를 구현해야 한다.
