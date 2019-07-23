@@ -5,5 +5,6 @@ package ch19.a.sub;
 // public => 다른 패키지에서도 접근 가능
 // (default) => 다른 패키지 접근 불가!
 public class A {
+  
 
 }

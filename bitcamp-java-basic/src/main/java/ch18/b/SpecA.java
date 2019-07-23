@@ -1,7 +1,7 @@
 // 인터페이스 정의 - public과 abstract는 생략할 수 있다.
 package ch18.b;
 
-public interface SpecA {
+public abstract interface SpecA {
   
   // 규칙이기에 무조건 public이다.
   //private abstract void m1(); // 컴파일 오류!

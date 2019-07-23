@@ -29,7 +29,7 @@ public class Test04 {
     map.put("ccc", new Student("안중근", 25));
     
     // value 목록 꺼내기
-    Collection<Student> values = map.values();
+    Collection<Student> values = map.values();  //컬렉션인터페이스의규칙에 따른만들어진 뭔가 클래스 객체를 만들어 맴이 갖고 있는 값만 따로 목록으로 뽑아 리턴.
     for (Student value : values) {
       System.out.println(value);
     }
