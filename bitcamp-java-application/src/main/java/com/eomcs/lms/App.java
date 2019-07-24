@@ -42,7 +42,7 @@ public class App {
   public static void main(String[] args) throws Exception {
 
     keyScan = new Scanner(System.in);
-
+    
     Deque<String> commandStack = new ArrayDeque<>(); 
     Queue<String> commandQueue = new LinkedList<>();
 
@@ -75,7 +75,8 @@ public class App {
     
     commandMap.put("/hi", new HiCommand(input));
     commandMap.put("/calc/plus", new CalcPlusCommand(input));
-
+    
+    
     while (true) {
       String command = prompt();
 
@@ -106,6 +107,7 @@ public class App {
       System.out.println();
     }
   }
+  
 
   private static void printCommandHistory(Iterable<String> list) throws Exception{ // 최신순으로 출력
     Iterator<String> iterator = list.iterator();

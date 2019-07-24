@@ -31,6 +31,16 @@ public class Test01 {
   static String getName(int index) {
     return list.get(index);
   }
+  
+  /*
+  static String getName(int index) {
+    try {
+    return list.get(index);
+    } catch (RuntimeException e) {
+      return null;
+    }
+  }
+  */ //적지 않아도 됨.
  
 }
 

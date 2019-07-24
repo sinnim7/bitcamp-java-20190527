@@ -8,13 +8,13 @@ public class Test02 {
   public static void main(String[] args) {
     ArrayList<long[]> list = new ArrayList<>();
     // 예외 처리
-    try {
+   try { 
       // 시스템 예외가 발생할 수 있는 코드를 이 블록에 둔다.
       for (int i = 0; i < 1000; i++) {
         list.add(new long[1000000]); // Heap 영역에 약 8MB 크기의 long 배열을 생성한다.
         // 만약 Heap 영역의 메모리가 모두 사용된다면 
         // 더이상 배열을 생성할 수 없기 때문에 "시스템 예외"가 발생할 것이다.
-      }
+     }
       
     } catch (Error err) {
       // 예외가 발생하면 이 블록이 실행된다.
@@ -26,6 +26,9 @@ public class Test02 {
       //
       System.out.println(list.size());
       System.out.println("시스템 예외가 발생했습니다!");
+      
+      //시스템 예외가 발생했으면 적절한 조치를 취한 후 바로 종료하라!
+      return;
     }
 
     // 시스템 예외가 발생했을 때 위와 같이 적절하게 조치를 취하고 다음과 같이 
@@ -44,6 +47,7 @@ public class Test02 {
     list.add(new long[1000000]); // 메모리가 부족한 상태이기 때문에 실행 오류! 해결 불가능!
     
     System.out.println("실행 완료!");
+   
     
   }
 }
