@@ -10,19 +10,26 @@ public class Test05 {
   public static void main(String[] args) {
     // 1) 리턴 값은 return 명령을 사용하여 처리한다.
     Calculator c1 = (a, b) -> { return a + b; };
+    Calculator d1 = (d, e ) -> {return d + e;};
     System.out.println(c1.compute(10, 20));
+    System.out.println(d1.compute(20, 30));
     
     // 2) 한 문장으로 된 표현식(=값을 리턴하는 한 문장의 코드)을 경우 괄호 생략할 수 있다. 
     Calculator c2 = (a, b) -> a - b;
+    Calculator d2 = (d, e) -> d + e;
     System.out.println(c2.compute(10, 20));
+    System.out.println(d2.compute(30, 2));
     
     // Math.max()는 int 값을 리턴한다. 그래서 이 메서드를 호출하는 문장은 표현식이다.
     Calculator c3 = (a, b) -> Math.max(a, b);
+    Calculator d3 = (d, e) -> Math.max(d, e);
+    
     System.out.println(c3.compute(10, 20));
+    System.out.println(d3.compute(500, 3));
     
     // 값을 리턴해야 하는데 람다 문장에서 값을 리턴하지 않으면 컴파일 오류!
-    //Calculator c4 = (a, b) -> System.out.println(a + ",", b); // 컴파일 오류!
-    //System.out.println(c4.compute(10, 20));
+    Calculator c4 = (a, b) -> System.out.println(a + ",", b); // 컴파일 오류!
+    System.out.println(c4.compute(10, 20));
   }
   
 }

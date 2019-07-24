@@ -24,7 +24,11 @@ public class LinkedList<T> {
       head = temp; //해드가 널이면 새로만든 템프에 저장.
     
     if (tail != null) //테일이 널이 아닐때만
-      tail.next = temp; //테일이 가리키는 넥스트에 새 값을 담은 템프를 저장.
+      tail.next = temp; //테일이 가리키는 넥스트에 새 값을 담은 템프를 저장. 
+    
+    
+    
+    
     
     tail = temp; //테일이라는 변수엔 새로 추가한 템프가 저장.
     

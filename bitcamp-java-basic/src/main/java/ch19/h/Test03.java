@@ -18,7 +18,9 @@ public class Test03 {
     
     // 3) 파라미터가 한 개일 때는 괄호도 생략할 수 있다.
     Player p3 = name -> System.out.println(name + " 님 환영합니다.");
+    Player p4 = name -> System.out.println(name + " 님 환영");
     p3.play("홍길동");
+    p4.play("김김김");
   }
 }
 

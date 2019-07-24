@@ -46,7 +46,10 @@ public class Test06 {
     
     // 추상 메서드를 한 개만 갖고 있는 인터페이스에 대해 람다 문법으로 입명클래스를 만들 수 있음.
     Player p1 = () -> System.out.println("Player...");
+    Player d1 = () -> System.out.println("asd?");
+    
     p1.play();
+    d1.play();
     
     // static 메서드나 default 메서드가 몇개이든 그 개수는 중요하지 않다.
     // 단 추상 메서드가 한 개이어야 한다.
@@ -56,7 +59,7 @@ public class Test06 {
     System.out.println(Player2.info());
     
     // 추상 메서드가 두 개 이상인 경우 람다 문법을 사용할 수 없다.
-    //Player3 p3 = () -> System.out.println("Player3..."); // 컴파일 오류!
+    Player3 p3 = () -> System.out.println("Player3..."); // 컴파일 오류!
     
     // 인터페이스가 아닌 추상 클래스는 람다 구현의 대상이 아니다!
     //Player4 p4 = () -> System.out.println("Player4..."); // 컴파일 오류!
