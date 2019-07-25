@@ -3,8 +3,12 @@
 
 package com.eomcs.lms;
 
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -160,34 +164,38 @@ public class App {
 
   private static void loadLessonData() {
     // File의 정보를 준비
-    File file = new File("./lesson.csv");
+    File file = new File("./lesson.dat");
 
-    FileReader in = null;
-    Scanner scan = null;
+    // 바이트 단위로 출력된 데이터를 읽을 객체를 준비.
+    FileInputStream in = null;
+    DataInputStream in2 = null;
 
     try {
       // 파일 정보를 바탕으로 데이터를 읽어주는 객체 준비
-      in = new FileReader(file);
-      scan = new Scanner(in);
+      in = new FileInputStream(file);
 
-      while (scan.hasNextLine()) {
-        // 파일에서 한 줄 읽는다.
-        String line = scan.nextLine();
+      // 바이트 배열을 읽어 원래의 타입인 int나 String 등으로 변환해 주는 도구를
+      // FileInputStream 에 붙임
 
-        // 문자열을 콤마로 분리한다. 분리된 데이터는 배열에 담겨 리턴된다.
-        String[] data = line.split(",");
+      in2 = new DataInputStream(in);
 
-        // 수업 데이터를 담을 Lesson 객체를 준비한다.
+      // 파일에서 첫 번째 int 값을 먼저 읽음.
+      // 이 값은 파일에 저장된 수업 데이터의 개수이다.
+      int len = in2.readInt();
+
+      while (len-- > 0) {
+
         Lesson lesson = new Lesson();
 
-        // 배열 각 항목의 값을 Lesson 객체에 담는다.
-        lesson.setNo(Integer.parseInt(data[0]));
-        lesson.setTitle(data[1]);
-        lesson.setContents(data[2]);
-        lesson.setStartDate(Date.valueOf(data[3]));
-        lesson.setEndDate(Date.valueOf(data[4]));
-        lesson.setTotalHours(Integer.parseInt(data[5]));
-        lesson.setDayHours(Integer.parseInt(data[6]));
+        // 파일에서 데이터의 각 항목을 읽어 객체에 저장함.
+
+        lesson.setNo(in2.readInt());
+        lesson.setTitle(in2.readUTF());
+        lesson.setContents(in2.readUTF());
+        lesson.setStartDate(Date.valueOf(in2.readUTF()));
+        lesson.setEndDate(Date.valueOf(in2.readUTF()));
+        lesson.setTotalHours(in2.readInt());
+        lesson.setDayHours(in2.readInt());
 
         // 수업 데이터를 담은 Lesson 객체를 lessonList에 추가한다.
         lessonList.add(lesson);
@@ -205,117 +213,103 @@ public class App {
 
     } finally {
       try {
-        scan.close();
+        in2.close();
       } catch (Exception e) {
-        // close() 하다가 오류가 발생하면 무시한다.
       }
       try {
         in.close();
       } catch (Exception e) {
-        // close() 하다가 오류가 발생하면 무시한다.
       }
     }
-
   }
 
   private static void saveLessonData() {
 
-    // File의 정보를 준비
-    File file = new File("./lesson.csv");
+    File file = new File("./lesson.dat");
 
-    FileWriter out = null;
+    FileOutputStream out = null;
+    DataOutputStream out2 = null;
 
     try {
-      // 파일 정보를 바탕으로 데이터를 출력해주는 객체 준비
-      out = new FileWriter(file);
+      out = new FileOutputStream(file);
+
+      out2 = new DataOutputStream(out);
+
+      out2.writeInt(lessonList.size());
 
       for (Lesson lesson : lessonList) {
-        // 파일에 출력한다.
-        // => 수업 데이터를 한 문자열로 만들자.
-        // 형식은 국제적으로 많이 사용하는 CSV(Comma-Separated Value) 형식으로 만들자.
-        String str = String.format("%d,%s,%s,%s,%s,%d,%d\n", lesson.getNo(), lesson.getTitle(),
-            lesson.getContents(), lesson.getStartDate(), lesson.getEndDate(),
-            lesson.getTotalHours(), lesson.getDayHours());
-        out.write(str);
+
+        out2.writeInt(lesson.getNo()); // int -> byte[]
+        out2.writeUTF(lesson.getTitle()); // String -> byte[]
+        out2.writeUTF(lesson.getContents()); // String -> byte[]
+        out2.writeUTF(lesson.getStartDate().toString()); // String -> byte[]
+        out2.writeUTF(lesson.getEndDate().toString()); // String -> byte[]
+        out2.writeInt(lesson.getTotalHours()); // int -> byte[]
+        out2.writeInt(lesson.getDayHours()); // int -> byte[]
+
+
       }
     } catch (FileNotFoundException e) {
-      // 출력할 파일을 생성하지 못할 때
-      // JVM을 멈추지 말고 간단히 오류 안내 문구를 출력한 다음에
-      // 계속 실행하게 하자!
       System.out.println("파일을 생성할 수 없습니다!");
 
     } catch (IOException e) {
-      // 파일에 데이터를 출력하다가 오류가 발생하면,
-      // JVM을 멈추지 말고 간단히 오류 안내 문구를 출력한 다음에
-      // 계속 실행하게 하자!
       System.out.println("파일에 데이터를 출력하는 중에 오류 발생!");
 
     } finally {
       try {
         out.close();
       } catch (Exception e) {
-        // close() 하다가 발생된 예외는 따로 처리할 게 없다.
-        // 그냥 빈채로 둔다.
       }
-
+    }
+    try {
+      out2.close();
+    } catch (Exception e) {
     }
   }
 
   private static void loadMemberData() {
-    // File의 정보를 준비
-    File file = new File("./member.csv");
+    File file = new File("./member.dat");
 
-    FileReader in = null;
-    Scanner scan = null;
+    FileInputStream in = null;
+    DataInputStream in2 = null;
 
     try {
-      // 파일 정보를 바탕으로 데이터를 읽어주는 객체 준비
-      in = new FileReader(file);
-      scan = new Scanner(in);
+      in = new FileInputStream(file);
 
-      while (scan.hasNextLine()) {
-        // 파일에서 한 줄 읽는다.
-        String line = scan.nextLine();
+      in2 = new DataInputStream(in);
 
-        // 문자열을 콤마로 분리한다. 분리된 데이터는 배열에 담겨 리턴된다.
-        String[] data = line.split(",");
+      int len = in2.readInt();
 
-        // 회원 데이터를 담을 Member 객체를 준비한다.
+      while (len-- > 0) {
+
         Member member = new Member();
 
-        // 배열 각 항목의 값을 Member 객체에 담는다.
-        member.setNo(Integer.parseInt(data[0]));
-        member.setName(data[1]);
-        member.setEmail(data[2]);
-        member.setPassword(data[3]);
-        member.setPhoto(data[4]);
-        member.setTel(data[5]);
-        member.setRegisteredDate(Date.valueOf(data[6]));
 
-        // 회원 데이터를 담은 Member 객체를 memberList에 추가한다.
+        member.setNo(in2.readInt());
+        member.setName(in2.readUTF());
+        member.setEmail(in2.readUTF());
+        member.setPassword(in2.readUTF());
+        member.setPhoto(in2.readUTF());
+        member.setTel(in2.readUTF());
+        member.setRegisteredDate(Date.valueOf(in2.readUTF()));
+
         memberList.add(member);
       }
 
     } catch (FileNotFoundException e) {
-      // 읽을 파일을 찾지 못할 때
-      // JVM을 멈추지 말고 간단히 오류 안내 문구를 출력한 다음에
-      // 계속 실행하게 하자!
       System.out.println("읽을 파일을 찾을 수 없습니다!");
 
     } catch (Exception e) {
-      // FileNotFoundException 외의 다른 예외를 여기에서 처리한다.
       System.out.println("파일을 읽는 중에 오류가 발생했습니다!");
 
     } finally {
       try {
-        scan.close();
+        in2.close();
       } catch (Exception e) {
-        // close() 하다가 오류가 발생하면 무시한다.
       }
       try {
         in.close();
       } catch (Exception e) {
-        // close() 하다가 오류가 발생하면 무시한다.
       }
     }
 
@@ -323,99 +317,87 @@ public class App {
 
   private static void saveMemberData() {
 
-    // File의 정보를 준비
-    File file = new File("./member.csv");
+    File file = new File("./member.dat");
 
-    FileWriter out = null;
+    FileOutputStream out = null;
+    DataOutputStream out2 = null;
 
     try {
-      // 파일 정보를 바탕으로 데이터를 출력해주는 객체 준비
-      out = new FileWriter(file);
+      out = new FileOutputStream(file);
+
+      out2 = new DataOutputStream(out);
+
+      out2.writeInt(memberList.size());
+
 
       for (Member member : memberList) {
-        // 파일에 출력한다.
-        // => 회원 데이터를 한 문자열로 만들자.
-        // 형식은 국제적으로 많이 사용하는 CSV(Comma-Separated Value) 형식으로 만들자.
-        String str = String.format("%d,%s,%s,%s,%s,%s,%s\n", member.getNo(), member.getName(),
-            member.getEmail(), member.getPassword(), member.getPhoto(), member.getTel(),
-            member.getRegisteredDate());
-        out.write(str);
+
+        out2.writeInt(member.getNo()); // int -> byte[]
+        out2.writeUTF(member.getName()); // String -> byte[]
+        out2.writeUTF(member.getEmail()); // String -> byte[]
+        out2.writeUTF(member.getPassword()); // String -> byte[]
+        out2.writeUTF(member.getPhoto()); // String -> byte[]
+        out2.writeUTF(member.getTel()); // int -> byte[]
+        out2.writeUTF(member.getRegisteredDate().toString()); // int -> byte[]
+
       }
     } catch (FileNotFoundException e) {
-      // 출력할 파일을 생성하지 못할 때
-      // JVM을 멈추지 말고 간단히 오류 안내 문구를 출력한 다음에
-      // 계속 실행하게 하자!
       System.out.println("파일을 생성할 수 없습니다!");
 
     } catch (IOException e) {
-      // 파일에 데이터를 출력하다가 오류가 발생하면,
-      // JVM을 멈추지 말고 간단히 오류 안내 문구를 출력한 다음에
-      // 계속 실행하게 하자!
       System.out.println("파일에 데이터를 출력하는 중에 오류 발생!");
 
     } finally {
       try {
         out.close();
       } catch (Exception e) {
-        // close() 하다가 발생된 예외는 따로 처리할 게 없다.
-        // 그냥 빈채로 둔다.
       }
-
+    }
+    try {
+      out2.close();
+    } catch (Exception e) {
     }
   }
 
   private static void loadBoardData() {
-    // File의 정보를 준비
-    File file = new File("./board.csv");
+    File file = new File("./board.dat");
 
-    FileReader in = null;
-    Scanner scan = null;
+    FileInputStream in = null;
+    DataInputStream in2 = null;
 
     try {
-      // 파일 정보를 바탕으로 데이터를 읽어주는 객체 준비
-      in = new FileReader(file);
-      scan = new Scanner(in);
+      in = new FileInputStream(file);
 
-      while (scan.hasNextLine()) {
-        // 파일에서 한 줄 읽는다.
-        String line = scan.nextLine();
+      in2 = new DataInputStream(in);
 
-        // 문자열을 콤마로 분리한다. 분리된 데이터는 배열에 담겨 리턴된다.
-        String[] data = line.split(",");
+      int len = in2.readInt();
 
-        // 게시물 데이터를 담을 Board 객체를 준비한다.
+      while (len-- > 0) {
+
         Board board = new Board();
 
-        // 배열 각 항목의 값을 Board 객체에 담는다.
-        board.setNo(Integer.parseInt(data[0]));
-        board.setContents(data[1]);
-        board.setViewCount(Integer.parseInt(data[2]));
-        board.setCreatedDate(Date.valueOf(data[3]));
+        board.setNo(in2.readInt());
+        board.setContents(in2.readUTF());
+        board.setViewCount(in2.readInt());
+        board.setCreatedDate(Date.valueOf(in2.readUTF()));
 
-        // 게시물 데이터를 담은 Board 객체를 boardList에 추가한다.
         boardList.add(board);
       }
 
     } catch (FileNotFoundException e) {
-      // 읽을 파일을 찾지 못할 때
-      // JVM을 멈추지 말고 간단히 오류 안내 문구를 출력한 다음에
-      // 계속 실행하게 하자!
       System.out.println("읽을 파일을 찾을 수 없습니다!");
 
     } catch (Exception e) {
-      // FileNotFoundException 외의 다른 예외를 여기에서 처리한다.
       System.out.println("파일을 읽는 중에 오류가 발생했습니다!");
 
     } finally {
       try {
-        scan.close();
+        in2.close();
       } catch (Exception e) {
-        // close() 하다가 오류가 발생하면 무시한다.
       }
       try {
         in.close();
       } catch (Exception e) {
-        // close() 하다가 오류가 발생하면 무시한다.
       }
     }
 
@@ -423,41 +405,36 @@ public class App {
 
   private static void saveBoardData() {
 
-    // File의 정보를 준비
-    File file = new File("./board.csv");
+    File file = new File("./board.dat");
 
-    FileWriter out = null;
+    FileOutputStream out = null;
+    DataOutputStream out2 = null;
 
     try {
-      // 파일 정보를 바탕으로 데이터를 출력해주는 객체 준비
-      out = new FileWriter(file);
+      out = new FileOutputStream(file);
+      out2 = new DataOutputStream(out);
+
+      out2.writeInt(boardList.size());
+
 
       for (Board board : boardList) {
-        // 파일에 출력한다.
-        // => 게시물 데이터를 한 문자열로 만들자.
-        // 형식은 국제적으로 많이 사용하는 CSV(Comma-Separated Value) 형식으로 만들자.
-        String str = String.format("%d,%s,%d,%s\n", board.getNo(), board.getContents(),
-            board.getViewCount(), board.getCreatedDate());
-        out.write(str);
+
+        out2.writeInt(board.getNo()); // int -> byte[]
+        out2.writeUTF(board.getContents()); // String -> byte[]
+        out2.writeInt(board.getViewCount()); // String -> byte[]
+        out2.writeUTF(board.getCreatedDate().toString()); // String -> byte[]
+
       }
     } catch (FileNotFoundException e) {
-      // 출력할 파일을 생성하지 못할 때
-      // JVM을 멈추지 말고 간단히 오류 안내 문구를 출력한 다음에
-      // 계속 실행하게 하자!
       System.out.println("파일을 생성할 수 없습니다!");
 
     } catch (IOException e) {
-      // 파일에 데이터를 출력하다가 오류가 발생하면,
-      // JVM을 멈추지 말고 간단히 오류 안내 문구를 출력한 다음에
-      // 계속 실행하게 하자!
       System.out.println("파일에 데이터를 출력하는 중에 오류 발생!");
 
     } finally {
       try {
         out.close();
       } catch (Exception e) {
-        // close() 하다가 발생된 예외는 따로 처리할 게 없다.
-        // 그냥 빈채로 둔다.
       }
 
     }
