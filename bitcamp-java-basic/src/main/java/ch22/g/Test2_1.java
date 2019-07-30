@@ -6,9 +6,10 @@ import java.io.ObjectOutputStream;
 
 public class Test2_1 {
 
-  public static void main(String[] args) {
-    try (ObjectOutputStream out = new ObjectOutputStream(
-          new FileOutputStream("score2.data"))) {
+  public static void main(String[] args) throws Exception {
+    
+    FileOutputStream out0 = new FileOutputStream("temp/score.data");
+    ObjectOutputStream out = new ObjectOutputStream(out0);
       
       Score2 score = new Score2();
       score.setName("홍길동");
@@ -25,10 +26,7 @@ public class Test2_1 {
       
       System.out.println("출력 완료!");
       
-    } catch (Exception e) {
-      e.printStackTrace();
-    }
-
-  }
+      out.close();
+  } 
 
 }

@@ -5,10 +5,10 @@ import java.io.FileInputStream;
 import java.io.ObjectInputStream;
 
 public class Test3_2 {
-  public static void main(String[] args) {
+  public static void main(String[] args) throws Exception {
     
-    try (ObjectInputStream in = new ObjectInputStream(
-          new FileInputStream("score3.data"))) {
+    FileInputStream in0 = new FileInputStream("temp/score.data");
+    ObjectInputStream in = new ObjectInputStream(in0);
       
       Score3 score = (Score3) in.readObject();
       System.out.println(score);
@@ -19,9 +19,8 @@ public class Test3_2 {
       score.compute();
       System.out.println(score);
       
-      
-    } catch (Exception e) {
-      e.printStackTrace();
-    }
+      in.close();
+    
+    
   }
 }
