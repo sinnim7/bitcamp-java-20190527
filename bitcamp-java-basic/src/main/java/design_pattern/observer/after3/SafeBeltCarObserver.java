@@ -8,10 +8,5 @@ public class SafeBeltCarObserver implements CarObserver {
     
   }
 
-  @Override
-  public void carStopped() {
-    // TODO Auto-generated method stub
-    
-  }
   
 }
