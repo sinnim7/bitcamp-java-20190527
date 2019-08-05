@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.sql.Date;
 
 // 수업 데이터를 저장할 설계도를 작성한다.
-public class Lesson implements Serializable{ //새로운 데이터 타입을 정의함.
+public class Lesson implements Serializable {
   private static final long serialVersionUID = 1L;
   
   private int no;
@@ -21,7 +21,6 @@ public class Lesson implements Serializable{ //새로운 데이터 타입을 정
         + startDate + ", endDate=" + endDate + ", totalHours=" + totalHours + ", dayHours="
         + dayHours + "]";
   }
-  
   public int getNo() {
     return no;
   }
@@ -65,4 +64,12 @@ public class Lesson implements Serializable{ //새로운 데이터 타입을 정
     this.dayHours = dayHours;
   }
   
+  
 }
+
+
+
+
+
+
+

@@ -3,7 +3,7 @@ package com.eomcs.lms.domain;
 import java.io.Serializable;
 import java.sql.Date;
 
-public class Member implements Serializable{
+public class Member implements Serializable {
   private static final long serialVersionUID = 1L;
   
   private int no;
@@ -19,7 +19,6 @@ public class Member implements Serializable{
     return "Member [no=" + no + ", name=" + name + ", email=" + email + ", password=" + password
         + ", tel=" + tel + ", photo=" + photo + ", registeredDate=" + registeredDate + "]";
   }
-  
   public int getNo() {
     return no;
   }

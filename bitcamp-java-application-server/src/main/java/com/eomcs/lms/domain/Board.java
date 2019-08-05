@@ -3,7 +3,7 @@ package com.eomcs.lms.domain;
 import java.io.Serializable;
 import java.sql.Date;
 
-public class Board implements Serializable{
+public class Board implements Serializable {
   private static final long serialVersionUID = 1L;
   
   private int no;
@@ -16,7 +16,6 @@ public class Board implements Serializable{
     return "Board [no=" + no + ", contents=" + contents + ", createdDate=" + createdDate
         + ", viewCount=" + viewCount + "]";
   }
-  
   public int getNo() {
     return no;
   }
@@ -41,6 +40,5 @@ public class Board implements Serializable{
   public void setViewCount(int viewCount) {
     this.viewCount = viewCount;
   }
-  
   
 }
