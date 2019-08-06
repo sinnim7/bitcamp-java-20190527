@@ -1,5 +1,5 @@
 package ch23.c;
-
+ 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.PrintStream;
@@ -20,7 +20,7 @@ public class CalculatorProcessor {
   public void execute() throws Exception {
     try (Socket socket = this.socket;
         BufferedReader in = this.in;
-        PrintStream out = this.out) {
+        PrintStream out = this.out) {  // 변수에 대한 클로즈 자동화
       
       sendGreeting();
       
