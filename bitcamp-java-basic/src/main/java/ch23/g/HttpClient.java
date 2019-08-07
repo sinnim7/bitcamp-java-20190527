@@ -17,12 +17,12 @@ public class HttpClient {
     // Host: [서버주소](CRLF)
     // (CRLF)
     // ---------------------------------
-    try (Socket socket = new Socket("www.seoultv.co.kr", 80);
+    try (Socket socket = new Socket("www.hani.co.kr", 80);
         PrintStream out = new PrintStream(socket.getOutputStream());
         Scanner in = new Scanner(socket.getInputStream())) {
       
       out.println("GET / HTTP/1.1");
-      out.println("Host: www.seoultv.co.kr");
+      out.println("Host: www.hani.co.kr");
 //      out.println("Connection: keep-alive");
 //      out.println("Pragma: no-cache");
 //      out.println("Cache-Control: no-cache");
