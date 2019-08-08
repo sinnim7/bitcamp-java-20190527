@@ -1,4 +1,4 @@
-// v4 : 수업관리시스템의 데이터를 로딩하고 저장하는 코드를 옵저버로 분리함.
+// v4 : 수업관리시스템의 데이터를 로딩하고 저장하는 코드를 옵저버로 분리함.//
 package com.eomcs.lms;
 
 import java.util.ArrayDeque;
