@@ -16,7 +16,7 @@ public class Test08 {
       try (Statement stmt = con.createStatement()) {
         
         try (ResultSet rs = stmt.executeQuery(
-            "select * from x_board order by board_id desc")) {
+            "select * from x_board order by created_date desc")) {
         
           while (rs.next()) {
             // 레코드에서 컬럼 값을 꺼낼 때 컬럼 번호를 지정하는 것 보다 
