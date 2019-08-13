@@ -1,4 +1,4 @@
-// client-v37_6 : 서버 종료를 처리하기 위해 serverstop 명령을 한 번 더 보내기.
+// client-v37_5 : 서버 종료를 처리하기 위해 serverstop 명령을 한 번 더 보내기.
 package com.eomcs.lms;
 
 import java.io.BufferedReader;

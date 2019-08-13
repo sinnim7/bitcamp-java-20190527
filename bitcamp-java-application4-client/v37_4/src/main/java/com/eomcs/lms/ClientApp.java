@@ -1,4 +1,4 @@
-// client-v37_6 : 서버 종료를 처리하기 위해 serverstop 명령을 한 번 더 보내기.
+// client-v37_4 : Stateful 통신 방식을 Stateless 통신 방식으로 변경하기.
 package com.eomcs.lms;
 
 import java.io.BufferedReader;
@@ -14,20 +14,21 @@ import java.util.Scanner;
 
 public class ClientApp {
 
-  Scanner keyboard;
-
+  Scanner keyBoard;
   String host;
   int port;
 
+
   private void service() {
 
-    keyboard = new Scanner(System.in);
+    keyBoard = new Scanner(System.in);
 
     System.out.print("서버? ");
-    host = keyboard.nextLine();
+    host = keyBoard.nextLine();
 
     System.out.print("포트? ");
-    port = Integer.parseInt(keyboard.nextLine());
+    port = Integer.parseInt(keyBoard.nextLine());
+
 
     Deque<String> commandStack = new ArrayDeque<>();
     Queue<String> commandQueue = new LinkedList<>();
@@ -37,8 +38,8 @@ public class ClientApp {
       if (command.length() == 0)
         continue;
 
-      commandStack.push(command); 
-      commandQueue.offer(command); 
+      commandStack.push(command);
+      commandQueue.offer(command);
 
       if (command.equals("history")) {
         printCommandHistory(commandStack);
@@ -48,36 +49,34 @@ public class ClientApp {
 
       } else {
         request(command);
-        
-        // 서버를 멈출 때는 서버가 상태 값을 처리할 수 있도록 한 번 더 요청을 보낸다.
-        if (command.equals("serverstop"))
-          request(command);
-        
-        if (command.equals("quit") || command.equals("serverstop"))
+
+        if (command.equals("quit") || command.equals("serverstop")) 
           break;
       }
+
       System.out.println();
-    } //while
+    } // while
+
   }
+
 
   private void request(String command) {
     try (Socket socket = new Socket(host, port);
         PrintStream out = new PrintStream(socket.getOutputStream());
-        BufferedReader in = new BufferedReader(
-            new InputStreamReader(socket.getInputStream()))) {
+        BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()))) {
 
-      send(command, out);
-      receive(in, out);
-      
+        send(command, out);
+        receive(in, out);
+        
     } catch (Exception e) {
       System.out.println("애플리케이션 서버와 통신 오류!");
       e.printStackTrace();
     }
   }
-
   private void send(String command, PrintStream out) throws Exception {
     out.println(command);
     out.flush();
+
   }
 
   private void receive(BufferedReader in, PrintStream out) throws Exception {
@@ -85,15 +84,14 @@ public class ClientApp {
       String response = in.readLine();
       if (response.equals("!end!")) {
         break;
-
       } else if (response.equals("!{}!")) {
-        send(keyboard.nextLine(), out);
-
+        send(keyBoard.nextLine(), out);
       } else {
         System.out.println(response);
       }
     }
   }
+
 
   private void printCommandHistory(Iterable<String> list) {
     Iterator<String> iterator = list.iterator();
@@ -102,7 +100,7 @@ public class ClientApp {
       System.out.println(iterator.next());
       if (++count % 5 == 0) {
         System.out.print(":");
-        if (keyboard.nextLine().equalsIgnoreCase("q"))
+        if (keyBoard.nextLine().equalsIgnoreCase("q"))
           break;
       }
     }
@@ -110,7 +108,7 @@ public class ClientApp {
 
   private String prompt() {
     System.out.print("명령> ");
-    return keyboard.nextLine();
+    return keyBoard.nextLine();
   }
 
   public static void main(String[] args) {
@@ -118,13 +116,5 @@ public class ClientApp {
     app.service();
   }
 }
-
-
-
-
-
-
-
-
 
 
