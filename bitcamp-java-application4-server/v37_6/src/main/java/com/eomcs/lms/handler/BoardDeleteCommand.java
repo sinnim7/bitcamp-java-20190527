@@ -3,7 +3,7 @@ package com.eomcs.lms.handler;
 import java.io.BufferedReader;
 import java.io.PrintStream;
 import com.eomcs.lms.dao.BoardDao;
-import com.eomcs.lms.util.Input;
+import com.eomcs.util.Input;
 
 public class BoardDeleteCommand implements Command {
   
@@ -15,10 +15,7 @@ public class BoardDeleteCommand implements Command {
   
   @Override
   public void execute(BufferedReader in, PrintStream out) {
-
-    
     try {
-      
       int no = Input.getIntValue(in, out, "번호? ");
       
       if (boardDao.delete(no) > 0) {

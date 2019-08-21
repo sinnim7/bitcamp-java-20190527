@@ -5,7 +5,7 @@ import java.io.PrintStream;
 import java.util.List;
 import com.eomcs.lms.dao.MemberDao;
 import com.eomcs.lms.domain.Member;
-import com.eomcs.lms.util.Input;
+import com.eomcs.util.Input;
 
 public class MemberSearchCommand implements Command {
   private MemberDao memberDao;
@@ -27,7 +27,7 @@ public class MemberSearchCommand implements Command {
       }
 
     } catch (Exception e) {
-      System.out.println("데이터 목록 조회에 실패했습니다!");
+      out.println("데이터 목록 조회에 실패했습니다!");
       System.out.println(e.getMessage());
     }
   }

@@ -4,7 +4,7 @@ import java.io.BufferedReader;
 import java.io.PrintStream;
 import com.eomcs.lms.dao.MemberDao;
 import com.eomcs.lms.domain.Member;
-import com.eomcs.lms.util.Input;
+import com.eomcs.util.Input;
 
 public class MemberAddCommand implements Command {
   private MemberDao memberDao;
@@ -15,7 +15,6 @@ public class MemberAddCommand implements Command {
 
   @Override
   public void execute(BufferedReader in, PrintStream out) {
-
     try {
       Member member = new Member();
       member.setName(Input.getStringValue(in, out, "이름? "));

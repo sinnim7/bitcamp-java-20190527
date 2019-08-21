@@ -4,7 +4,7 @@ import java.io.BufferedReader;
 import java.io.PrintStream;
 import com.eomcs.lms.dao.BoardDao;
 import com.eomcs.lms.domain.Board;
-import com.eomcs.lms.util.Input;
+import com.eomcs.util.Input;
 
 public class BoardDetailCommand implements Command {
   
@@ -16,18 +16,11 @@ public class BoardDetailCommand implements Command {
   
   @Override
   public void execute(BufferedReader in, PrintStream out) {
-    
-    
-    
-
     try {
-      
-      // 클라에게 번호를 요구해 받음.
+      // 클라이언트에게 번호를 요구하여 받는다.
       int no = Input.getIntValue(in, out, "번호? ");
       
-      // 사용자가 입력한 번호를 가지고 목록에서 그 번호에 해당하는 Board 객체를 찾는다.
       Board board = boardDao.findBy(no);
-      
       if (board == null) {
         out.println("해당 번호의 데이터가 없습니다!");
         return;

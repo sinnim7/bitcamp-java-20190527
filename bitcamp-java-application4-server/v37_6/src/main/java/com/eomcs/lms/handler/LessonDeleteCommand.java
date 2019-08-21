@@ -3,7 +3,7 @@ package com.eomcs.lms.handler;
 import java.io.BufferedReader;
 import java.io.PrintStream;
 import com.eomcs.lms.dao.LessonDao;
-import com.eomcs.lms.util.Input;
+import com.eomcs.util.Input;
 
 public class LessonDeleteCommand implements Command {
   
@@ -15,8 +15,8 @@ public class LessonDeleteCommand implements Command {
 
   @Override
   public void execute(BufferedReader in, PrintStream out) {
-    
     try {
+
       int no = Input.getIntValue(in, out, "번호? ");
       
       if (lessonDao.delete(no) > 0) {

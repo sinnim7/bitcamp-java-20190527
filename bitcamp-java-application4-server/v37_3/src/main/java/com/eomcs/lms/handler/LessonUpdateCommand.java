@@ -4,7 +4,7 @@ import java.io.BufferedReader;
 import java.io.PrintStream;
 import com.eomcs.lms.dao.LessonDao;
 import com.eomcs.lms.domain.Lesson;
-import com.eomcs.lms.util.Input;
+import com.eomcs.util.Input;
 
 public class LessonUpdateCommand implements Command {
 
@@ -16,10 +16,9 @@ public class LessonUpdateCommand implements Command {
 
   @Override
   public void execute(BufferedReader in, PrintStream out) {
-
     try {
       int no = Input.getIntValue(in, out, "번호? ");
-      
+
       Lesson lesson = lessonDao.findBy(no);
       if (lesson == null) {
         out.println("해당 번호의 데이터가 없습니다!");
@@ -30,21 +29,11 @@ public class LessonUpdateCommand implements Command {
       String str = Input.getStringValue(in, out, "수업명(" + lesson.getTitle() + ")? ");
       if (str.length() > 0) {
         lesson.setTitle(str);
-        lessonDao.update(lesson);
-        out.println("데이터를 변경하였습니다.");
-
-      } else {
-        out.println("데이터 변경을 취소합니다");
       }
 
       str = Input.getStringValue(in, out, "수업내용? ");
       if (str.length() > 0) {
         lesson.setContents(str);
-        lessonDao.update(lesson);
-        out.println("데이터를 변경하였습니다.");
-
-      } else {
-        out.println("데이터 변경을 취소합니다");
       }
 
       lesson.setStartDate(

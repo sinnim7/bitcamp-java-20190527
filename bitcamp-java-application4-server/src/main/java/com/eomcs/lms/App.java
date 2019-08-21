@@ -1,4 +1,4 @@
-// v37_6 : 스레드풀 적용하기 
+// v38_1 : 사진 게시판 만들기
 package com.eomcs.lms;
 
 import java.io.BufferedReader;
@@ -14,9 +14,13 @@ import java.util.concurrent.Executors;
 import com.eomcs.lms.dao.BoardDao;
 import com.eomcs.lms.dao.LessonDao;
 import com.eomcs.lms.dao.MemberDao;
+import com.eomcs.lms.dao.PhotoBoardDao;
+import com.eomcs.lms.dao.PhotoFileDao;
 import com.eomcs.lms.dao.mariadb.BoardDaoImpl;
 import com.eomcs.lms.dao.mariadb.LessonDaoImpl;
 import com.eomcs.lms.dao.mariadb.MemberDaoImpl;
+import com.eomcs.lms.dao.mariadb.PhotoBoardDaoImpl;
+import com.eomcs.lms.dao.mariadb.PhotoFileDaoImpl;
 import com.eomcs.lms.handler.BoardAddCommand;
 import com.eomcs.lms.handler.BoardDeleteCommand;
 import com.eomcs.lms.handler.BoardDetailCommand;
@@ -34,6 +38,11 @@ import com.eomcs.lms.handler.MemberDetailCommand;
 import com.eomcs.lms.handler.MemberListCommand;
 import com.eomcs.lms.handler.MemberSearchCommand;
 import com.eomcs.lms.handler.MemberUpdateCommand;
+import com.eomcs.lms.handler.PhotoBoardAddCommand;
+import com.eomcs.lms.handler.PhotoBoardDeleteCommand;
+import com.eomcs.lms.handler.PhotoBoardDetailCommand;
+import com.eomcs.lms.handler.PhotoBoardListCommand;
+import com.eomcs.lms.handler.PhotoBoardUpdateCommand;
 
 public class App {
 
@@ -46,7 +55,7 @@ public class App {
   
   // 스레드풀
   ExecutorService executorService = Executors.newCachedThreadPool();
-
+  
   public App() throws Exception {
 
     // 처음에는 클라이언트 요청을 처리해야 하는 상태로 설정한다.
@@ -61,6 +70,8 @@ public class App {
       BoardDao boardDao = new BoardDaoImpl(con);
       MemberDao memberDao = new MemberDaoImpl(con);
       LessonDao lessonDao = new LessonDaoImpl(con);
+      PhotoBoardDao photoBoardDao = new PhotoBoardDaoImpl(con);
+      PhotoFileDao photoFileDao = new PhotoFileDaoImpl(con);
 
       // 클라이언트 명령을 처리할 커맨드 객체를 준비한다.
       commandMap.put("/lesson/add", new LessonAddCommand(lessonDao));
@@ -82,7 +93,13 @@ public class App {
       commandMap.put("/board/list", new BoardListCommand(boardDao));
       commandMap.put("/board/update", new BoardUpdateCommand(boardDao));
 
-
+      commandMap.put("/photoboard/add", 
+          new PhotoBoardAddCommand(photoBoardDao, photoFileDao));
+      commandMap.put("/photoboard/delete", new PhotoBoardDeleteCommand(photoBoardDao));
+      commandMap.put("/photoboard/detail", new PhotoBoardDetailCommand(photoBoardDao));
+      commandMap.put("/photoboard/list", new PhotoBoardListCommand(photoBoardDao));
+      commandMap.put("/photoboard/update", new PhotoBoardUpdateCommand(photoBoardDao));
+      
     } catch (Exception e) {
       System.out.println("DBMS에 연결할 수 없습니다!");
       throw e;
@@ -97,9 +114,8 @@ public class App {
       System.out.println("애플리케이션 서버가 시작되었음!");
 
       while (true) {
-        // 클라이언트가 접속하면 작업을 수행할 Runnable 객체를 만들어 스레드풀에 맡김.
+        // 클라이언트가 접속하면 작업을 수행할 Runnable 객체를 만들어 스레드풀에 맡긴다.
         executorService.submit(new CommandProcessor(serverSocket.accept()));
-        
         
         // 한 클라이언트가 serverstop 명령을 보내면 종료 상태로 설정되고 
         // 다음 요청을 처리할 때 즉시 실행을 멈춘다.
@@ -107,17 +123,15 @@ public class App {
           break;
       }
 
-      
-      // 스레드풀에게 실행 종료를 요청.
-      // => 스레드풀은 자신이 관리하는 스레드들의 실행이 종료됐는지 감시.
+      // 스레드풀에게 실행 종료를 요청한다.
+      // => 스레드풀은 자신이 관리하는 스레드들이 실행이 종료되었는지 감시한다.
       executorService.shutdown();
       
-      // 스레드풀이 관리하는 모든 스레드가 종료됐는지 매 0.5초마다 검사.
-      // => 스래드풀의 모든 스레드가 실행을 종료했으면 즉시 main 스레드를 종료.
+      // 스레드풀이 관리하는 모든 스레드가 종료되었는지 매 0.5초마다 검사한다.
+      // => 스레드풀의 모든 스레드가 실행을 종료했으면 즉시 main 스레드를 종료한다.
       while (!executorService.isTerminated()) {
         Thread.currentThread().sleep(500);
       }
-      
       
       System.out.println("애플리케이션 서버를 종료함!");
 

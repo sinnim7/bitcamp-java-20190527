@@ -24,7 +24,7 @@ public class MemberListCommand implements Command {
       }
 
     } catch (Exception e) {
-      System.out.println("데이터 목록 조회에 실패했습니다!");
+      out.println("데이터 목록 조회에 실패했습니다!");
       System.out.println(e.getMessage());
     }
   }

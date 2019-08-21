@@ -10,7 +10,6 @@ public class BoardListCommand implements Command {
   
   private BoardDao boardDao;
   
-  
   public BoardListCommand(BoardDao boardDao) {
     this.boardDao = boardDao;
   }
@@ -26,7 +25,7 @@ public class BoardListCommand implements Command {
       }
       
     } catch (Exception e) {
-      out.println("데이터 목록 조회에 실패했습니다!");  // 클라에게 답변.
+      out.println("데이터 목록 조회에 실패했습니다!");
       System.out.println(e.getMessage());
     }
   }

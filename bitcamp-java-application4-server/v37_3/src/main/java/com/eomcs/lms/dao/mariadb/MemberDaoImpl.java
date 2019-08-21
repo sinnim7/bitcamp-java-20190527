@@ -55,7 +55,7 @@ public class MemberDaoImpl implements MemberDao {
       return list;
     }
   }
-  
+
   @Override
   public Member findBy(int no) throws Exception {
     try (Statement stmt = con.createStatement();
@@ -81,30 +81,6 @@ public class MemberDaoImpl implements MemberDao {
     }
   }
   
-  
-
-  @Override
-  public int update(Member member) throws Exception {
-    try (Statement stmt = con.createStatement()) {
-
-      return stmt.executeUpdate("update lms_member set"
-          + " name='" + member.getName()
-          + "', email='" + member.getEmail()
-          + "', pwd=password('" + member.getPassword()
-          + "'), tel='" + member.getTel()
-          + "', photo='" + member.getPhoto()
-          + "' where member_id=" + member.getNo());
-    }
-  }
-
-  @Override
-  public int delete(int no) throws Exception {
-    try (Statement stmt = con.createStatement()) {
-
-      return stmt.executeUpdate("delete from lms_member where member_id=" + no);
-    }
-  }
-
   @Override
   public List<Member> findByKeyword(String keyword) throws Exception {
     try (Statement stmt = con.createStatement();
@@ -130,6 +106,28 @@ public class MemberDaoImpl implements MemberDao {
         list.add(member);
       }
       return list;
+    }
+  }
+
+  @Override
+  public int update(Member member) throws Exception {
+    try (Statement stmt = con.createStatement()) {
+
+      return stmt.executeUpdate("update lms_member set"
+          + " name='" + member.getName()
+          + "', email='" + member.getEmail()
+          + "', pwd=password('" + member.getPassword()
+          + "'), tel='" + member.getTel()
+          + "', photo='" + member.getPhoto()
+          + "' where member_id=" + member.getNo());
+    }
+  }
+
+  @Override
+  public int delete(int no) throws Exception {
+    try (Statement stmt = con.createStatement()) {
+
+      return stmt.executeUpdate("delete from lms_member where member_id=" + no);
     }
   }
 

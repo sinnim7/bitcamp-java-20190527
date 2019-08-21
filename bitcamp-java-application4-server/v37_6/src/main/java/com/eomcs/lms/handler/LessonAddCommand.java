@@ -4,7 +4,7 @@ import java.io.BufferedReader;
 import java.io.PrintStream;
 import com.eomcs.lms.dao.LessonDao;
 import com.eomcs.lms.domain.Lesson;
-import com.eomcs.lms.util.Input;
+import com.eomcs.util.Input;
 
 public class LessonAddCommand implements Command {
 
@@ -16,7 +16,6 @@ public class LessonAddCommand implements Command {
 
   @Override
   public void execute(BufferedReader in, PrintStream out) {
-
     try {
       Lesson lesson = new Lesson();
       
