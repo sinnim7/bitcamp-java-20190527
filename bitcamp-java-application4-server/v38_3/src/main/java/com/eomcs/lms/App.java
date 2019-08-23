@@ -1,4 +1,4 @@
-// v38_2: 사진 게시판 만들기 + 첨부파일만들기 + 트랜젝션 적용하기
+// v38_3 : 사진 게시판 만들기 + 첨부파일 다루기 + 트랜잭션 적용하기
 package com.eomcs.lms;
 
 import java.io.BufferedReader;

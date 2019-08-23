@@ -14,7 +14,9 @@ public class PhotoBoardDetailCommand implements Command {
   private PhotoBoardDao photoBoardDao;
   private PhotoFileDao photoFileDao;
   
-  public PhotoBoardDetailCommand(PhotoBoardDao photoBoardDao, PhotoFileDao photoFileDao) {
+  public PhotoBoardDetailCommand(
+      PhotoBoardDao photoBoardDao,
+      PhotoFileDao photoFileDao) {
     this.photoBoardDao = photoBoardDao;
     this.photoFileDao = photoFileDao;
   }
@@ -41,7 +43,6 @@ public class PhotoBoardDetailCommand implements Command {
       for (PhotoFile file : files) {
         out.printf("> %s\n", file.getFilePath());
       }
-      
       
     } catch (Exception e) {
       out.println("데이터 조회에 실패했습니다!");

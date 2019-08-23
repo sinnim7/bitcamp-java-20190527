@@ -11,7 +11,9 @@ public class PhotoBoardDeleteCommand implements Command {
   private PhotoBoardDao photoBoardDao;
   private PhotoFileDao photoFileDao;
   
-  public PhotoBoardDeleteCommand(PhotoBoardDao photoBoardDao, PhotoFileDao photoFileDao) {
+  public PhotoBoardDeleteCommand(
+      PhotoBoardDao photoBoardDao,
+      PhotoFileDao photoFileDao) {
     this.photoBoardDao = photoBoardDao;
     this.photoFileDao = photoFileDao;
   }
@@ -21,18 +23,18 @@ public class PhotoBoardDeleteCommand implements Command {
     try {
       int no = Input.getIntValue(in, out, "번호? ");
       
-      
       if (photoBoardDao.findBy(no) == null) {
-        out.println("해당 데이터가 업습니다.");
+        out.println("해당 데이터가 없습니다.");
         return;
       }
       
-      // 먼저 게시물의 첨부파일을 삭제함.
+      // 먼저 게시물의 첨부파일을 삭제한다.
       photoFileDao.deleteAll(no);
       
-      // 게시물을 삭제.
+      // 게시물을 삭제한다.
       photoBoardDao.delete(no);
-      out.println("데이터를 삭젷했습니다.");
+      
+      out.println("데이터를 삭제하였습니다.");
       
     } catch (Exception e) {
       out.println("데이터 삭제에 실패했습니다!");

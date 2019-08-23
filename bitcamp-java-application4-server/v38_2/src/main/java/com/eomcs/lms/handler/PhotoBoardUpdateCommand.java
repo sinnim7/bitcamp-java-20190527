@@ -14,7 +14,9 @@ public class PhotoBoardUpdateCommand implements Command {
   private PhotoBoardDao photoBoardDao;
   private PhotoFileDao photoFileDao;
 
-  public PhotoBoardUpdateCommand(PhotoBoardDao photoBoardDao, PhotoFileDao photoFileDao) {
+  public PhotoBoardUpdateCommand(
+      PhotoBoardDao photoBoardDao,
+      PhotoFileDao photoFileDao) {
     this.photoBoardDao = photoBoardDao;
     this.photoFileDao = photoFileDao;
   }
@@ -35,13 +37,12 @@ public class PhotoBoardUpdateCommand implements Command {
       String str = Input.getStringValue(in, out, 
           String.format("제목(%s)? ", photoBoard.getTitle()));
 
-      // 제목을 변경했으면 사진 게시글의 제목을 변경한다.
+      // 제목을 입력했으면 사진 게시글의 제목을 변경한다.
       if (str.length() > 0) {
         photoBoard.setTitle(str);
         photoBoardDao.update(photoBoard);
-        out.println("게시물의 제목을 변경했습니다.");
+        out.println("게시물의 제목을 변경하였습니다.");
       }
-
 
       // 이전에 등록한 파일 목록을 출력한다.
       out.println("사진 파일:");
@@ -60,21 +61,21 @@ public class PhotoBoardUpdateCommand implements Command {
         out.println("파일 변경을 취소합니다.");
         return;
       }
-
-      // 기존 사진 파일을 삭제함.
+      
+      // 기존 사진 파일을 삭제한다.
       photoFileDao.deleteAll(no);
 
-      out.println("최소 한 개의 사진 파일을 등록해야 합니다."); 
+      out.println("최소 한 개의 사진 파일을 등록해야 합니다.");
       out.println("파일명 입력 없이 그냥 엔터를 치면 파일 추가를 마칩니다.");
-      out.flush();  
+      out.flush();
 
       int count = 0;
       while (true) {
-        String filepath =Input.getStringValue(in, out, "사진 파일? ");
+        String filepath = Input.getStringValue(in, out, "사진 파일? ");
         if (filepath.length() == 0) {
           if (count > 0) {
             break;
-          }else {
+          } else { 
             out.println("최소 한 개의 사진 파일을 등록해야 합니다.");
             continue;
           }
@@ -85,7 +86,6 @@ public class PhotoBoardUpdateCommand implements Command {
         photoFileDao.insert(photoFile);
         count++;
       }
-
       out.println("사진을 변경하였습니다.");
 
     } catch (Exception e) {
