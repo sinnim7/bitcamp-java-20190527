@@ -194,20 +194,20 @@
   </select>
   
   <select id="select9_2" resultMap="boardMap" parameterType="map">
-	select *
-	from x_board
-	where
-        <foreach collection="noList" item="value" separator="or">
-        title like concat('%', #{value},'%')
+    select *
+    from x_board
+    where 
+        <foreach collection="list" item="value" separator="or">
+          title like concat('%', #{value}, '%') 
         </foreach>
   </select>
   
   <select id="select9_3" resultMap="boardMap" parameterType="map">
-  select *
-  from x_board
-  where
-        <foreach collection="List" item="b" separator="or">
-        title like concat('%', #{b.title},'%')
+    select *
+    from x_board
+    where 
+        <foreach collection="list" item="b" separator="or">
+          title like concat('%', #{b.title}, '%') 
         </foreach>
   </select>
 </mapper>
