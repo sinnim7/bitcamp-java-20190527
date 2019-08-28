@@ -44,18 +44,18 @@
   </select>
 
 <!-- 여러 개의 조건을 처리하기 
-=> where 절에 조건을 붙일 때 or나 and를 앞에 붙이는 경우가 있다.
+=> where 절에 조건을 붙일 때 or(여러 조건 중 하나 만족)나 and(모두 만족할 때)를 앞에 붙이는 경우가 있다.
    문제는 where 절에 아무 조건문이 없는 상태에서 
    or 조건이나 and 조건문 등이 붙는다면 SQL 오류가 발생한다.
       예) where or title = #{title}
    그래서 보통 이런 경우 임의의 조건을 추가하여 문제가 발생하지 않도록 한다.
-      예) where 1=0  <=== 임의의 조건 
+      예) where 1=0  <=== 임의의 조건  
             or title = #{title}
 -->
   <select id="select3" resultMap="boardMap" parameterType="map">
     select * 
     from x_board
-    where 1=0
+    where 1=0  <!-- 1이 0이 아니라서 false라는 얘기. 뒤에 참만 고른다.-->
     <if test="no != null">
       or board_id = #{no}
     </if>
@@ -170,7 +170,7 @@
 
 <!-- udpate를 실행할 때 
      값을 변경하는 컬럼에 대해서만 update를 수행하게 할 수 있다. 
-     <set>과 <if> 태그를 조합하면 된다.
+     <set>과 <if> 태그를 조합하면 된다. set을 넣으면 ,자동 제거됨.
      -->
   <update id="update1" parameterType="map">
     update x_board 
@@ -190,6 +190,24 @@
       board_id in /*(10, 12, 15, 28, 39)*/
         <foreach collection="noList" item="value" open="(" close=")" separator=",">
           #{value}
+        </foreach>
+  </select>
+  
+  <select id="select9_2" resultMap="boardMap" parameterType="map">
+	select *
+	from x_board
+	where
+        <foreach collection="noList" item="value" separator="or">
+        title like concat('%', #{value},'%')
+        </foreach>
+  </select>
+  
+  <select id="select9_3" resultMap="boardMap" parameterType="map">
+  select *
+  from x_board
+  where
+        <foreach collection="List" item="b" separator="or">
+        title like concat('%', #{b.title},'%')
         </foreach>
   </select>
 </mapper>

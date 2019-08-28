@@ -17,14 +17,14 @@ public class PhotoBoardDaoImpl implements PhotoBoardDao {
   @Override
   public int insert(PhotoBoard photoBoard) throws Exception {
     try (SqlSession sqlSession = sqlSessionFactory.openSession()) {
-      return sqlSession.insert("PhotoBoardDao.insert", photoBoard);
+      return sqlSession.insert("PhotoBoardDao.insert", photoBoard); //껍데기인 클로즈 프록시를 호출함.
     }
   }
 
   @Override
   public List<PhotoBoard> findAll() throws Exception {
     try (SqlSession sqlSession = sqlSessionFactory.openSession()) {
-      return sqlSession.selectList("PhotoBoardDao.findAll");
+      return sqlSession.selectList("PhotoBoardDao.findAll");   // 리턴 동시에 기존 세션 삭제됨.
     }
   }
 

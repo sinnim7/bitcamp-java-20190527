@@ -27,7 +27,7 @@ public class SqlSessionFactoryProxy implements SqlSessionFactory {
   // => 스레드풀을 가용할 땐 스레드가 응답을 완료한 후 재사용되기 때문에,
   //    다른 클라이언트의 요청을 처리하기 위해 재사용되기 전에 
   //    이전에 사용했던 SqlSession을 제거해야 한다.
-  //    왜? 이전에 사용한 SqlSession은 트랸잭션을 종료하는 순간 close() 됐기 때문이다.
+  //    왜? 이전에 사용한 SqlSession은 트랜잭션을 종료하는 순간 close() 됐기 때문이다.
   //    다시 사용하고 싶어도 사용할 수 없는 상태다.
   public void clearSession() {
     localSqlSession.remove();

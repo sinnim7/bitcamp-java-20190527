@@ -1,4 +1,4 @@
-// v43_2 : Mybatis 도입하기 + 도메인 클래스 별명 적용 + SQL 매퍼에 resultMap 적용 + 트랜잭션 적용
+// v44_1: mybatis의 dynamic sql 사용하기
 package com.eomcs.lms;
 
 import java.io.BufferedReader;
@@ -73,12 +73,9 @@ public class App {
       sqlSessionFactory = new SqlSessionFactoryProxy(
             new SqlSessionFactoryBuilder().build(inputStream));
       
-      
       // 트랜잭션 관리자를 준비한다.
       PlatformTransactionManager txManager = 
           new PlatformTransactionManager(sqlSessionFactory);
-      
-      
       
       // Command 객체가 사용할 데이터 처리 객체를 준비한다.
       BoardDao boardDao = new BoardDaoImpl(sqlSessionFactory);
