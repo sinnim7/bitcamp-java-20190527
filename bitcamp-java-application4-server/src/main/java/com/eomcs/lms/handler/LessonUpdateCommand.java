@@ -44,28 +44,28 @@ public class LessonUpdateCommand implements Command {
          data.setStartDate(
              Input.getDateValue(in, out, "시작일(" + lesson.getStartDate() + ")? "));
       } catch(Exception e) {
-        
+        // 클라이언트가 보낸 날짜가 유효하지 않으면 무시
       }
         
       try {
         data.setEndDate(
             Input.getDateValue(in, out, "시작일(" + lesson.getStartDate() + ")? "));
       } catch(Exception e) {
-        
+        // 클라이언트가 보낸 날짜가 유효하지 않으면 무시
       }
       
       try {
         data.setTotalHours(
             Input.getIntValue(in, out, "총수업시간(" + lesson.getTotalHours() + ")? "));
       } catch(Exception e) {
-        
+        // 클라이언트가 보낸 값이 숫자가 아니라면 무시
       }
       
       try {
         data.setTotalHours(
             Input.getIntValue(in, out, "일수업시간(" + lesson.getDayHours() + ")? "));
       } catch(Exception e) {
-        
+     // 클라이언트가 보낸 값이 숫자가 아니라면 무시
       }
      
       lessonDao.update(data);
