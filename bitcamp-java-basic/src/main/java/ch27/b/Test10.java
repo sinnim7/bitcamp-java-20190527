@@ -48,6 +48,10 @@ public class Test10 {
     System.out.println(Date.class.getName());
     System.out.println(new Date[]{}.getClass().getName());
     System.out.println(new Date[]{}.getClass().getComponentType().getName());
+    
+    System.out.println(C.class.getName());
+    System.out.println(new C[]{}.getClass().getName());
+    System.out.println(new C[]{}.getClass().getComponentType().getName());
   }
 
 }

@@ -42,6 +42,7 @@ public class Test01 {
     class MyHandler implements InvocationHandler {
       @Override
       public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
+        System.out.println("invoke()...호출됨!");
         // newProxyInstance()가 생성한 객체에 대해 메서드를 호출할 때마다 이 메서드가 호출된다.
         int a = (int) args[0]; // auto-unboxing => ((Integer)args[0]).intValue();
         int b = (int) args[1]; // auto-unboxing => ((Integer)args[1]).intValue();
@@ -59,10 +60,12 @@ public class Test01 {
     // Calculator 인터페이스를 구현한 클래스를 만들고 그 인스턴스를 생성하여 리턴한다.
     Calculator c1 = (Calculator) Proxy.newProxyInstance(
         Calculator.class.getClassLoader(), 
-        new Class[] {Calculator.class}, 
+        new Class[] {Calculator.class}, // <-new int[] {100, 200, 300}  배열임.  인터페이스 정보 한개를 넘김.
         new MyHandler());
 
+    System.out.println("++++");
     System.out.println(c1.plus(10, 20));
+    System.out.println("----");
     System.out.println(c1.minus(10, 20));
   }
 
