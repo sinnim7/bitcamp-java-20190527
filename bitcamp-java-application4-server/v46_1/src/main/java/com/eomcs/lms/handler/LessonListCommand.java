@@ -13,13 +13,11 @@ public class LessonListCommand implements Command {
   public LessonListCommand(LessonDao lessonDao) {
     this.lessonDao = lessonDao;
   }
-  
-  @Override
-  public String getCommandName() {
 
+  public String getCommandName() {
     return "/lesson/list";
   }
-
+  
   @Override
   public void execute(BufferedReader in, PrintStream out) {
     try {

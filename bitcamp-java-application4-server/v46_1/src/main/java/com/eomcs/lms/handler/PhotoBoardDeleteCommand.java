@@ -22,7 +22,6 @@ public class PhotoBoardDeleteCommand implements Command {
     this.photoFileDao = photoFileDao;
   }
   
-  @Override
   public String getCommandName() {
     return "/photoboard/delete";
   }

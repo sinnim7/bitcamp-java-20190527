@@ -34,7 +34,6 @@ public class PhotoFileDaoImpl implements PhotoFileDao {
       return sqlSession.delete("PhotoFileDao.deleteAll", boardNo);
     }
   }
-  
 
 }
 

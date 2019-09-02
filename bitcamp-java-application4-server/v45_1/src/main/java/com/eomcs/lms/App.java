@@ -1,4 +1,4 @@
-// v45_1: Java proxy를 이용해 DAO 구현체 자동 생성하기
+// v45_1 : Java Proxy를 이용하여 DAO 구현체 자동 생성하기
 package com.eomcs.lms;
 
 import java.io.BufferedReader;
@@ -66,8 +66,8 @@ public class App {
     try {
       InputStream inputStream = 
           Resources.getResourceAsStream("com/eomcs/lms/conf/mybatis-config.xml");
-      sqlSessionFactory = new SqlSessionFactoryProxy(
-            new SqlSessionFactoryBuilder().build(inputStream));
+      sqlSessionFactory =new SqlSessionFactoryProxy(
+          new SqlSessionFactoryBuilder().build(inputStream));
       
       // 트랜잭션 관리자를 준비한다.
       PlatformTransactionManager txManager = 
@@ -75,7 +75,6 @@ public class App {
       
       // DAO 구현체 생성기를 준비한다.
       MybatisDaoFactory daoFactory = new MybatisDaoFactory(sqlSessionFactory);
-      
       
       // Command 객체가 사용할 데이터 처리 객체를 준비한다.
       BoardDao boardDao = daoFactory.createDao(BoardDao.class);
@@ -201,11 +200,11 @@ public class App {
         System.out.println("클라이언트와 통신 오류!");
         
       } finally {
-        // 현재 스레드가 클라이언트 요청에 대해 응답을 완료했다면
+        // 현재 스레드가 클라이언트 요청에 대해 응답을 완료했다면,
         // 현재 스레드에 보관된 Mybatis의 SqlSession 객체를 제거해야 한다.
         // 그래야만 다음 클라이언트 요청이 들어 왔을 때 
         // 새 SqlSession 객체를 사용할 것이다.
-       ((SqlSessionFactoryProxy)sqlSessionFactory).clearSession();
+        ((SqlSessionFactoryProxy)sqlSessionFactory).clearSession();
       }
     }
   }

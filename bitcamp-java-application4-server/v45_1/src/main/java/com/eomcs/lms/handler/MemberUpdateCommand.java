@@ -25,7 +25,6 @@ public class MemberUpdateCommand implements Command {
       }
       
       // 사용자로부터 변경할 값을 입력 받는다.
-
       Member data = new Member();
       data.setNo(no);
       
@@ -55,6 +54,7 @@ public class MemberUpdateCommand implements Command {
       }
       
       memberDao.update(data);
+      
       out.println("데이터를 변경하였습니다.");
 
     } catch (Exception e) {

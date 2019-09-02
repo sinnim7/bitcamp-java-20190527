@@ -14,13 +14,11 @@ public class LoginCommand implements Command {
   public LoginCommand(MemberDao memberDao) {
     this.memberDao = memberDao;
   }
-  
-  @Override
-  public String getCommandName() {
 
+  public String getCommandName() {
     return "/auth/login";
   }
-
+  
   @Override
   public void execute(BufferedReader in, PrintStream out) {
     try {
@@ -29,6 +27,7 @@ public class LoginCommand implements Command {
       params.put("password", Input.getStringValue(in, out, "암호? "));
       
       Member member = memberDao.findByEmailPassword(params);
+      
       if (member == null) {
         out.println("이메일 또는 암호가 맞지 않습니다!");
       } else {

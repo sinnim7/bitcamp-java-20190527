@@ -16,7 +16,7 @@ public class BoardDaoImpl implements BoardDao {
 
   @Override
   public int insert(Board board) throws Exception {
-    try(SqlSession sqlSession = sqlSessionFactory.openSession()) {
+    try (SqlSession sqlSession = sqlSessionFactory.openSession()) {
       int count = sqlSession.insert("BoardDao.insert", board);
       return count;
     }
@@ -31,7 +31,6 @@ public class BoardDaoImpl implements BoardDao {
 
   @Override
   public Board findBy(int no) throws Exception {
-    
     try (SqlSession sqlSession = sqlSessionFactory.openSession()) {
       Board board = sqlSession.selectOne("BoardDao.findBy", no);
       if (board != null) {
@@ -50,7 +49,7 @@ public class BoardDaoImpl implements BoardDao {
 
   @Override
   public int delete(int no) throws Exception {
-    try (SqlSession sqlSession = sqlSessionFactory.openSession(true)) {
+    try (SqlSession sqlSession = sqlSessionFactory.openSession()) {
       return sqlSession.delete("BoardDao.delete", no);
     }
   }

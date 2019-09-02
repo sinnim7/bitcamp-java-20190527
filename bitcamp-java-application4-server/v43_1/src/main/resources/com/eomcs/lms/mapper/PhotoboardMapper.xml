@@ -49,13 +49,14 @@
   </insert>
   
   <update id="update" parameterType="com.eomcs.lms.domain.PhotoBoard">
-  update lms_photo set
-  titl=#{title}
-  where photo_id=#{no} </update>
+    update lms_photo set
+      titl=#{title}
+    where photo_id=#{no}
+  </update>
   
   <delete id="delete" parameterType="int">
     delete from lms_photo 
-    where photo_id=#{value}
+    where photo_id=#{no}
   </delete>
 
 </mapper>

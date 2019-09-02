@@ -24,12 +24,12 @@ public class PhotoBoardUpdateCommand implements Command {
     this.photoBoardDao = photoBoardDao;
     this.photoFileDao = photoFileDao;
   }
-  
-  @Override
+
   public String getCommandName() {
     return "/photoboard/update";
   }
-
+  
+  
   @Override
   public void execute(BufferedReader in, PrintStream out) {
     try {

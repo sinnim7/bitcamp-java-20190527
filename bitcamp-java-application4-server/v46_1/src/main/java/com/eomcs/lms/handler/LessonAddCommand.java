@@ -13,12 +13,11 @@ public class LessonAddCommand implements Command {
   public LessonAddCommand(LessonDao lessonDao) {
     this.lessonDao = lessonDao;
   }
-  
-  @Override
+
   public String getCommandName() {
     return "/lesson/add";
   }
-
+  
   @Override
   public void execute(BufferedReader in, PrintStream out) {
     try {
@@ -39,8 +38,6 @@ public class LessonAddCommand implements Command {
       System.out.println(e.getMessage());
     }
   }
-
-  
 
 }
 

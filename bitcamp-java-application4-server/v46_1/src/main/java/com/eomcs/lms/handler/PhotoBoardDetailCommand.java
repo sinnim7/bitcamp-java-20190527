@@ -16,7 +16,6 @@ public class PhotoBoardDetailCommand implements Command {
     this.photoBoardDao = photoBoardDao;
   }
   
-  @Override
   public String getCommandName() {
     return "/photoboard/detail";
   }

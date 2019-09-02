@@ -13,7 +13,6 @@ public class MemberListCommand implements Command {
     this.memberDao = memberDao;
   }
   
-  @Override
   public String getCommandName() {
     return "/member/list";
   }

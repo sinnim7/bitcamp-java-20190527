@@ -39,7 +39,6 @@ public class PhotoBoardDaoImpl implements PhotoBoardDao {
     }
   }
 
-
   @Override
   public int update(PhotoBoard photoBoard) throws Exception {
     try (SqlSession sqlSession = sqlSessionFactory.openSession()) {
@@ -50,12 +49,10 @@ public class PhotoBoardDaoImpl implements PhotoBoardDao {
   @Override
   public int delete(int no) throws Exception {
     try (SqlSession sqlSession = sqlSessionFactory.openSession()) {
-      return sqlSession.delete("LessonDao.delete", no);
+      return sqlSession.delete("PhotoBoardDao.delete", no);
     }
   }
   
-  
-
 }
 
 
