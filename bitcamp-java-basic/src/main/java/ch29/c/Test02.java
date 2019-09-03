@@ -12,7 +12,6 @@ public class Test02 {
         new ClassPathXmlApplicationContext("ch29/c/application-context-02.xml");
     
     System.out.println("---------------------------------------");
-    
     System.out.println(iocContainer.getBean("c4"));
     System.out.println(iocContainer.getBean("c5"));
   }

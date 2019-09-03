@@ -7,9 +7,12 @@
   <!-- 빈 이름 설정
     id : 빈의 이름을 한 개 설정할 때 사용
     name : 빈의 이름을 여러 개 설정할 때 사용
-  -->
-  <bean id="c1" class="ch29.b.Car"/>
+    <bean id="c1" class="ch29.b.Car"/>
   <bean name="c2" class="ch29.b.Car"/>
+  -->
+  
+  <bean id="c1" class="ch29.b.Car"/>
+  <bean name="c2" class="ch29.b.Car"/> 
   
   <!-- id의 값 전체가 하나의 문자열로 취급되면 빈 이름으로 사용된다.  
        즉 "c3 c4 c5" 이름으로 객체를 저장한다.-->
@@ -26,8 +29,12 @@
   <bean name="c15:c16:c17" class="ch29.b.Car"/>
   
   <!-- id와 name이 모두 있으면, 
-       id는 빈의 이름으로 사용하고 name에 설정된 값은 모두 별명으로 사용한다.-->
+       id는 빈의 이름으로 사용하고 name에 설정된 값은 모두 별명으로 사용한다.
   <bean id="c20" name="c21 c22 c23" class="ch29.b.Car"/>     
+  -->
+  
+  <bean id="c20" name="c21 c22 c23" class="ch29.b.Car"/>
+  
 </beans>
 
 

@@ -8,7 +8,7 @@
   <!-- 의존 객체 주입하기
   -->
   
-  <!-- 프로퍼티 값을 설정하다가 주입하려면 의존 객체가 없으면,
+  <!-- 프로퍼티 값을 설정하다가 주입하려는 의존 객체가 없으면,
        의존 객체를 먼저 생성한다. 
        따라서 의존 객체를 먼저 생성하기 위해 고민할 필요가 없다.
        스프링 IoC 컨테이너가 자동으로 처리한다. -->
@@ -17,6 +17,8 @@
     <property name="model" value="모델1"/>
     <property name="blackBox"><ref bean="bb1"/></property>
   </bean>
+  
+  
 
   <bean id="bb1" class="ch29.d.BlackBox">
     <property name="maker" value="비트오토"/>
@@ -33,7 +35,6 @@
        => p:프로퍼티명-ref="객체이름" -->
   <bean id="c3" class="ch29.d.Car"
         p:maker="비트자동차" p:model="모델4" p:blackBox-ref="bb1"/>
-        
   
 </beans>
 

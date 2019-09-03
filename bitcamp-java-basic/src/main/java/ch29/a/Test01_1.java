@@ -6,7 +6,7 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.context.support.FileSystemXmlApplicationContext;
 
-public class Test01 {
+public class Test01_1 {
   public static void main(String[] args) {
     // IoC(Inversion Of Control) 컨테이너
     // => bean container 라고도 부른다.
@@ -26,6 +26,10 @@ public class Test01 {
     // ApplicationContext 인터페이스
     // => 스프링 IoC 컨테이너의 사용 규칙을 정의한 인터페이스이다.
     // => 모든 스프링 IoC 컨테이너는 이 규칙에 따라 IoC 컨테이너가 정의되어 있다.
+    
+    // ApplicationContext 인터페이스
+    // => 스프링 Ioc 컨테이너의 사용 규칙을 정의한 인터페이스이다.
+    // => 모든 스프링 IoC 컨테이너는 이 규칙에 따라 IoC 컨테이너가 정의돼읶다.
     //
     // ApplicationContext 구현체(implements, 인터페이스를 구현한 클래스 또는 그 클래스의 인스턴스)의 종류
     // => XML 파일에서 설정 정보를 읽어들이는 IoC 컨테이너
@@ -54,9 +58,9 @@ public class Test01 {
     //    file://
     ApplicationContext iocContainer2 = 
         new FileSystemXmlApplicationContext(
-            "file:///Users/eomjinyoung/git/bitcamp-java-2018-12/java-basic/bin/main/ch29/a/application-context.xml");
+            "file:///Users/bit/git/bitcamp-java-20190527/bitcamp-java-basic/src/main/java/ch29/a/application-context.xml");
     
-    // 3) 자바 클래스 파일의 애노테이션으로부터 설정 정보를 추출한다.
+    // 3) 자바 클래스 파일의 애노테이션으로부터 설정 정보를 추출한다. = java config라 부른다.
     // => 생성자에 설정 정보를 갖고 있는 클래스의 타입 정보를 넘긴다. 
     ApplicationContext iocContainer3 = 
         new AnnotationConfigApplicationContext(AppConfig.class);
@@ -64,7 +68,6 @@ public class Test01 {
     System.out.println("실행 완료!");
   }
 }
-
 
 
 

@@ -24,6 +24,13 @@
     </property>
   </bean>
   
+  
+  
+  
+  
+  
+  
+  
   <bean id="spareTire" class="ch29.e.Tire" 
         p:maker="비트타이어" p:width="150" p:ratio="65" p:wheel="15"/>
         

@@ -13,7 +13,7 @@
        파라미터명을 지정하기 때문에 속성을 지정하는 순서는 상관없다.-->
   <bean id="c1" class="ch29.c.Car" 
         c:model="비트모델2" c:maker="비트자동차"/> <!-- Car(String,String) -->
-  
+        
   <bean id="c2" class="ch29.c.Car" 
         c:model="비트모델2" c:cc="1980"/> <!-- Car(String,int) -->
         
@@ -25,6 +25,8 @@
        => 순서는 0부터 시작한다. -->
   <bean id="c4" class="ch29.c.Car" 
         c:_0="비트자동차" c:_1="모델3" c:_2="1980" c:_3="16" c:_4="true"/>     
+        
+        
 </beans>
 
  
