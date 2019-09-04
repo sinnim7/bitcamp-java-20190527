@@ -42,6 +42,35 @@
     <constructor-arg ref="blackBox"/>
     <constructor-arg value="sonata"/>
   </bean>
+  <!-- 
+  
+  FactoryBean이 나오면 앞에 Car 객체에 저장한다고 생각하자. 결국 c1에 저장.
+  
+  Class<?> clazz = CarFactoryBean.class;
+  Class<?>[] interfaces = clazz.getInterfaces();
+  bollean isFactoryBean = false; //팩토리빈클래스 인터페이스를 구현했다면.
+  for (Class<?> c : interfaces) {
+    if (c == FactoryBean.class) {
+      isFactoryBean = true;
+      break;
+    }
+  }
+  if (isFactoryBean) {
+   CarFactoryBean factory = new CarFactoryBean(blackBox, "sonata");
+   Car c1 = factory.getObject();
+  } else {  
+  CarfactoryBean c1 = new CarfactoryBeean(blackBox, "sonata");  // 콘텍3가팩토리빈인터를 구현안하면
+  }
+  
+   -->
+  
+  <bean id="bb" class="ch29.f.BlackBoxFactoryBean">  
+    <constructor-arg value="비트비트"/>
+    <constructor-arg value="하루종일"/>
+  </bean>
+  <!--  블랙박스객체를 비비에 저장 -->
+  
+  
 </beans>
 
 
