@@ -18,18 +18,19 @@ import org.springframework.transaction.PlatformTransactionManager;
 // jdbc.properties 파일을 로딩
 @PropertySource("classpath:ch29/k1/jdbc.properties")
 public class DatabaseConfig {
-  
+
   @Value("${jdbc.driver}") String jdbcDriver;
 
   @Value("${jdbc.url}") String jdbcUrl;
-  
+
   @Value("${jdbc.username}") String jdbcUsername;
-  
+
   @Value("${jdbc.password}") String jdbcPassword;
-  
-  // DB 커넥션풀 객체 준비
+
+  //DB 커넥션풀 객체 준비
   @Bean
   public DataSource dataSource() {
+    System.out.println("dataSource()");
     // spring-jdbc 라이브러리에서 제공해주는 클래스를 사용하여 DataSource 구현체 만들기
     DriverManagerDataSource ds = new DriverManagerDataSource();
     ds.setDriverClassName(this.jdbcDriver); 
@@ -38,7 +39,7 @@ public class DatabaseConfig {
     ds.setPassword(this.jdbcPassword);
     return ds;
   }
-  
+
   // 트랜잭션 관리자 준비
   // => Spring IoC 컨테이너에서 트랜잭션 관리자를 찾을 때 
   //    "transactionManager"라는 이름으로 찾는다.
@@ -48,11 +49,15 @@ public class DatabaseConfig {
   //    
   @Bean
   public PlatformTransactionManager transactionManager(DataSource dataSource) {
+    System.out.println("transactionManager()");
     // 트랜잭션 관리자를 생성할 때 DataSource(DB 커넥션풀) 구현체를 요구한다.
     // Spring IoC 컨테이너에 들어 있는 것을 꺼내기 위해 
     // 파라미터로 선언하라.
     return new DataSourceTransactionManager(dataSource);
   }
+
+
+
 }
 
 

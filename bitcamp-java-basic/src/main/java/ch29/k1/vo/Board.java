@@ -1,4 +1,4 @@
-package ch29.k1.vo;
+package ch29.k1.vo; // vo : value of object 값을 표현하는 갹체
 import java.io.Serializable;
 import java.sql.Date;
 
