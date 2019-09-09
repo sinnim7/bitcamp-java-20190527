@@ -1,14 +1,13 @@
 package com.eomcs.lms.handler;
 
-import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.RequestMapping;
 import com.eomcs.lms.dao.BoardDao;
 import com.eomcs.lms.domain.Board;
+import com.eomcs.util.ServletRequest;
+import com.eomcs.util.ServletResponse;
 
 @Component
 public class BoardCommand {
@@ -20,7 +19,7 @@ public class BoardCommand {
   }
 
   @RequestMapping("/board/form")
-  public void form(ServletRequest request, ServletResponse response) throws IOException {
+  public void form(ServletRequest request, ServletResponse response) {
     PrintWriter out = response.getWriter();
     out.println("<html><head><title>게시물 목록</title></head>");
     out.println("<body><h1>게시물 등록폼</h1>");
@@ -36,7 +35,7 @@ public class BoardCommand {
   // a : anchor, 콘텐츠가 놓인 곳?
   // href : htmlref 약자
   @RequestMapping("/board/add") // 클라이언트 요청이 들어 왔을 때 이 메서드를 호출하라고 표시한다.
-  public void add(ServletRequest request, ServletResponse response) throws IOException {
+  public void add(ServletRequest request, ServletResponse response) {
     PrintWriter out = response.getWriter();
     out.println("<html><head><title>게시물 등록</title>"
         + "<meta http-equiv='Refresh' content='1;url=/board/list'>"
@@ -58,7 +57,7 @@ public class BoardCommand {
   }
 
   @RequestMapping("/board/delete") // 클라이언트 요청이 들어 왔을 때 이 메서드를 호출하라고 표시한다.
-  public void delete(ServletRequest request, ServletResponse response) throws IOException {
+  public void delete(ServletRequest request, ServletResponse response) {
     PrintWriter out = response.getWriter();
     out.println("<html><head><title>게시물 삭제</title>"
         + "<meta http-equiv='Refresh' content='1;url=/board/list'>"
@@ -82,7 +81,7 @@ public class BoardCommand {
   }
 
   @RequestMapping("/board/detail") // 클라이언트 요청이 들어 왔을 때 이 메서드를 호출하라고 표시한다.
-  public void detail(ServletRequest request, ServletResponse response) throws IOException {
+  public void detail(ServletRequest request, ServletResponse response) {
     PrintWriter out = response.getWriter();
     out.println("<html><head><title>게시물 상세</title></head>");
     out.println("<body><h1>게시물 상세</h1>");
@@ -117,7 +116,7 @@ public class BoardCommand {
   }
 
   @RequestMapping("/board/list") // 클라이언트 요청이 들어 왔을 때 이 메서드를 호출하라고 표시한다.
-  public void list(ServletRequest request, ServletResponse response) throws IOException {
+  public void list(ServletRequest request, ServletResponse response) {
     PrintWriter out = response.getWriter();
     out.println("<html><head><title>게시물 목록</title>"
         + "<link rel=\'stylesheet\' href=\'https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css\' integrity=\'sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T\' crossorigin=\'anonymous\'>"
@@ -148,7 +147,7 @@ public class BoardCommand {
   }
 
   @RequestMapping("/board/update") // 클라이언트 요청이 들어 왔을 때 이 메서드를 호출하라고 표시한다.
-  public void update(ServletRequest request, ServletResponse response) throws IOException {
+  public void update(ServletRequest request, ServletResponse response) {
     PrintWriter out = response.getWriter();
     out.println("<html><head><title>게시물 변경</title>"
         + "<meta http-equiv='Refresh' content='1;url=/board/list'>"

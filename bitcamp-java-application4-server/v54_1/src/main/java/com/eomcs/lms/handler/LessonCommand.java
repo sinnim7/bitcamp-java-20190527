@@ -1,15 +1,14 @@
 package com.eomcs.lms.handler;
 
-import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Date;
 import java.util.List;
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.RequestMapping;
 import com.eomcs.lms.dao.LessonDao;
 import com.eomcs.lms.domain.Lesson;
+import com.eomcs.util.ServletRequest;
+import com.eomcs.util.ServletResponse;
 
 @Component
 public class LessonCommand {
@@ -21,7 +20,7 @@ public class LessonCommand {
   }
 
   @RequestMapping("/lesson/form")
-  public void form(ServletRequest request, ServletResponse response) throws IOException {
+  public void form(ServletRequest request, ServletResponse response) {
     PrintWriter out = response.getWriter();
     out.println("<html><head><title>수업 등록폼</title></head>");
     out.println("<body><h1>수업 등록폼</h1>");
@@ -38,7 +37,7 @@ public class LessonCommand {
   }
   
   @RequestMapping("/lesson/add") 
-  public void add(ServletRequest request, ServletResponse response) throws IOException {
+  public void add(ServletRequest request, ServletResponse response) {
     PrintWriter out = response.getWriter();
     out.println("<html><head><title>수업 등록</title>"
         + "<meta http-equiv='Refresh' content='1;url=/lesson/list'>"
@@ -67,7 +66,7 @@ public class LessonCommand {
   }
   
   @RequestMapping("/lesson/delete") 
-  public void delete(ServletRequest request, ServletResponse response) throws IOException {
+  public void delete(ServletRequest request, ServletResponse response) {
     PrintWriter out = response.getWriter();
     out.println("<html><head><title>수업 삭제</title>"
         + "<meta http-equiv='Refresh' content='1;url=/lesson/list'>"
@@ -93,7 +92,7 @@ public class LessonCommand {
   }
 
   @RequestMapping("/lesson/detail") 
-  public void detail(ServletRequest request, ServletResponse response) throws IOException {
+  public void detail(ServletRequest request, ServletResponse response) {
     PrintWriter out = response.getWriter();
     out.println("<html><head><title>수업 상세</title></head>");
     out.println("<body><h1>수업 상세</h1>");
@@ -135,7 +134,7 @@ public class LessonCommand {
   }
   
   @RequestMapping("/lesson/list") 
-  public void list(ServletRequest request, ServletResponse response) throws IOException {
+  public void list(ServletRequest request, ServletResponse response) {
     PrintWriter out = response.getWriter();
     out.println("<html><head><title>수업 목록</title>"
         + "<link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css' integrity='sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T' crossorigin='anonymous'>"
@@ -171,7 +170,7 @@ public class LessonCommand {
   }
   
   @RequestMapping("/lesson/update") 
-  public void update(ServletRequest request, ServletResponse response) throws IOException {
+  public void update(ServletRequest request, ServletResponse response) {
     PrintWriter out = response.getWriter();
     out.println("<html><head><title>수업 변경</title>"
         + "<meta http-equiv='Refresh' content='1;url=/lesson/list'>"
