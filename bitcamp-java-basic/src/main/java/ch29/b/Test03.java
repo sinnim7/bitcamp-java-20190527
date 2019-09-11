@@ -33,6 +33,7 @@ public class Test03 {
     System.out.println(obj11 == obj12); // true
     System.out.println(obj11 == obj13); // true
     
+    
     // scope이 prototype 일 경우 미리 객체를 생성하지 않는다.
     // getBean()을 호출했을 때 생성한다. 
     // 그리고 getBean()을 호출할 때 마다 새 객체를 만들어 리턴한다.

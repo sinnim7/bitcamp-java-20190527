@@ -60,6 +60,7 @@ public class Servlet04 extends GenericServlet {
     // getParameter()가 null을 리턴한다는 것을 확인하기 위해 
     // 파라미터 모두 String으로 받는다.
     // => 멀티파트 형식으로 전송된 데이터는 getParameter()로 꺼낼 수 없다.
+  
     /*
     String age = req.getParameter("age");
     String name = req.getParameter("name");
@@ -70,7 +71,7 @@ public class Servlet04 extends GenericServlet {
     out.printf("이름=%s\n", name);
     out.printf("나이=%s\n", age);
     out.printf("사진=%s\n", photo);
-    */
+   */
     
     // 멀티파트 형식의 데이터 처리하기
     // 1) Apache 라이브러리 가져온다.
@@ -79,9 +80,12 @@ public class Servlet04 extends GenericServlet {
     //    - '$ gradle eclipse' 실행하여 이클립스 설정 파일을 갱신한다.
     //    - 이클립스 IDE에서 프로젝트 정보를 갱신한다.
     // 2) Apache commons-fileupload 문서에 따라 코딩한다.
-    
+   
+
     // => 멀티파트 데이터를 분석하여 FileItem 객체에 담아 줄 공장을 준비한다.
     DiskFileItemFactory fileItemFactory = new DiskFileItemFactory();
+    //FileItem createItem() 메서드
+    
     
     // => 공장 객체를 사용하여 클라이언트가 보낸 데이터를 처리할 객체 준비
     ServletFileUpload multipartDataHandler = 
@@ -115,7 +119,7 @@ public class Servlet04 extends GenericServlet {
           // 전체 파일 경로를 준비한다.
           // => /java-web/upload/파일명
           File file = new File(this.uploadDir + "/" + filename);
-          
+          System.out.println(file.getCanonicalPath());
           // 파일 경로에 업로드 파일을 저장한다.
           part.write(file);
           
@@ -140,6 +144,7 @@ public class Servlet04 extends GenericServlet {
     } catch (Exception e) {
       e.printStackTrace();
     }
+
   }
 }
 

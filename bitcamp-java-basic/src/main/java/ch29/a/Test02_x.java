@@ -12,7 +12,7 @@ public class Test02_x {
     //
     ApplicationContext iocContainer = 
         new ClassPathXmlApplicationContext("ch29/a/application-context-02.xml");
-    
+
     SpringUtils.printObjects(iocContainer);
     System.out.println("-----------------------------------------");
     
