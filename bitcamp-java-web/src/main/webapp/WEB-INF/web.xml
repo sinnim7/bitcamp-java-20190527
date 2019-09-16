@@ -11,8 +11,8 @@
 
   <display-name>웹 애플리케이션의 이름</display-name>
 
-<!-- 컨텍스트 초기화 파라미터 정보 -->
- <!--  <context-param>
+<!-- 컨텍스트 초기화 파라미터 정보 // 모든 서블릿들이 공통으로 사용하는 것-->
+ <context-param>
     <param-name>jdbc.driver</param-name>
     <param-value>org.mariadb.jdbc.Driver</param-value>
   </context-param>
@@ -31,7 +31,7 @@
   <context-param>
     <param-name>encoding</param-name>
     <param-value>UTF-8</param-value>
-  </context-param> -->
+  </context-param>
 
   <!-- 리스너 배치 정보 -->
  <!-- 
@@ -63,7 +63,7 @@
   </filter-mapping>
  -->
   <!-- 필터 배치 정보 -->
- <!--  
+
   
   <filter>
     <filter-name>ex06 Filter01</filter-name>
@@ -72,16 +72,14 @@
       <param-name>encoding</param-name>
       <param-value>UTF-8</param-value>
     </init-param>
-  </filter> -->
+  </filter>
   
   <!-- 필터를 언제 실행할 지 결정하기 위해 URL을 지정한다. -->
-  <!-- 
-  
   
   <filter-mapping>
     <filter-name>ex06 Filter01</filter-name>
     <url-pattern>/ex06/*</url-pattern>
-  </filter-mapping> -->
+  </filter-mapping>
 
 
   <!-- 서블릿 배치 정보 설정
@@ -130,14 +128,13 @@
   </servlet-mapping>    
  
     
-    
-  <!-- 
-  <servlet>
+    <servlet>
     <servlet-name>bitcamp.ex06.Servlet02</servlet-name>
     <servlet-class>bitcamp.ex06.Servlet02</servlet-class>
     <load-on-startup>1</load-on-startup>
   </servlet>
-  <servlet>
+  
+     <servlet>
     <servlet-name>bitcamp.ex06.Servlet04</servlet-name>
     <servlet-class>bitcamp.ex06.Servlet04</servlet-class>
     <init-param>
@@ -157,7 +154,11 @@
       <param-value>1111</param-value>
     </init-param>
   </servlet>
-  -->
+  <servlet-mapping>
+    <servlet-name>bitcamp.ex06.Servlet04</servlet-name>
+    <url-pattern>/ex06/s4</url-pattern>
+  </servlet-mapping>
+    
   <!-- 서블릿에 URL을 지정한다.
        => URL이 지정된 서블릿은 웹브라우저 쪽에서 그 URL로 실행을 요청할 수 있다.
        => URL이 지정되지 않은 서블릿은 웹브라우저 쪽에서 실행을 요청할 수 없다.
@@ -165,11 +166,7 @@
   
   
   
-  <!--
-  <servlet-mapping>
-    <servlet-name>bitcamp.ex06.Servlet04</servlet-name>
-    <url-pattern>/ex06/s4</url-pattern>
-  </servlet-mapping> -->
+  
   
   <!-- 외부 라이브러리 파일(java-web-library.jar)에 있는 서블릿을 배치한다. -->
   <!-- <servlet>
@@ -196,11 +193,11 @@
   </servlet-mapping>
    -->
   
-  
+  <!--  
   <session-config>
     <session-timeout>1</session-timeout>
   </session-config>
-  
+  -->
 </web-app>
 
 
