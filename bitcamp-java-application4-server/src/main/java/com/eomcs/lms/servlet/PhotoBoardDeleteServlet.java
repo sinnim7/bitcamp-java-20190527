@@ -1,7 +1,6 @@
 package com.eomcs.lms.servlet;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -14,6 +13,7 @@ import com.eomcs.lms.dao.PhotoFileDao;
 @WebServlet("/photoboard/delete")
 public class PhotoBoardDeleteServlet extends HttpServlet {
   private static final long serialVersionUID = 1L;
+  
   private PhotoBoardDao photoBoardDao;
   private PhotoFileDao photoFileDao;
   
@@ -26,32 +26,28 @@ public class PhotoBoardDeleteServlet extends HttpServlet {
   }
   
   @Override
-  public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    response.setContentType("text/html;charset=UTF-8");
-    PrintWriter out = response.getWriter();
-    out.println("<html><head><title>사진게시물 삭제</title>"
-        + "<meta http-equiv='Refresh' content='1;url=/photoboard/list'>"
-        + "</head>");
-    out.println("<body><h1>사진게시물 삭제</h1>");
+  public void doGet(HttpServletRequest request, HttpServletResponse response) 
+      throws IOException, ServletException {
+    
     
     try {
       int no = Integer.parseInt(request.getParameter("no"));
       
       if (photoBoardDao.findBy(no) == null) {
-        out.println("<p>해당 데이터가 없습니다.</p>");
-      } else { 
-        photoFileDao.deleteAll(no);
-        photoBoardDao.delete(no);
-        out.println("<p>데이터를 삭제하였습니다.</p>");
-      }
+        throw new Exception("해당 데이터가 없습니다.");
+      } 
+      photoFileDao.deleteAll(no);
+      photoBoardDao.delete(no);
+      response.sendRedirect("/photoboard/list");
       
     } catch (Exception e) {
-      out.println("<p>데이터 삭제에 실패했습니다!</p>");
-      throw new RuntimeException(e);
+      request.setAttribute("message", "데이터 삭제에 실패했습니다!");
+      request.setAttribute("refresh", "/photoboard/list");
+      request.setAttribute("erroe", e);
+      request.getRequestDispatcher("/error").forward(request, response);
       
-    } finally {
-      out.println("</body></html>");
-    }
+      
+    } 
   }
   
   

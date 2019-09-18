@@ -14,6 +14,7 @@ import com.eomcs.lms.domain.Member;
 @WebServlet("/member/add")
 public class MemberAddtServlet extends HttpServlet{
   private static final long serialVersionUID = 1L;
+  
   private MemberDao memberDao;
 
   
@@ -42,32 +43,26 @@ public class MemberAddtServlet extends HttpServlet{
   }
   
   @Override
-  public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    response.setContentType("text/html;charset=UTF-8");
-    PrintWriter out = response.getWriter();
-    out.println("<html><head><title>회원 등록</title>"
-        + "<meta http-equiv='Refresh' content='1;url=/member/list'>"
-        + "</head>");
-    out.println("<body><h1>회원 등록</h1>");
+  public void doPost(HttpServletRequest request, HttpServletResponse response) 
+      throws IOException, ServletException {
+    
     
     try {
       Member member = new Member();
-      
       member.setName(request.getParameter("name"));
       member.setEmail(request.getParameter("email"));
       member.setPassword(request.getParameter("password"));
       member.setPhoto(request.getParameter("photo"));
       member.setTel(request.getParameter("tel"));
-      
       memberDao.insert(member);
-      out.println("<p>저장하였습니다.</p>");
+      response.sendRedirect("/member/list");
       
     } catch (Exception e) {
-      out.println("<p>데이터 저장에 실패했습니다!</p>");
-      throw new RuntimeException(e);
+      request.setAttribute("message", "데이터 변경에 실패했습니다!");
+      request.setAttribute("refresh", "/member/list");
+      request.setAttribute("erroe", e);
+      request.getRequestDispatcher("/error").forward(request, response);
       
-    } finally {
-      out.println("</body></html>");
     }
   }
 }

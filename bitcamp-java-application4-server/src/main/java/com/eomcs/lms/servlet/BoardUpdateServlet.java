@@ -1,7 +1,6 @@
 package com.eomcs.lms.servlet;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -12,10 +11,10 @@ import com.eomcs.lms.dao.BoardDao;
 import com.eomcs.lms.domain.Board;
 
 @WebServlet("/board/update")
-public class BoardUpdateServlet extends HttpServlet{
+public class BoardUpdateServlet extends HttpServlet {
   private static final long serialVersionUID = 1L;
+  
   private BoardDao boardDao;
-
   
   @Override
   public void init() throws ServletException {
@@ -23,33 +22,23 @@ public class BoardUpdateServlet extends HttpServlet{
         (ApplicationContext) getServletContext().getAttribute("iocContainer");
     boardDao = appCtx.getBean(BoardDao.class);
   }
-  
-
 
   @Override
-  public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    response.setContentType("text/html;charset=UTF-8");
-    PrintWriter out = response.getWriter();
-    out.println("<html><head><title>게시물 변경</title>"
-        + "<meta http-equiv='Refresh' content='1;url=/board/list'>"
-        + "</head>");
-    out.println("<body><h1>게시물 변경</h1>");
+  public void doPost(HttpServletRequest request, HttpServletResponse response) 
+      throws IOException, ServletException {
     try {
       Board board = new Board();
-      
       board.setNo(Integer.parseInt(request.getParameter("no")));
       board.setContents(request.getParameter("contents"));
-
       boardDao.update(board);
-      out.println("<p>변경했습니다.</p>");
-
+      response.sendRedirect("/board/list");
+      
     } catch (Exception e) {
-      out.println("데이터 변경에 실패했습니다!");
-      System.out.println(e.getMessage());
-
-    } finally {
-      out.println("</body></html>");
+      request.setAttribute("message", "데이터 변경에 실패했습니다!");
+      request.setAttribute("refresh", "/board/list");
+      request.setAttribute("erroe", e);
+      request.getRequestDispatcher("/error").forward(request, response);
+      
     }
   }
 }
-

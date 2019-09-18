@@ -15,6 +15,7 @@ import com.eomcs.lms.domain.Lesson;
 @WebServlet("/lesson/add")
 public class LessonAddServlet extends HttpServlet{
   private static final long serialVersionUID = 1L;
+  
   private LessonDao lessonDao;
 
   
@@ -24,8 +25,6 @@ public class LessonAddServlet extends HttpServlet{
         (ApplicationContext) getServletContext().getAttribute("iocContainer"); 
     lessonDao = appCtx.getBean(LessonDao.class);
   }
-
-  
   
   
   @Override
@@ -47,13 +46,9 @@ public class LessonAddServlet extends HttpServlet{
   }
   
   @Override
-  public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    response.setContentType("text/html;charset=UTF-8");
-    PrintWriter out = response.getWriter();
-    out.println("<html><head><title>수업 등록</title>"
-        + "<meta http-equiv='Refresh' content='1;url=/lesson/list'>"
-        + "</head>");
-    out.println("<body><h1>수업 등록</h1>");
+  public void doPost(HttpServletRequest request, HttpServletResponse response) 
+      throws IOException, ServletException {
+    
     try {
       Lesson lesson = new Lesson();
       
@@ -63,16 +58,16 @@ public class LessonAddServlet extends HttpServlet{
       lesson.setEndDate(Date.valueOf(request.getParameter("endDate")));
       lesson.setTotalHours(Integer.parseInt(request.getParameter("totalHours")));
       lesson.setDayHours(Integer.parseInt(request.getParameter("dayHours")));
-      
       lessonDao.insert(lesson);
-      out.println("<p>저장하였습니다.</p>");
+      response.sendRedirect("/lesson/list");
       
     } catch (Exception e) {
-      out.println("<p>데이터 저장에 실패했습니다!</p>");
-      throw new RuntimeException(e);
+      request.setAttribute("message", "데이터 저장에 실패했습니다!");
+      request.setAttribute("refresh", "/lesson/list");
+      request.setAttribute("erroe", e);
+      request.getRequestDispatcher("/error").forward(request, response);
       
-    } finally {
-      out.println("</body></html>");
+      
     }
   }
   

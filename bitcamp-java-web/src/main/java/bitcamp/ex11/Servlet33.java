@@ -1,4 +1,4 @@
-// 세션(session) 무효화시키기 - 세션 무효화하기
+// 세션(session) 무효화시키기 - 세션 무효화하기 == 로그아웃기능
 package bitcamp.ex11;
 
 import java.io.IOException;

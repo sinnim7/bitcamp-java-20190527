@@ -16,6 +16,7 @@ import com.eomcs.lms.domain.PhotoFile;
 @WebServlet("/photoboard/add")
 public class PhotoBoardAddServlet extends HttpServlet {
   private static final long serialVersionUID = 1L;
+  
   private PhotoBoardDao photoBoardDao;
   private PhotoFileDao photoFileDao;
 
@@ -49,13 +50,9 @@ public class PhotoBoardAddServlet extends HttpServlet {
   }
   
   @Override
-  public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    response.setContentType("text/html;charset=UTF-8");
-    PrintWriter out = response.getWriter();
-    out.println("<html><head><title>사진게시물 등록</title>"
-        + "<meta http-equiv='Refresh' content='1;url=/photoboard/list'>"
-        + "</head>");
-    out.println("<body><h1>사진게시물 등록</h1>");
+  public void doPost(HttpServletRequest request, HttpServletResponse response) 
+      throws IOException, ServletException {
+    
     try {
       PhotoBoard photoBoard = new PhotoBoard();
       photoBoard.setTitle(request.getParameter("title"));
@@ -74,21 +71,22 @@ public class PhotoBoardAddServlet extends HttpServlet {
         photoFile.setBoardNo(photoBoard.getNo());
         photoFileDao.insert(photoFile);
         count++;
+        
       }
       
       if (count == 0) {
         throw new Exception("사진 파일 없음!");
       }
-      
-      out.println("<p>저장하였습니다.</p>");
+      response.sendRedirect("/photoboard/list");
       
     } catch (Exception e) {
-      out.println("<p>데이터 저장에 실패했습니다!</p>");
-      throw new RuntimeException(e);
+      request.setAttribute("message", "데이터 저장에 실패했습니다!");
+      request.setAttribute("refresh", "/photoboard/list");
+      request.setAttribute("erroe", e);
+      request.getRequestDispatcher("/error").forward(request, response);
       
-    } finally {
-      out.println("</body></html>");
-    }
+    } 
+    
   }
 
 }

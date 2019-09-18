@@ -1,7 +1,6 @@
 package com.eomcs.lms.servlet;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -13,6 +12,7 @@ import com.eomcs.lms.dao.BoardDao;
 @WebServlet("/board/delete")
 public class BoardDeleteServlet extends HttpServlet{
   private static final long serialVersionUID = 1L;
+  
   private BoardDao boardDao;
 
   
@@ -24,31 +24,24 @@ public class BoardDeleteServlet extends HttpServlet{
   }
   
 
-
   @Override
-  public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    response.setContentType("text/html;charset=UTF-8");
-    PrintWriter out = response.getWriter();
-    out.println("<html><head><title>게시물 삭제</title>"
-        + "<meta http-equiv='Refresh' content='1;url=/board/list'>"
-        + "</head>");
-    out.println("<body><h1>게시물 삭제</h1>");
+  public void doGet(HttpServletRequest request, HttpServletResponse response) 
+      throws IOException, ServletException {
 
     try {
       int no = Integer.parseInt(request.getParameter("no"));
-
-      if (boardDao.delete(no) > 0) {
-        out.println("<p>데이터를 삭제하였습니다.</P>");
-      } else {
-        out.println("<p>해당 데이터가 없습니다.</P>");
-      }
+      if (boardDao.delete(no) == 0) {
+        throw new Exception("해당 데이터가 없습니다.");
+      } 
+      response.sendRedirect("/board/list");
 
     } catch (Exception e) {
-      out.println("<p>데이터 삭제에 실패했습니다!</P>");
-      System.out.println(e.getMessage());
+      request.setAttribute("message", "데이터 삭제에 실패했습니다!");
+      request.setAttribute("refresh", "/board/list");
+      request.setAttribute("erroe", e);
+      request.getRequestDispatcher("/error").forward(request, response);
       
-    } finally {
-      out.println("</body></html>");
+      
     }
   }
 }

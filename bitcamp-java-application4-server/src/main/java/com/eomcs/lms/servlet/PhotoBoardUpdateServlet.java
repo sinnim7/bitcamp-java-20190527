@@ -1,7 +1,6 @@
 package com.eomcs.lms.servlet;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -16,6 +15,7 @@ import com.eomcs.lms.domain.PhotoFile;
 @WebServlet("/photoboard/update")
 public class PhotoBoardUpdateServlet extends HttpServlet {
   private static final long serialVersionUID = 1L;
+  
   private PhotoBoardDao photoBoardDao;
   private PhotoFileDao photoFileDao;
   
@@ -28,13 +28,9 @@ public class PhotoBoardUpdateServlet extends HttpServlet {
   }
 
   @Override
-  public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    response.setContentType("text/html;charset=UTF-8");
-    PrintWriter out = response.getWriter();
-    out.println("<html><head><title>사진게시물 변경</title>"
-        + "<meta http-equiv='Refresh' content='1;url=/photoboard/list'>"
-        + "</head>");
-    out.println("<body><h1>사진게시물 변경</h1>");
+  public void doPost(HttpServletRequest request, HttpServletResponse response) 
+      throws IOException, ServletException {
+    
     try {
       PhotoBoard photoBoard = new PhotoBoard();
       photoBoard.setNo(Integer.parseInt(request.getParameter("no")));
@@ -57,19 +53,18 @@ public class PhotoBoardUpdateServlet extends HttpServlet {
       }
       
       if (count == 0) {
-        out.println("<p>최소 한 개의 사진 파일을 등록해야 합니다.</p>");
-        throw new Exception("사진 파일 없음!");
+        throw new Exception("<p>최소 한 개의 사진 파일을 등록해야 합니다.</p>");
       }
       
-      out.println("<p>변경하였습니다.</p>");
+      response.sendRedirect("/photoboard/list");
       
     } catch (Exception e) {
-      out.println("<p>데이터 변경에 실패했습니다!</p>");
-      throw new RuntimeException(e);
-    
-    } finally {
-      out.println("</body></html>");
-    }
+      request.setAttribute("message", "데이터 변경에 실패했습니다!");
+      request.setAttribute("refresh", "/photoboard/list");
+      request.setAttribute("erroe", e);
+      request.getRequestDispatcher("/error").forward(request, response);
+      
+    } 
   }
 
 }
