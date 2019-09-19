@@ -1,12 +1,10 @@
 plugins {
-
     id 'java'
     
-    // 웹 애플리케이션 프로젝트를 다룰 때 사용할 명령어 포함시키기.
+    // 웹 애플리케이션 프로젝트를 다룰 때 사용할 명령어 포함시키기
     id 'war'
     id 'eclipse-wtp'
 }
-
 
 tasks.withType(JavaCompile) {
     options.encoding = 'UTF-8'
@@ -15,9 +13,8 @@ tasks.withType(JavaCompile) {
 }
 
 war {
-  archiveName = 'app4.war'
+    archiveName = 'app4.war'
 }
-
 
 repositories {
     jcenter()
@@ -42,7 +39,7 @@ dependencies {
     // Spring WebMVC
     compile group: 'org.springframework', name: 'spring-webmvc', version: '5.1.9.RELEASE'
     
-    // log4j2
+    // Log4j2
     compile group: 'org.apache.logging.log4j', name: 'log4j-core', version: '2.12.1'
     
     // Apache HttpClient
@@ -51,8 +48,6 @@ dependencies {
     // Servlet API
     providedCompile group: 'javax.servlet', name: 'javax.servlet-api', version: '4.0.1'
     
-    
     implementation 'com.google.guava:guava:27.1-jre'
     testImplementation 'junit:junit:4.12'
 }
-

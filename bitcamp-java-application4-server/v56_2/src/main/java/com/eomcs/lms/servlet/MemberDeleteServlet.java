@@ -11,17 +11,18 @@ import org.springframework.context.ApplicationContext;
 import com.eomcs.lms.dao.MemberDao;
 
 @WebServlet("/member/delete")
-public class MemberDeleteServlet extends HttpServlet{
+public class MemberDeleteServlet extends HttpServlet {
   private static final long serialVersionUID = 1L;
+  
   private MemberDao memberDao;
 
-  
   @Override
   public void init() throws ServletException {
     ApplicationContext appCtx = 
-        (ApplicationContext) getServletContext().getAttribute("iocContainer"); 
+        (ApplicationContext) getServletContext().getAttribute("iocContainer");
     memberDao = appCtx.getBean(MemberDao.class);
   }
+
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
     response.setContentType("text/html;charset=UTF-8");
@@ -48,5 +49,4 @@ public class MemberDeleteServlet extends HttpServlet{
       out.println("</body></html>");
     }
   }
-  
 }

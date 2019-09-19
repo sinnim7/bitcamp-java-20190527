@@ -13,15 +13,15 @@ import com.eomcs.lms.dao.LessonDao;
 import com.eomcs.lms.domain.Lesson;
 
 @WebServlet("/lesson/update")
-public class LessonUpdateServlet extends HttpServlet{
+public class LessonUpdateServlet extends HttpServlet {
   private static final long serialVersionUID = 1L;
+  
   private LessonDao lessonDao;
 
-  
   @Override
   public void init() throws ServletException {
     ApplicationContext appCtx = 
-        (ApplicationContext) getServletContext().getAttribute("iocContainer"); 
+        (ApplicationContext) getServletContext().getAttribute("iocContainer");
     lessonDao = appCtx.getBean(LessonDao.class);
   }
 

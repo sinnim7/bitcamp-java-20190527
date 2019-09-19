@@ -184,7 +184,7 @@ public class PhotoBoardCommand {
     out.println("<a href='/photoboard/form'>새 사진게시물</a><br>");
     
     try {
-      out.println("<table class='table table-hover table-striped'>");
+      out.println("<table class='table table-hover'>");
       out.println("<tr><th>번호</th><th>제목</th><th>등록일</th><th>조회수</th><th>수업</th></tr>");
       List<PhotoBoard> photoBoards = photoBoardDao.findAll();
       for (PhotoBoard photoBoard : photoBoards) {

@@ -141,7 +141,7 @@ public class MemberCommand {
     out.println("<a href='/member/form'>새 회원</a><br>");
     
     try {
-      out.println("<table class='table table-hover table-striped'>");
+      out.println("<table class='table table-hover'>");
       out.println("<tr><th>번호</th><th>이름</th><th>이메일</th><th>전화</th><th>등록일</th></tr>");
       List<Member> members = memberDao.findAll();
       for (Member member : members) {

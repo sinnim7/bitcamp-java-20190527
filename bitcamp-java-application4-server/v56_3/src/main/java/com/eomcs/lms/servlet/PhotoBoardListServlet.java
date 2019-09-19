@@ -10,21 +10,25 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.springframework.context.ApplicationContext;
 import com.eomcs.lms.dao.PhotoBoardDao;
-import com.eomcs.lms.dao.PhotoFileDao;
 import com.eomcs.lms.domain.PhotoBoard;
 
 @WebServlet("/photoboard/list")
 public class PhotoBoardListServlet extends HttpServlet {
   private static final long serialVersionUID = 1L;
+  
+  // 이 클래스에서 로그를 출력할 일이 있다면 다음과 같이 로거를 만들어 사용하라!
+  /*
+  private static final Logger logger = 
+      LogManager.getLogger(PhotoBoardAddServlet.class);
+  */
+  
   private PhotoBoardDao photoBoardDao;
-  private PhotoFileDao photoFileDao;
   
   @Override
   public void init() throws ServletException {
     ApplicationContext appCtx = 
-        (ApplicationContext) getServletContext().getAttribute("iocContainer"); 
+        (ApplicationContext) getServletContext().getAttribute("iocContainer");
     photoBoardDao = appCtx.getBean(PhotoBoardDao.class);
-    photoFileDao = appCtx.getBean(PhotoFileDao.class);
   }
 
   @Override
@@ -38,7 +42,7 @@ public class PhotoBoardListServlet extends HttpServlet {
     out.println("<a href='/photoboard/add'>새 사진게시물</a><br>");
     
     try {
-      out.println("<table class='table table-hover table-striped'>");
+      out.println("<table class='table table-hover'>");
       out.println("<tr><th>번호</th><th>제목</th><th>등록일</th><th>조회수</th><th>수업</th></tr>");
       List<PhotoBoard> photoBoards = photoBoardDao.findAll();
       for (PhotoBoard photoBoard : photoBoards) {
@@ -65,6 +69,4 @@ public class PhotoBoardListServlet extends HttpServlet {
       out.println("</body></html>");
     }
   }
-  
-
 }

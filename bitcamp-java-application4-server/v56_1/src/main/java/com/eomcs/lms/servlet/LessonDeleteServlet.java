@@ -11,19 +11,19 @@ import org.springframework.context.ApplicationContext;
 import com.eomcs.lms.dao.LessonDao;
 
 @WebServlet("/lesson/delete")
-public class LessonDeleteServlet extends HttpServlet{
+public class LessonDeleteServlet extends HttpServlet {
   private static final long serialVersionUID = 1L;
+  
   private LessonDao lessonDao;
 
-  
   @Override
   public void init() throws ServletException {
     ApplicationContext appCtx = 
-        (ApplicationContext) getServletContext().getAttribute("iocContainer"); 
+        (ApplicationContext) getServletContext().getAttribute("iocContainer");
     lessonDao = appCtx.getBean(LessonDao.class);
   }
-  
-  @Override 
+
+  @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
     response.setContentType("text/html;charset=UTF-8");
     PrintWriter out = response.getWriter();

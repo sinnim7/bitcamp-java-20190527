@@ -29,14 +29,13 @@ public class PhotoBoardUpdateServlet extends HttpServlet {
   @Override
   public void init() throws ServletException {
     ApplicationContext appCtx = 
-        (ApplicationContext) getServletContext().getAttribute("iocContainer"); 
+        (ApplicationContext) getServletContext().getAttribute("iocContainer");
     photoBoardDao = appCtx.getBean(PhotoBoardDao.class);
     photoFileDao = appCtx.getBean(PhotoFileDao.class);
   }
 
   @Override
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    
     try {
       PhotoBoard photoBoard = new PhotoBoard();
       photoBoard.setNo(Integer.parseInt(request.getParameter("no")));
@@ -59,7 +58,7 @@ public class PhotoBoardUpdateServlet extends HttpServlet {
       }
       
       if (count == 0) {
-        throw new Exception("<p>최소 한 개의 사진 파일을 등록해야 합니다.</p>");
+        throw new Exception("최소 한 개의 사진 파일을 등록해야 합니다.");
       }
       
       response.sendRedirect("/photoboard/list");
@@ -67,20 +66,17 @@ public class PhotoBoardUpdateServlet extends HttpServlet {
     } catch (Exception e) {
       response.setContentType("text/html;charset=UTF-8");
       PrintWriter out = response.getWriter();
-      out.println("<html><head><title>사진게시물 변경</title>"
-          + "<meta http-equiv='Refresh' content='1;url=/photoboard/list'>"
-          + "</head>");
+      out.println("<html><head><title>사진게시물 변경</title></head>");
       out.println("<body><h1>사진게시물 변경</h1>");
       out.println("<p>데이터 변경에 실패했습니다!</p>");
       out.println("</body></html>");
       response.setHeader("Refresh", "1;url=/photoboard/list");
-      
-   // 왜 오류가 발생했는지 자세한 사항은 로그로 넘긴다.
+
+      // 왜 오류가 발생했는지 자세한 사항은 로그로 남긴다.
       StringWriter strOut = new StringWriter();
       e.printStackTrace(new PrintWriter(strOut));
       logger.error(strOut.toString());
-    
-    } 
+    }
   }
 
 }

@@ -15,6 +15,7 @@ import com.eomcs.lms.domain.Member;
 @WebServlet("/auth/login")
 public class LoginServlet extends HttpServlet {
   private static final long serialVersionUID = 1L;
+  
   private MemberDao memberDao;
   
   @Override
@@ -23,7 +24,7 @@ public class LoginServlet extends HttpServlet {
         (ApplicationContext) getServletContext().getAttribute("iocContainer");
     memberDao = appCtx.getBean(MemberDao.class);
   }
-  
+
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
     response.setContentType("text/html;charset=UTF-8");
@@ -37,7 +38,7 @@ public class LoginServlet extends HttpServlet {
     out.println("</form>");
     out.println("</body></html>");
   }
-
+  
   @Override
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
     response.setContentType("text/html;charset=UTF-8");

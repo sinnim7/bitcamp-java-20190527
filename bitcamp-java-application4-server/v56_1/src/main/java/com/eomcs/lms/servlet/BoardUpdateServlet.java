@@ -12,10 +12,10 @@ import com.eomcs.lms.dao.BoardDao;
 import com.eomcs.lms.domain.Board;
 
 @WebServlet("/board/update")
-public class BoardUpdateServlet extends HttpServlet{
+public class BoardUpdateServlet extends HttpServlet {
   private static final long serialVersionUID = 1L;
+  
   private BoardDao boardDao;
-
   
   @Override
   public void init() throws ServletException {
@@ -23,8 +23,6 @@ public class BoardUpdateServlet extends HttpServlet{
         (ApplicationContext) getServletContext().getAttribute("iocContainer");
     boardDao = appCtx.getBean(BoardDao.class);
   }
-  
-
 
   @Override
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
@@ -36,20 +34,18 @@ public class BoardUpdateServlet extends HttpServlet{
     out.println("<body><h1>게시물 변경</h1>");
     try {
       Board board = new Board();
-      
       board.setNo(Integer.parseInt(request.getParameter("no")));
       board.setContents(request.getParameter("contents"));
-
+      
       boardDao.update(board);
-      out.println("<p>변경했습니다.</p>");
-
+      out.println("<p>변경 했습니다</p>");
+      
     } catch (Exception e) {
-      out.println("데이터 변경에 실패했습니다!");
-      System.out.println(e.getMessage());
-
+      out.println("<p>데이터 변경에 실패했습니다!</p>");
+      throw new RuntimeException(e);
+      
     } finally {
       out.println("</body></html>");
     }
   }
 }
-

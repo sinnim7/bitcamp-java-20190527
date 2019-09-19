@@ -11,23 +11,21 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
-// 역할 :
+// 역할:
 // => 웹 애플리케이션이 시작될 때 보고를 받는다.
 // => Spring IoC 컨테이너를 준비한다.
 // => ServletContext 보관소에 IoC 컨테이너를 저장한다.
 //
-
-
-
-
 public class ContextLoaderListener implements ServletContextListener {
   
-//Log4j의 로그 출력 도구를 준비한다.
- private static final Logger logger = LogManager.getLogger(ContextLoaderListener.class);
+  // Log4j의 로그 출력 도구를 준비한다.
+  private static final Logger logger = 
+      LogManager.getLogger(ContextLoaderListener.class);
 
   @Override
   public void contextInitialized(ServletContextEvent sce) {
     // 웹 애플리케이션이 시작될 때 서블릿 컨테이너가 호출하는 메서드
+    
     ServletContext sc = sce.getServletContext();
     ApplicationContext appCtx = null;
 
@@ -74,8 +72,16 @@ public class ContextLoaderListener implements ServletContextListener {
           beanName));
     }
     logger.debug("------------------------------------");
-  
   }
-  
-  
 }
+
+
+
+
+
+
+
+
+
+
+

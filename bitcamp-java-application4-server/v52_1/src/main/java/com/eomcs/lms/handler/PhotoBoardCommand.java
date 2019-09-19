@@ -24,10 +24,10 @@ public class PhotoBoardCommand {
     this.photoBoardDao = photoBoardDao;
     this.photoFileDao = photoFileDao;
   }
+
   @Transactional
   @RequestMapping("/photoboard/add") // 클라이언트 요청이 들어 왔을 때 이 메서드를 호출하라고 표시한다.
   public void add(BufferedReader in, PrintStream out) {
-
     try {
       PhotoBoard photoBoard = new PhotoBoard();
       photoBoard.setTitle(Input.getStringValue(in, out, "제목? "));
@@ -56,7 +56,6 @@ public class PhotoBoardCommand {
         photoFileDao.insert(photoFile);
         count++;
       }
-      
       out.println("저장하였습니다.");
       
     } catch (Exception e) {
@@ -65,7 +64,6 @@ public class PhotoBoardCommand {
       e.printStackTrace();
       throw new RuntimeException(e);
     }
-     
   }
   
   @Transactional
@@ -142,10 +140,10 @@ public class PhotoBoardCommand {
       System.out.println(e.getMessage());
     }
   }
+  
   @Transactional
   @RequestMapping("/photoboard/update") // 클라이언트 요청이 들어 왔을 때 이 메서드를 호출하라고 표시한다.
   public void update(BufferedReader in, PrintStream out) {
-    
     try {
       int no = Input.getIntValue(in, out, "번호? ");
 

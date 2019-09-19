@@ -27,42 +27,38 @@ public class PhotoBoardDeleteServlet extends HttpServlet {
   @Override
   public void init() throws ServletException {
     ApplicationContext appCtx = 
-        (ApplicationContext) getServletContext().getAttribute("iocContainer"); 
+        (ApplicationContext) getServletContext().getAttribute("iocContainer");
     photoBoardDao = appCtx.getBean(PhotoBoardDao.class);
     photoFileDao = appCtx.getBean(PhotoFileDao.class);
   }
-  
+
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    
     
     try {
       int no = Integer.parseInt(request.getParameter("no"));
       
       if (photoBoardDao.findBy(no) == null) {
         throw new Exception("해당 데이터가 없습니다.");
-      } 
+      }
+      
+      photoFileDao.deleteAll(no);
+      photoBoardDao.delete(no);
       response.sendRedirect("/photoboard/list");
       
     } catch (Exception e) {
       response.setContentType("text/html;charset=UTF-8");
       PrintWriter out = response.getWriter();
-      out.println("<html><head><title>사진게시물 삭제</title>"
-          + "<meta http-equiv='Refresh' content='1;url=/photoboard/list'>"
-          + "</head>");
+      out.println("<html><head><title>사진게시물 삭제</title></head>");
       out.println("<body><h1>사진게시물 삭제</h1>");
       out.println("<p>데이터 삭제에 실패했습니다!</p>");
       out.println("</body></html>");
       response.setHeader("Refresh", "1;url=/photoboard/list");
-      
-   // 왜 오류가 발생했는지 자세한 사항은 로그로 넘긴다.
+
+      // 왜 오류가 발생했는지 자세한 사항은 로그로 남긴다.
       StringWriter strOut = new StringWriter();
       e.printStackTrace(new PrintWriter(strOut));
       logger.error(strOut.toString());
-      
-    } 
+    }
   }
-  
-  
-
 }

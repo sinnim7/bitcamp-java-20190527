@@ -17,7 +17,7 @@ public class LoginCommand {
   public LoginCommand(MemberDao memberDao) {
     this.memberDao = memberDao;
   }
-  
+
   @RequestMapping("/auth/form")
   public void form(ServletRequest request, ServletResponse response) {
     PrintWriter out = response.getWriter();
@@ -30,8 +30,8 @@ public class LoginCommand {
     out.println("</form>");
     out.println("</body></html>");
   }
-
-  @RequestMapping("/auth/login") // 클라이언트 요청이 들어 왔을 때 이 메서드를 호출하라고 표시한다.
+  
+  @RequestMapping("/auth/login") 
   public void execute(ServletRequest request, ServletResponse response) {
     PrintWriter out = response.getWriter();
     out.println("<html><head><title>로그인 결과</title></head>");

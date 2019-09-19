@@ -69,7 +69,7 @@ public class App {
         if (anno == null)
           continue;
         // @RequestMapping 이 붙은 메서드를 찾으면 mapping 객체에 보관한다.
-        mapping.addRequestHandler(anno.value() [0], obj, m);
+        mapping.addRequestHandler(anno.value()[0], obj, m);
         //System.out.printf("%s ==> %s\n", anno.value(), m.getName());
       }
       

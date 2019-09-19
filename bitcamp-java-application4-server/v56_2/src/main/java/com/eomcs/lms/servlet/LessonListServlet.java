@@ -14,14 +14,14 @@ import com.eomcs.lms.domain.Lesson;
 
 @WebServlet("/lesson/list")
 public class LessonListServlet extends HttpServlet {
-
   private static final long serialVersionUID = 1L;
+  
   private LessonDao lessonDao;
 
   @Override
   public void init() throws ServletException {
     ApplicationContext appCtx = 
-        (ApplicationContext) getServletContext().getAttribute("iocContainer"); 
+        (ApplicationContext) getServletContext().getAttribute("iocContainer");
     lessonDao = appCtx.getBean(LessonDao.class);
   }
 
@@ -35,7 +35,7 @@ public class LessonListServlet extends HttpServlet {
     out.println("<body><h1>수업 목록</h1>");
     out.println("<a href='/lesson/add'>새 수업</a><br>");
     try {
-      out.println("<table class='table table-hover table-striped'>");
+      out.println("<table class='table table-hover'>");
       out.println("<tr><th>번호</th><th>수업</th><th>기간</th><th>총수업시간</th></tr>");
       List<Lesson> lessons = lessonDao.findAll();
       for (Lesson lesson : lessons) {
@@ -61,7 +61,6 @@ public class LessonListServlet extends HttpServlet {
       out.println("</body></html>");
     }
   }
-  
 }
 
 

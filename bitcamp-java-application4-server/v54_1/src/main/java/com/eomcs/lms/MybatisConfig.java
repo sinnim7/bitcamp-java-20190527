@@ -17,10 +17,9 @@ public class MybatisConfig {
   @Bean
   public SqlSessionFactory sqlSessionFactory(
       DataSource dataSource, ApplicationContext appCtx) throws Exception {
-    
-    // Mybatis의 Log4j2를 활성화시키기.
+
+    // Mybatis의 Log4j2를 활성화시키기 
     LogFactory.useLog4J2Logging();
-    
     
     SqlSessionFactoryBean sqlSessionFactoryBean = new SqlSessionFactoryBean();
     sqlSessionFactoryBean.setDataSource(dataSource);

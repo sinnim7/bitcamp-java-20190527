@@ -13,18 +13,18 @@ import com.eomcs.lms.dao.MemberDao;
 import com.eomcs.lms.domain.Member;
 
 @WebServlet("/member/list")
-public class MemberListServlet extends HttpServlet{
+public class MemberListServlet extends HttpServlet {
   private static final long serialVersionUID = 1L;
+  
   private MemberDao memberDao;
 
-  
   @Override
   public void init() throws ServletException {
     ApplicationContext appCtx = 
-        (ApplicationContext) getServletContext().getAttribute("iocContainer"); 
+        (ApplicationContext) getServletContext().getAttribute("iocContainer");
     memberDao = appCtx.getBean(MemberDao.class);
   }
-
+  
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
     response.setContentType("text/html;charset=UTF-8");
@@ -36,7 +36,7 @@ public class MemberListServlet extends HttpServlet{
     out.println("<a href='/member/add'>새 회원</a><br>");
     
     try {
-      out.println("<table class='table table-hover table-striped'>");
+      out.println("<table class='table table-hover'>");
       out.println("<tr><th>번호</th><th>이름</th><th>이메일</th><th>전화</th><th>등록일</th></tr>");
       List<Member> members = memberDao.findAll();
       for (Member member : members) {

@@ -13,21 +13,18 @@ import com.eomcs.lms.dao.LessonDao;
 import com.eomcs.lms.domain.Lesson;
 
 @WebServlet("/lesson/add")
-public class LessonAddServlet extends HttpServlet{
+public class LessonAddServlet extends HttpServlet {
   private static final long serialVersionUID = 1L;
+  
   private LessonDao lessonDao;
 
-  
   @Override
   public void init() throws ServletException {
     ApplicationContext appCtx = 
-        (ApplicationContext) getServletContext().getAttribute("iocContainer"); 
+        (ApplicationContext) getServletContext().getAttribute("iocContainer");
     lessonDao = appCtx.getBean(LessonDao.class);
   }
 
-  
-  
-  
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
     response.setContentType("text/html;charset=UTF-8");
@@ -75,7 +72,6 @@ public class LessonAddServlet extends HttpServlet{
       out.println("</body></html>");
     }
   }
-  
 }
 
 

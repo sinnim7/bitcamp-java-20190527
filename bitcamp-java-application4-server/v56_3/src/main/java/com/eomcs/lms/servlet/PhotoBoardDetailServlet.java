@@ -10,27 +10,30 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.springframework.context.ApplicationContext;
 import com.eomcs.lms.dao.PhotoBoardDao;
-import com.eomcs.lms.dao.PhotoFileDao;
 import com.eomcs.lms.domain.PhotoBoard;
 import com.eomcs.lms.domain.PhotoFile;
 
 @WebServlet("/photoboard/detail")
 public class PhotoBoardDetailServlet extends HttpServlet {
   private static final long serialVersionUID = 1L;
+  
+  // 이 클래스에서 로그를 출력할 일이 있다면 다음과 같이 로거를 만들어 사용하라!
+  /*
+  private static final Logger logger = 
+      LogManager.getLogger(PhotoBoardAddServlet.class);
+  */
+  
   private PhotoBoardDao photoBoardDao;
-  private PhotoFileDao photoFileDao;
   
   @Override
   public void init() throws ServletException {
     ApplicationContext appCtx = 
-        (ApplicationContext) getServletContext().getAttribute("iocContainer"); 
+        (ApplicationContext) getServletContext().getAttribute("iocContainer");
     photoBoardDao = appCtx.getBean(PhotoBoardDao.class);
-    photoFileDao = appCtx.getBean(PhotoFileDao.class);
   }
 
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    response.setContentType("text/html;charset=UTF-8");
     response.setContentType("text/html;charset=UTF-8");
     PrintWriter out = response.getWriter();
     out.println("<html><head><title>사진게시물 상세</title></head>");
@@ -80,6 +83,4 @@ public class PhotoBoardDetailServlet extends HttpServlet {
       out.println("</body></html>");
     }
   }
-  
-
 }

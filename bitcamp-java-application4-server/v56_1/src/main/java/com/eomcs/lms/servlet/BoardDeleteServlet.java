@@ -11,10 +11,10 @@ import org.springframework.context.ApplicationContext;
 import com.eomcs.lms.dao.BoardDao;
 
 @WebServlet("/board/delete")
-public class BoardDeleteServlet extends HttpServlet{
+public class BoardDeleteServlet extends HttpServlet {
   private static final long serialVersionUID = 1L;
+  
   private BoardDao boardDao;
-
   
   @Override
   public void init() throws ServletException {
@@ -23,8 +23,6 @@ public class BoardDeleteServlet extends HttpServlet{
     boardDao = appCtx.getBean(BoardDao.class);
   }
   
-
-
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
     response.setContentType("text/html;charset=UTF-8");
@@ -33,19 +31,17 @@ public class BoardDeleteServlet extends HttpServlet{
         + "<meta http-equiv='Refresh' content='1;url=/board/list'>"
         + "</head>");
     out.println("<body><h1>게시물 삭제</h1>");
-
     try {
       int no = Integer.parseInt(request.getParameter("no"));
-
       if (boardDao.delete(no) > 0) {
-        out.println("<p>데이터를 삭제하였습니다.</P>");
+        out.println("<p>데이터를 삭제하였습니다.</p>");
       } else {
-        out.println("<p>해당 데이터가 없습니다.</P>");
+        out.println("<p>해당 데이터가 없습니다.</p>");
       }
-
+      
     } catch (Exception e) {
-      out.println("<p>데이터 삭제에 실패했습니다!</P>");
-      System.out.println(e.getMessage());
+      out.println("<p>데이터 삭제에 실패했습니다!</p>");
+      throw new RuntimeException(e);
       
     } finally {
       out.println("</body></html>");

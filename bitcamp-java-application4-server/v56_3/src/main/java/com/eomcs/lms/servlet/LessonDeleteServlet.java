@@ -14,7 +14,7 @@ import org.springframework.context.ApplicationContext;
 import com.eomcs.lms.dao.LessonDao;
 
 @WebServlet("/lesson/delete")
-public class LessonDeleteServlet extends HttpServlet{
+public class LessonDeleteServlet extends HttpServlet {
   private static final long serialVersionUID = 1L;
   
   private static final Logger logger = 
@@ -22,21 +22,19 @@ public class LessonDeleteServlet extends HttpServlet{
   
   private LessonDao lessonDao;
 
-  
   @Override
   public void init() throws ServletException {
     ApplicationContext appCtx = 
-        (ApplicationContext) getServletContext().getAttribute("iocContainer"); 
+        (ApplicationContext) getServletContext().getAttribute("iocContainer");
     lessonDao = appCtx.getBean(LessonDao.class);
   }
-  
-  @Override 
+
+  @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
     
     try {
       int no = Integer.parseInt(request.getParameter("no"));
-      
-      if (lessonDao.delete(no) > 0) {
+      if (lessonDao.delete(no) == 0) {
         throw new Exception("해당 데이터가 없습니다.");
       }
       response.sendRedirect("/lesson/list");
@@ -44,20 +42,17 @@ public class LessonDeleteServlet extends HttpServlet{
     } catch (Exception e) {
       response.setContentType("text/html;charset=UTF-8");
       PrintWriter out = response.getWriter();
-      out.println("<html><head><title>수업 삭제</title>"
-          + "<meta http-equiv='Refresh' content='1;url=/lesson/list'>"
-          + "</head>");
+      out.println("<html><head><title>수업 삭제</title></head>");
       out.println("<body><h1>수업 삭제</h1>");
       out.println("<p>데이터 삭제에 실패했습니다!</p>");
       out.println("</body></html>");
       response.setHeader("Refresh", "1;url=/lesson/list");
-      
-   // 왜 오류가 발생했는지 자세한 사항은 로그로 넘긴다.
+
+      // 왜 오류가 발생했는지 자세한 사항은 로그로 남긴다.
       StringWriter strOut = new StringWriter();
       e.printStackTrace(new PrintWriter(strOut));
       logger.error(strOut.toString());
-      
-    } 
+    }
   }
 }
 

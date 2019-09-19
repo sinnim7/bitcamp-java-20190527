@@ -24,10 +24,10 @@ import com.eomcs.util.RequestMappingHandlerMapping;
 import com.eomcs.util.RequestMappingHandlerMapping.RequestHandler;
 
 public class App {
-  
+
   // Log4j의 로그 출력 도구를 준비한다.
   private static final Logger logger = LogManager.getLogger(App.class);
-
+  
   private static final int CONTINUE = 1;
   private static final int STOP = 0;
 
@@ -64,7 +64,7 @@ public class App {
     // 객체풀에서 @Component 애노테이션이 붙은 객체 목록을 꺼낸다.
     Map<String,Object> components = appCtx.getBeansWithAnnotation(Component.class);
     
-    logger.trace("[요청 핸들러] ==================================");
+    logger.trace("[요청 핸들러] ===========================");
     
     // 객체 안에 선언된 메서드 중에서 @RequestMapping이 붙은 메서드를 찾아낸다.
     Collection<Object> objList = components.values();
@@ -72,29 +72,27 @@ public class App {
       
       Method[] methods = null;
       
-      if (AopUtils.isAopProxy(obj)) { // 원본이 아니라 프록시(한번 포장했는지?) 객체라면
+      if (AopUtils.isAopProxy(obj)) { // 원본이 아니라 프록시 객체라면
         try {
-        // 프록시 객체의 클래스가 아니라 원본 객체의 클래스 정보를 가져온다.
-        Class<?> originClass = (Class<?>) obj.getClass().getMethod("getTargetClass").invoke(obj);
-        // 프록시 객체의 이름은 생성될때마다 랜덤으로 생성돼 이름을 모름.
-        // 그래서 프록시 객체의 클래스 정보로부터 getTargetClass 매서드 정보를 알아내고 그 객체를 호출.
-        // 리턴값은 원본 클래스정보를 리턴함. 그럼
-        methods = originClass.getMethods();
-      } catch (Exception e) {
-        e.printStackTrace();
-      }
-      }else { // 원본 객체일 경우,
+          // 프록시 객체의 클래스가 아니라 원본 객체의 클래스 정보를 가져온다.
+          Class<?> originClass = 
+              (Class<?>) obj.getClass().getMethod("getTargetClass").invoke(obj);
+          methods = originClass.getMethods();
+        } catch (Exception e) {
+          e.printStackTrace();
+        }
+      } else { // 원본 객체일 경우,
         // 원본 객체의 클래스로부터 메서드 목록을 가져온다.
         methods = obj.getClass().getMethods();
       }
-      // => 객체에서 메서드 정보를 추출한다.
+      
       for (Method m : methods) {
         RequestMapping anno = m.getAnnotation(RequestMapping.class);
         if (anno == null)
           continue;
         // @RequestMapping 이 붙은 메서드를 찾으면 mapping 객체에 보관한다.
         mapping.addRequestHandler(anno.value()[0], obj, m);
-        logger.trace(String.format("%s ==> %s.%s()", anno.value()[0],
+        logger.trace(String.format("%s ==> %s.%s()", anno.value()[0], 
             obj.getClass().getSimpleName(),
             m.getName()));
       }
@@ -136,7 +134,7 @@ public class App {
       logger.info("소켓 통신 오류!");
       
       StringWriter out = new StringWriter();
-      e.printStackTrace(new PrintWriter(out)); // 메모리에 보관됨
+      e.printStackTrace(new PrintWriter(out));
       logger.debug(out.toString());
     }
   }
@@ -182,7 +180,7 @@ public class App {
             logger.info("해당 명령을 처리할 수 없습니다.");
             
             StringWriter out2 = new StringWriter();
-            e.printStackTrace(new PrintWriter(out2)); // 메모리에 보관됨
+            e.printStackTrace(new PrintWriter(out2));
             logger.debug(out2.toString());
           }
         }
@@ -207,7 +205,7 @@ public class App {
       logger.info("시스템 실행 중 오류 발생!");
       
       StringWriter out2 = new StringWriter();
-      e.printStackTrace(new PrintWriter(out2)); // 메모리에 보관됨
+      e.printStackTrace(new PrintWriter(out2));
       logger.debug(out2.toString());
     }
   }

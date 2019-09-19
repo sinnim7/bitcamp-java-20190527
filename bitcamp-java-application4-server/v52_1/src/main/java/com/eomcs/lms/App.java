@@ -1,4 +1,4 @@
-// v52_1 : 스프링 애노테이션을 이용해 트랜잭션 처리하기.
+// v52_1 : 스프링 애노테이션을 이용하여 트랜잭션 처리하기
 package com.eomcs.lms;
 
 import java.io.BufferedReader;
@@ -65,28 +65,26 @@ public class App {
       
       Method[] methods = null;
       
-      if (AopUtils.isAopProxy(obj)) { // 원본이 아니라 프록시(한번 포장했는지?) 객체라면
+      if (AopUtils.isAopProxy(obj)) { // 원본이 아니라 프록시 객체라면
         try {
-        // 프록시 객체의 클래스가 아니라 원본 객체의 클래스 정보를 가져온다.
-        Class<?> originClass = (Class<?>) obj.getClass().getMethod("getTargetClass").invoke(obj);
-        // 프록시 객체의 이름은 생성될때마다 랜덤으로 생성돼 이름을 모름.
-        // 그래서 프록시 객체의 클래스 정보로부터 getTargetClass 매서드 정보를 알아내고 그 객체를 호출.
-        // 리턴값은 원본 클래스정보를 리턴함. 그럼
-        methods = originClass.getMethods();
-      } catch (Exception e) {
-        e.printStackTrace();
-      }
-      }else { // 원본 객체일 경우,
+          // 프록시 객체의 클래스가 아니라 원본 객체의 클래스 정보를 가져온다.
+          Class<?> originClass = 
+              (Class<?>) obj.getClass().getMethod("getTargetClass").invoke(obj);
+          methods = originClass.getMethods();
+        } catch (Exception e) {
+          e.printStackTrace();
+        }
+      } else { // 원본 객체일 경우,
         // 원본 객체의 클래스로부터 메서드 목록을 가져온다.
         methods = obj.getClass().getMethods();
       }
-      // => 객체에서 메서드 정보를 추출한다.
+      
       for (Method m : methods) {
         RequestMapping anno = m.getAnnotation(RequestMapping.class);
         if (anno == null)
           continue;
         // @RequestMapping 이 붙은 메서드를 찾으면 mapping 객체에 보관한다.
-        mapping.addRequestHandler(anno.value() [0], obj, m);
+        mapping.addRequestHandler(anno.value()[0], obj, m);
         //System.out.printf("%s ==> %s\n", anno.value(), m.getName());
       }
       

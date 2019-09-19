@@ -15,15 +15,13 @@ import com.eomcs.lms.dao.BoardDao;
 import com.eomcs.lms.domain.Board;
 
 @WebServlet("/board/add")
-public class BoardAddServlet extends HttpServlet{
+public class BoardAddServlet extends HttpServlet {
   private static final long serialVersionUID = 1L;
   
   private static final Logger logger = 
       LogManager.getLogger(BoardAddServlet.class);
   
-  
   private BoardDao boardDao;
-
   
   @Override
   public void init() throws ServletException {
@@ -32,21 +30,20 @@ public class BoardAddServlet extends HttpServlet{
     boardDao = appCtx.getBean(BoardDao.class);
   }
   
-
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
     response.setContentType("text/html;charset=UTF-8");
     PrintWriter out = response.getWriter();
-    out.println("<html><head><title>게시물 목록</title></head>");
+    out.println("<html><head><title>게시물 등록폼</title></head>");
     out.println("<body><h1>게시물 등록폼</h1>");
     out.println("<form action='/board/add' method='post'>");
-    out.println("내용 : <textarea name='contents' rows='5' cols='50'></textarea> <br>");
-    out.println("<button>등록  </button>");
+    out.println("내용 : <textarea name='contents' rows='5' cols='50'></textarea><br>");
+    out.println("<button>등록</button>");
     out.println("</form>");
     out.println("</body></html>");
   }
-
-  @Override // 클라이언트 요청이 들어 왔을 때 이 메서드를 호출하라고 표시한다.
+  
+  @Override
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
     
     try {
@@ -54,23 +51,21 @@ public class BoardAddServlet extends HttpServlet{
       board.setContents(request.getParameter("contents"));
       boardDao.insert(board);
       response.sendRedirect("/board/list");
-
+      
     } catch (Exception e) {
       response.setContentType("text/html;charset=UTF-8");
       PrintWriter out = response.getWriter();
-      out.println("<html><head><title>게시물 등록</title>"
-          + "<meta http-equiv='Refresh' content='1;url=/board/list'>"
-          + "</head>");
+      out.println("<html><head><title>게시물 등록</title></head>");
       out.println("<body><h1>게시물 등록</h1>");
-      out.println("<p>데이터 저장에 실패했습니다!</P>");
+      out.println("<p>데이터 저장에 실패했습니다!</p>");
       out.println("</body></html>");
       response.setHeader("Refresh", "1;url=/board/list");
-      
-      // 왜 오류가 발생했는지 자세한 사항은 로그로 넘긴다.
+
+      // 왜 오류가 발생했는지 자세한 사항은 로그로 남긴다.
       StringWriter strOut = new StringWriter();
       e.printStackTrace(new PrintWriter(strOut));
       logger.error(strOut.toString());
-
     } 
   }
+
 }
