@@ -31,6 +31,7 @@ private String calculate(long money) { // 인스턴스 메서드
 %>
 
 <%!
+
 { // 인스턴스 블록
   System.out.println("ex06 인스턴스 생성!");
 }

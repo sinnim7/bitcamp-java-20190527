@@ -1,3 +1,4 @@
+<%@page import="java.util.List"%>
 <%@page import="java.util.ArrayList"%>
 <%@ page 
     language="java" 
@@ -21,6 +22,8 @@ names.add("홍길동");
 names.add("임꺽정");
 names.add("안중근");
 names.add("윤봉길");
+
+
 
 pageContext.setAttribute("list", names);
 
