@@ -1,13 +1,6 @@
 package com.eomcs.lms.servlet;
 
-//이클래스의 모든 스태틱메서드를알려달라
-import static org.reflections.ReflectionUtils.getMethods;
-import static org.reflections.ReflectionUtils.withAnnotation;
-import static org.reflections.ReflectionUtils.withModifier;
 import java.io.IOException;
-import java.lang.reflect.Method;
-import java.lang.reflect.Modifier;
-import java.util.Set;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
@@ -17,7 +10,6 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.context.ApplicationContext;
-import org.springframework.web.bind.annotation.RequestMapping;
 import com.eomcs.util.RequestMappingHandlerMapping;
 import com.eomcs.util.RequestMappingHandlerMapping.RequestHandler;
 
@@ -55,8 +47,8 @@ public class DispatcherServlet extends HttpServlet {
       }
       
    // request handler를 실행한다.
-      String viewUrl = (String) requestHandler.method.invoke(requestHandler.bean, request, response);
-      
+      String viewUrl = (String) requestHandler.invoke(request, response);
+      //
       
       String contentType = (String) request.getAttribute("contentType");
       if (contentType != null) {

@@ -58,9 +58,9 @@ public class RequestMappingHandlerMapping {
       this.bean = bean;
     }
     
-    public void invoke(HttpServletRequest request, HttpServletResponse response) 
+    public Object invoke(HttpServletRequest request, HttpServletResponse response) 
       throws Exception {
-      method.invoke(bean, request, response);
+      return method.invoke(bean, request, response);
     }
     
     

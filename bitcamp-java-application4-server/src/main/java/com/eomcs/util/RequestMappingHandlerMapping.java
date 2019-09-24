@@ -3,6 +3,7 @@ package com.eomcs.util;
 import static org.reflections.ReflectionUtils.getMethods;
 import static org.reflections.ReflectionUtils.withAnnotation;
 import java.lang.reflect.Method;
+import java.lang.reflect.Parameter;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Set;
@@ -60,6 +61,13 @@ public class RequestMappingHandlerMapping {
     
     public Object invoke(HttpServletRequest request, HttpServletResponse response) 
       throws Exception {
+      
+      // 메서드의 파라미터를 분석해 원하는 값을 준비한다.
+      Parameter[] params = method.getParameters();
+      
+      // 메서드를 호출할 대 넘겨 줄 파라미터 값을 담을 배열을 준비한다.
+      Object[] args = new Object[params.length];
+      
       return method.invoke(bean, request, response);
     }
     
