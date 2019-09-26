@@ -26,7 +26,7 @@ public class ServletContainerInitializerImpl
     // 이 라이브러리 외부에 구현된 MyWebInitializer 구현체를 찾아 객체를 생성한다.
     for (Class<?> clazz : types) {
       try {
-        System.out.println(clazz.getName() + ".start() 호출함!");
+        System.out.println(clazz.getName() + ".start() 호출~~~~~~!");
         MyWebInitializer obj = 
             (MyWebInitializer) clazz.getConstructor().newInstance();
         obj.start(ctx);
