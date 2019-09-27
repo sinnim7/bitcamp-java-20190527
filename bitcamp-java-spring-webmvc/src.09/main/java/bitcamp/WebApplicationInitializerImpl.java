@@ -36,15 +36,14 @@ import org.springframework.web.servlet.DispatcherServlet;
 public class WebApplicationInitializerImpl 
   implements WebApplicationInitializer {
   
-  
   @Override
   public void onStartup(ServletContext servletContext) throws ServletException {
     System.out.println("WebApplicationInitializerImpl.onStartup()...호출됨!");
-
+    
     // DispatcherServlet 에서 사용할 스프링 IoC 컨테이너를 준비한다.
     AnnotationConfigWebApplicationContext ac = new AnnotationConfigWebApplicationContext();
     
-    // => 직접 IoC 컨테이너에 설정 정보를 갖고 있는 Java Config 클래스를 직접 지정하기
+    // => IoC 컨테이너의 설정 정보를 갖고 있는 Java Config 클래스를 직접 지정하기
     //ac.register(AppConfig.class);
     
     // => Java Config 클래스가 있는 패키지를 지정하기
@@ -63,9 +62,8 @@ public class WebApplicationInitializerImpl
     
     // DispatcherServlet에 URL 패턴을 지정한다.
     registration.addMapping("/app/*");
-  
-
   }
+
 }
 
 

@@ -9,10 +9,10 @@ import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatche
 //    AbstractAnnotationConfigDispatcherServletInitializer 클래스를 상속 받기
 //    - 이 클래스는 미리 AnnotationConfigWebApplicationContext IoC 컨테이너를 준비했다.
 //    - 따라서 IoC 컨테이너를 따로 설정할 필요가 없다.
-//    - 또한 DispatcherServlet을 등록하는 코드가 이미 작성돼 있어 
-//    - 따로 등록할 필요가 없다.
-//    - 즉 인터페이스를 직접 구현하는 것보다 편하다.
-
+//    - 또한 DispatcherServlet을 등록하는 코드가 이미 작성되어 있기 때문에 
+//      따로 등록할 필요가 없다.
+//    - 즉 인터페이스를 직접 구현하는 것 보다 편하다.
+//
 public class WebApplicationInitializerImpl 
 extends AbstractAnnotationConfigDispatcherServletInitializer {
 
@@ -52,7 +52,7 @@ extends AbstractAnnotationConfigDispatcherServletInitializer {
   public void onStartup(ServletContext servletContext) throws ServletException {
     // 이 메서드가 호출될 때 간단한 메시지를 출력하기 위해 오버라이딩 하였다.
     // 따라서 원래의 메서드를 반드시 호출해줘야 한다.
-    System.out.println("WebApplicationInitializerImpl2.onStartup()...호출됨!");
+    System.out.println("WebApplicationInitializerImpl.onStartup()...호출됨!");
     super.onStartup(servletContext);
   }
 }
