@@ -6,7 +6,6 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import com.eomcs.lms.dao.MemberDao;
@@ -17,7 +16,6 @@ public class MemberController {
 
   @Resource 
   private MemberDao memberDao;
-
 
   @RequestMapping("/member/add")
   public String add(HttpServletRequest request, HttpServletResponse response) 
@@ -116,10 +114,4 @@ public class MemberController {
     memberDao.update(member);
     return "redirect:list";
   }
-  
-  
-  
-  
-  
-  
 }

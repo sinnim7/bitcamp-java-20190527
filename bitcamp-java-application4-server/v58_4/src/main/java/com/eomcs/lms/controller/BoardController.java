@@ -4,7 +4,6 @@ import java.util.List;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import com.eomcs.lms.dao.BoardDao;
@@ -40,7 +39,7 @@ public class BoardController {
     }
     return "redirect:list";
   }
-
+  
   @RequestMapping("/board/detail")
   public String detail(HttpServletRequest request, HttpServletResponse response) 
       throws Exception {
@@ -77,17 +76,5 @@ public class BoardController {
 
     return "redirect:list";
   }
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
+
 }

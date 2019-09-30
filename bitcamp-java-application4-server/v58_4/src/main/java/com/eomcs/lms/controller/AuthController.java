@@ -42,11 +42,11 @@ public class AuthController {
     session.setAttribute("loginUser", member);
     return "redirect:../board/list";
   }
-
+  
   @RequestMapping("/auth/logout")
   public String logout(HttpServletRequest request, HttpServletResponse response) 
       throws Exception {
-
+    
     request.getSession().invalidate();
     return "redirect:login";
   }

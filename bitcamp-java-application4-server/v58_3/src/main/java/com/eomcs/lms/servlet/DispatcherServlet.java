@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import static org.reflections.ReflectionUtils.*; //이클래스의 모든 스태틱메서드를알려달라
+import static org.reflections.ReflectionUtils.*;
 import org.springframework.context.ApplicationContext;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -41,14 +41,13 @@ public class DispatcherServlet extends HttpServlet {
         servletPath, pathInfo));
     
     try {
-      // 클라이언트 요청을 처리할 페이지 컨트롤러를 찾는다.
+      // 클라이언트 요청을 처리할 페이지 컨트롤로를 찾는다.
       Object pageController = iocContainer.getBean(pathInfo);
       
       // 페이지 컨트롤러에서 @RequestMapping이 붙은 메서드를 찾는다.
       Method requestHandler = findRequestHandler(pageController);
-      
       if (requestHandler == null) {
-        throw new Exception(pathInfo + "요청을 처리할 수 없습니다.");
+        throw new Exception(pathInfo + " 요청을 처리할 수 없습니다.");
       }
       
       // request handler를 실행한다.
@@ -84,12 +83,10 @@ public class DispatcherServlet extends HttpServlet {
         obj.getClass(), 
         withAnnotation(RequestMapping.class),
         withModifier(Modifier.PUBLIC));
-    //=> 리쉐크스매핑,퍼블릭 조건 가진 메서드 가져오기
     
     for (Method method : methods) {
       return method;
     }
-    
     return null;
   }
 }

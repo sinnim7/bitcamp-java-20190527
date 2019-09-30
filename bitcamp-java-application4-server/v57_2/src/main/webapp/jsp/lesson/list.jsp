@@ -1,6 +1,7 @@
+<%@page import="com.eomcs.lms.domain.Lesson"%>
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 <!DOCTYPE html>
 <html>
 <head>
@@ -22,14 +23,18 @@
   <th>기간</th>
   <th>총강의시간</th>
 </tr>
-<c:forEach items="${lessons}" var="lesson">
+<%
+List<Lesson> lessons = (List<Lesson>)request.getAttribute("lessons");
+for (Lesson lesson : lessons) {
+  pageContext.setAttribute("lesson", lesson);
+%>
   <tr>
     <td>${lesson.no}</td>
     <td><a href='/lesson/detail?no=${lesson.no}'>${lesson.title}</a></td>
     <td>${lesson.startDate} ~ ${lesson.endDate}</td>
     <td>${lesson.totalHours}</td>
   </tr>
-</c:forEach> 
+<%}%>
 </table>
 </div>
 

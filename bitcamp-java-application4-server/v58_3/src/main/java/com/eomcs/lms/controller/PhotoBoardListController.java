@@ -10,7 +10,7 @@ import com.eomcs.lms.dao.PhotoBoardDao;
 import com.eomcs.lms.domain.PhotoBoard;
 
 @Component("/photoboard/list")
-public class PhotoBoardListController  {
+public class PhotoBoardListController {
 
   @Resource private PhotoBoardDao photoBoardDao;
 

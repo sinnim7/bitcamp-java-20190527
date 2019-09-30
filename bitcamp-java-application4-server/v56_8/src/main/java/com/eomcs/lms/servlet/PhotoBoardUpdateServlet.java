@@ -25,7 +25,6 @@ public class PhotoBoardUpdateServlet extends HttpServlet {
   private PhotoBoardDao photoBoardDao;
   private PhotoFileDao photoFileDao;
   
-  
   @Override
   public void init() throws ServletException {
     ApplicationContext appCtx = 
@@ -65,7 +64,7 @@ public class PhotoBoardUpdateServlet extends HttpServlet {
       }
       
       if (count == 0) {
-        throw new Exception("최소 한 개의 사진 파일을 등록해야 합니다.");
+        throw new Exception("사진 파일 없음!");
       }
       
       response.sendRedirect("/photoboard/list");

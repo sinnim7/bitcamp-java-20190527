@@ -29,17 +29,14 @@ public class RequestMappingHandlerMapping {
     // 각 객체에 대해 request handler를 꺼낸다. 즉 @RequestMapping이 붙은 메서드를 꺼낸다.
     for (Object obj : objects) {
       Set<Method> methods = getMethods(
-          obj.getClass(),
+          obj.getClass(), 
           withAnnotation(RequestMapping.class));
-      
       for (Method m : methods) {
         RequestMapping mapping = m.getAnnotation(RequestMapping.class);
         addRequestHandler(mapping.value()[0], obj, m);
       }
     }
   }
-  
-  
   
   private void addRequestHandler(String name, Object bean, Method method) {
     handlerMap.put(name, new RequestHandler(method, bean));
@@ -59,10 +56,14 @@ public class RequestMappingHandlerMapping {
     }
     
     public Object invoke(HttpServletRequest request, HttpServletResponse response) 
-      throws Exception {
+        throws Exception {
       return method.invoke(bean, request, response);
     }
-    
-    
   }
 }
+
+
+
+
+
+
