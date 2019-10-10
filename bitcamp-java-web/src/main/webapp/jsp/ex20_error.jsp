@@ -14,7 +14,6 @@
 <body>
 <h1>오류 발생!</h1>
 <%=exception.getMessage()%>
-
 </body>
 </html>
 <%--

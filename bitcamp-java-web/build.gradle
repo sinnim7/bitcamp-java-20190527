@@ -1,6 +1,4 @@
-
 plugins {
-  
     id 'java'
     id 'eclipse-wtp'
     id 'war'
@@ -13,16 +11,12 @@ tasks.withType(JavaCompile) {
 }
 
 repositories {
-   
     jcenter()
 }
 
 dependencies {
-
     // Servlet API
     providedCompile group: 'javax.servlet', name: 'javax.servlet-api', version: '4.0.1'
-   
-    
     
     // Apache FileUpload
     compile group: 'commons-fileupload', name: 'commons-fileupload', version: '1.4'
@@ -30,13 +24,9 @@ dependencies {
     // Thumbnailator
     compile group: 'net.coobird', name: 'thumbnailator', version: '0.4.8'
     
-    //JSTL
+    // JSTL
     compile group: 'javax.servlet', name: 'jstl', version: '1.2'
     
-    
-    
-    implementation 'com.google.guava:guava:27.1-jre'
+    implementation 'com.google.guava:guava:28.0-jre'
     testImplementation 'junit:junit:4.12'
-    
 }
-

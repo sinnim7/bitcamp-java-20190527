@@ -21,8 +21,6 @@
 <c:out value="${null}" default="홍길동"/><br>
 <c:out value="${null}">홍길동</c:out><br>
 <c:out value="${'임꺽정'}" default="홍길동"/><br>
-<c:out value="${2}"/><br>
-
 </body>
 </html>
 

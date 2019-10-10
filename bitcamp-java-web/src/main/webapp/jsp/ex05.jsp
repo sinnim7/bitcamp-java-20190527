@@ -2,7 +2,6 @@
     pageEncoding="UTF-8"%>
 <%
 String[] names = {"홍길동", "임꺽정", "유관순"};
-String a = "aaa";
 %>
 <!DOCTYPE html>
 <html>
@@ -15,11 +14,8 @@ String a = "aaa";
 <ul>
 <%for (String name : names) {%>
 <li><%=name%></li>
-<li><%=a + "111" + name%></li>
 <%}%>
 </ul>
-<li><%=a%></li>
-<%=10 > 20 ? "hello" : "ok" %>
 </body>
 </html>
 <%--
