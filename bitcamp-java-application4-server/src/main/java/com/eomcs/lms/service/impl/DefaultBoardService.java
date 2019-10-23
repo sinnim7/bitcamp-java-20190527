@@ -7,15 +7,13 @@ import com.eomcs.lms.dao.BoardDao;
 import com.eomcs.lms.domain.Board;
 import com.eomcs.lms.service.BoardService;
 
-
-// BoardService 기본 구현체
-
+// BoardService 기본 구현체 
+//
 @Service
 public class DefaultBoardService implements BoardService {
 
   @Resource
   private BoardDao boardDao;
-
 
   @Override
   public void insert(Board board) throws Exception {
@@ -39,12 +37,13 @@ public class DefaultBoardService implements BoardService {
     return board;
   }
 
+  @Override
   public List<Board> list() throws Exception {
     return boardDao.findAll();
   }
 
+  @Override
   public void update(Board board) throws Exception {
     boardDao.update(board);
   }
-
 }

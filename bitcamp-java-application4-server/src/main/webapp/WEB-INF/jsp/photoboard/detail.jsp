@@ -11,7 +11,25 @@
 <body>
 
 <jsp:include page="../header.jsp"/>
-    
+
+
+<%-- <jsp:include page="../photoboard/list.jsp"/> --%>
+
+<%-- <div>
+<tr>
+  <th>번호</th>
+  <th>제목</th>
+  <th>등록일</th>
+  <th>조회수</th>
+  <th>수업</th>
+</tr>
+<c:forEach items="${photoBoard.photoFiles}" var="file">
+  <tr>
+    <td>포토파일 넘버2 : ${phoroBoard.photoFile.no}</td>
+  </tr>
+</c:forEach> 
+</div>
+     --%>
 <div id='content'>
 <h1>사진게시물</h1>
 <form action='update'
@@ -20,6 +38,14 @@
 제목: <input type='text' name='title' value='${photoBoard.title}'><br>
 수업: ${photoBoard.lessonNo}<br>
 조회수: ${photoBoard.viewCount}<br>
+${file.filePath}<br>
+${photoFile.no}<br>
+<p>
+<c:forEach items="${files}" var="file">
+ ${photFile.no}<br>
+ ${photFile.filePath}<br>
+</c:forEach>
+</p>
 <p>
 <c:forEach items="${photoBoard.files}" var="file">
   <img src='/upload/photoboard/${file.filePath}' class='photo2'> 
@@ -33,6 +59,12 @@
 <a href='delete?no=${photoBoard.no}'>삭제</a>
 </form>
 </div>
+
+<%-- <div>
+<jsp:include page="../photoboard/list.jsp"/>
+
+</div> --%>
+
 
 <jsp:include page="../footer.jsp"/>
 

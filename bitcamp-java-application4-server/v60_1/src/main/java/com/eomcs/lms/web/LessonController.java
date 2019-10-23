@@ -35,21 +35,18 @@ public class LessonController {
   
   @GetMapping("detail")
   public void detail(Model model, int no) throws Exception {
-
     Lesson lesson = lessonService.get(no);
     model.addAttribute("lesson", lesson);
   }
   
   @GetMapping("list")
-  public void list(Model model) 
-      throws Exception {
+  public void list(Model model) throws Exception {
     List<Lesson> lessons = lessonService.list();
     model.addAttribute("lessons", lessons);
   }
   
   @PostMapping("update")
-  public String update(Lesson lesson) 
-      throws Exception {
+  public String update(Lesson lesson) throws Exception {
     lessonService.update(lesson);
     return "redirect:list";
   }

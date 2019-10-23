@@ -7,15 +7,13 @@ import com.eomcs.lms.dao.LessonDao;
 import com.eomcs.lms.domain.Lesson;
 import com.eomcs.lms.service.LessonService;
 
-
-// LessonService 기본 구현체
-
+// LessonService 기본 구현체 
+//
 @Service
 public class DefaultLessonService implements LessonService {
 
   @Resource
   private LessonDao lessonDao;
-
 
   @Override
   public void insert(Lesson lesson) throws Exception {
@@ -38,12 +36,13 @@ public class DefaultLessonService implements LessonService {
     return lesson;
   }
 
+  @Override
   public List<Lesson> list() throws Exception {
     return lessonDao.findAll();
   }
 
+  @Override
   public void update(Lesson lesson) throws Exception {
     lessonDao.update(lesson);
   }
-
 }
